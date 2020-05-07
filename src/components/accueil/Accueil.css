@@ -1,0 +1,21 @@
+
+
+.bg-light {
+    background-color: var(--light) !important;
+}
+#sidebar-container {
+    min-height: 100vh;
+    transition: margin .25 ease-in-out;
+}
+#sidebar-container .logo {
+    padding: .875rem 1.25rem;
+    font-size: 1.2;
+}
+
+#sidebar-container .menu {
+    width: 10rem;
+    float: left;
+}
+.icon {
+    float: left;
+}
