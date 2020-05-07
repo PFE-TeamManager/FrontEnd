@@ -1,13 +1,13 @@
 import React from 'react';
 import './App.css';
-import Formulaire from './components/Auth/Formulaire';
-import Auth from './components/Auth/Auth';
-
+import Login from './components/Auth/Login';
+//import Accueil from './components/accueil/Accueil';
 function App() {
   return (
+
     <div className="App">
-    
-    <Auth />
+
+           <Login />
 
     </div>
   );
