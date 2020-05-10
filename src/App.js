@@ -1,16 +1,14 @@
 import React from 'react';
-import Login from './components/Auth/Login';
-import Register from './components/Member/Register/Register';
-import Dashboard from './components/Dashboard/Dashboard';
+
+import Guard from './components/Guard/Guard';
 
 function App() {
   return (
 
     <div className="App">
-      
-          <Dashboard />
-          {/* <Login /> */}
-          {/* <Register /> */}
+          {/* Must verify The connection of the user to show either dahsboard or Guard  */}
+          {/* <Dashboard /> */}
+          <Guard />
 
     </div>
   );

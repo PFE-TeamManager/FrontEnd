@@ -1,4 +1,5 @@
 import React from 'react';
+import { BrowserRouter as Router,Switch,Route,Link } from "react-router-dom";
 
 class Login extends React.Component {
 
@@ -58,7 +59,7 @@ class Login extends React.Component {
                                 <label className="control-label">PASSWORD</label>
                                 <input className="form-control" type="password" placeholder="Password" />
                             </div>
-                            <div className="form-group">
+                            {/* <div className="form-group">
                                 <div className="utility">
                                 <div className="animated-checkbox">
                                     <label>
@@ -67,9 +68,14 @@ class Login extends React.Component {
                                 </div>
                                 <p className="semibold-text mb-2"><a href="#" data-toggle="flip">Forgot Password ?</a></p>
                                 </div>
-                            </div>
+                            </div> */}
                             <div className="form-group btn-container">
                                 <button className="btn btn-primary btn-block"><i className="fa fa-sign-in fa-lg fa-fw"></i>SIGN IN</button>
+                            </div>
+                            <div className="form-group mt-3">
+                                <p className="semibold-text mb-0">
+                                    <Link to="/register">Create Account</Link>
+                                </p>
                             </div>
                         </form>
                         <form className="forget-form" action="index.html">
@@ -86,7 +92,7 @@ class Login extends React.Component {
                             </div>
                         </form>
                     </div>
-                </section>                  
+                </section>
             </div>
         );
     }

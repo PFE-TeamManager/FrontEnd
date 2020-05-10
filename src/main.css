@@ -16738,6 +16738,6 @@ be a descendant of the grid when it is being dragged.
 /*****Register****/
 
 .auth .register-half-bg {
-  background: url("./components/Member/Register/register-bg.jpg");
+  background: url("./components/Guard/Register/register-bg.jpg");
   background-size: cover;
 }
