@@ -1,32 +1,29 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import * as serviceWorker from './serviceWorker';
-import { BrowserRouter as Router,Switch,Route } from "react-router-dom";
-
-import App from './App';
-import Dashboard from './components/BackOffice/Dashboard/Dashboard';
-import Notfound from "./components/notfound";
-import Register from './components/Guard/Register/Register';
-
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'font-awesome/css/font-awesome.min.css';
 import './main.css';
+import * as serviceWorker from './serviceWorker';
 
-const routing = (
-  <Router>
-    <div>
-      <Switch>
-        <Route exact path="/" component={App} />
-        <Route path="/dashboard" component={Dashboard} />
-        <Route path="/register" component={Register} />
-        <Route component={Notfound} />
-      </Switch>
-    </div>
-  </Router>
-)
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { createStore } from "redux";
+import createHistory from 'history/createBrowserHistory';
+import { Provider } from "react-redux";
+import {ConnectedRouter} from "react-router-redux";
+import { Route } from "react-router";
+import App from './App';
 
+const store = createStore(
+  state => state
+);
+const history = createHistory();
 
-ReactDOM.render(routing,document.getElementById('root'));
+ReactDOM.render((
+  <Provider store={store}>
+    <ConnectedRouter history={history}>
+      <Route path="/" component={App}/>
+    </ConnectedRouter>
+  </Provider>
+), document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

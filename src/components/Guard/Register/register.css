@@ -10916,8 +10916,8 @@ fieldset:disabled a.btn {
 
 .btn-primary {
   color: #fff;
-  background-color: #6640b2;
-  border-color: #6640b2;
+  background-color: #009688;
+  border-color: #009688;
 }
 
 .btn-primary:hover {
@@ -10935,8 +10935,8 @@ fieldset:disabled a.btn {
 
 .btn-primary.disabled, .btn-primary:disabled {
   color: #fff;
-  background-color: #6640b2;
-  border-color: #6640b2;
+  background-color: #009688;
+  border-color: #009688;
 }
 
 .btn-primary:not(:disabled):not(.disabled):active, .btn-primary:not(:disabled):not(.disabled).active,
