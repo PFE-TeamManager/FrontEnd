@@ -29,7 +29,7 @@ import {
 /*****************Project Action****************/
 
 export const projectListRequest = () => ({
-  type: PROJECT_LIST_REQUEST,
+  type: PROJECT_LIST_REQUEST,//reducer
 });
 
 export const projectListError = (error) => ({
@@ -38,7 +38,7 @@ export const projectListError = (error) => ({
 });
 
 export const projectListReceived = (data) => ({
-  type: PROJECT_LIST_RECEIVED,
+  type: PROJECT_LIST_RECEIVED,//reducer
   data
 });
 

@@ -3,7 +3,7 @@ import {
     PROJECT_LIST_ADD,
     PROJECT_LIST_RECEIVED,
     PROJECT_LIST_ERROR, PROJECT_LIST_SET_PAGE
-  } from "../actions/constants";
+  } from "../../actions/constants";
   //import {hydraPageCount} from "../apiUtils";
   
   export default(state = {

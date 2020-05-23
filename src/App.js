@@ -1,10 +1,10 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import Guard from './components/Guard/Guard';
 
+import Guard from './components/Guard/Guard';
 import Dashboard from './components/BackOffice/Dashboard/Dashboard';
 import Register from './components/Guard/Register/Register';
-import Notfound from "./components/notfound";
+import Notfound from "./components/Global/notfound";
 
 function App() {
   return (

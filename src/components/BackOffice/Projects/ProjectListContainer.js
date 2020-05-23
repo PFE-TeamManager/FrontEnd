@@ -2,6 +2,7 @@ import React from 'react';
 import ProjectList from "./ProjectList";
 import {projectListFetch} from "../../../redux/actions/actions";
 import {connect} from "react-redux";
+import { Spinner } from '../../Global/Spinner';
 
 const mapStateToProps = state => ({
   ...state.projectList
@@ -19,7 +20,11 @@ class ProjectListContainer extends React.Component {
 
   render() {
 
-    const {projects} = this.props;
+    const {projects,isFetching} = this.props;
+
+    if (isFetching) {
+      return (<Spinner />);
+    }
 
     return (
       <div>

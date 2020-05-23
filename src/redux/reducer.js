@@ -1,8 +1,9 @@
 import {combineReducers} from "redux";
-import registration from "./reducers/registrationReducer";
-import auth from "./reducers/authReducer";
-import projectList from './reducers/projectListReducer';
+import registration from "./reducers/Global/registrationReducer";
+import auth from "./reducers/Global/authReducer";
+import projectList from './reducers/project/projectListReducer';
+import project from './reducers/project/projectReducer';
 
 export default combineReducers({
-    auth,registration,projectList
+    auth,registration,projectList,project
 });
