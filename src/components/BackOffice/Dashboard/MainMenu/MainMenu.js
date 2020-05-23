@@ -2,15 +2,6 @@ import React from 'react';
 
 class MainMenu extends React.Component {
 
-    constructor(props){
-        super(props);
-        this.state = {
-            color : "Green",
-            placeholder : '',
-            valeur : ''
-        }
-    }
-
     render(){
         return (
             <div>

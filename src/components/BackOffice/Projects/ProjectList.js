@@ -4,6 +4,7 @@ import {Link} from "react-router-dom";
 import {Message} from "../../Message";
 
 class ProjectList extends React.Component {
+
   render() {
     const {projects} = this.props;
 
@@ -16,7 +17,7 @@ class ProjectList extends React.Component {
         <div className="card mb-3 mt-3 shadow-sm" key={project.id}>
           <div className="card-body">
             <h3>
-              <Link to={`/project/${project.id}`}>{project.projectName}</Link>
+              <Link to={`/projects/${project.id}`}>{project.projectName}</Link>
               </h3>
             <p className="card-text bordet-top">
               <small className="text-muted">

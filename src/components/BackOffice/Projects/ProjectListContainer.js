@@ -12,6 +12,7 @@ const mapDispatchToProps = {
 };
 
 class ProjectListContainer extends React.Component {
+
   componentDidMount() {
     this.props.projectListFetch();
   }

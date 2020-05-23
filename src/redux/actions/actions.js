@@ -24,6 +24,10 @@ import {
 //import {SubmissionError} from "redux-form";
 //import {parseApiErrors} from "../apiUtils";
 
+
+
+/*****************Project Action****************/
+
 export const projectListRequest = () => ({
   type: PROJECT_LIST_REQUEST,
 });
@@ -38,7 +42,6 @@ export const projectListReceived = (data) => ({
   data
 });
 
-// Keep it here in case i do the pagination in some entity
 export const projectListFetch = () => {
   return (dispatch) => {
     dispatch(projectListRequest());
@@ -103,6 +106,11 @@ export const projectFormUnload = () => ({
   type: PROJECT_FORM_UNLOAD
 });
 
+/*****************END Project Action****************/
+
+
+
+/*****************User Action****************/
 export const userLoginSuccess = (token, userId) => {
   return {
     type: USER_LOGIN_SUCCESS,
@@ -206,7 +214,12 @@ export const userProfileFetch = (userId) => {
     ).catch(() => dispatch(userProfileError(userId)))
   }
 };
+/*****************END User Action****************/
 
+
+
+
+/*****************Image Action****************/
 export const imageUploaded = (data) => {
   return {
     type: IMAGE_UPLOADED,
@@ -255,3 +268,4 @@ export const imageDeleted = (id) => {
     imageId: id
   }
 };
+/*****************END Image Action****************/

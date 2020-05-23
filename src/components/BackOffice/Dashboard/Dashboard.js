@@ -1,26 +1,21 @@
 import React from 'react';
 import SideBar from './SideBar/SideBar';
 import MainMenu from './MainMenu/MainMenu';
+import MainContent from './MainContent/MainContent';
+
 
 class Dashboard extends React.Component {
-
-    constructor(props){
-        super(props);
-        this.state = {
-            color : "Green",
-            placeholder : '',
-            valeur : ''
-        }
-    }
 
     render(){
         return (
             <div>
                 <MainMenu />
                 <SideBar />
+                <MainContent />
             </div>
         );
     }
+
 }
 
 export default Dashboard;

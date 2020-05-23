@@ -1,17 +1,38 @@
 import React from 'react';
+import { BrowserRouter as Router,Switch,Route,Link } from "react-router-dom";
+
+
+const menuItems = [
+    {
+        id: 1,
+        type: "navItem",
+        icon: "app-menu__icon fa fa-dashboard",
+        text: "Dashboard",
+        link: "/dashboard",
+        restricted: false
+    },
+    {
+        id: 2,
+        type: "navItem",
+        icon: "app-menu__icon fa fa-user-circle",
+        text: "Docs",
+        link: "/dashboard/docs",
+        restricted: false
+    },
+    {
+        id: 3,
+        type: "navItem",
+        icon: "app-menu__icon fa fa-sign-in",
+        text: "Projects",
+        link: "/dashboard/projects",
+        restricted: false
+    },
+];
 
 class SideBar extends React.Component {
 
-    constructor(props){
-        super(props);
-        this.state = {
-            color : "Green",
-            placeholder : '',
-            valeur : ''
-        }
-    }
-
     render(){
+
         return (
             <div>
                 <div className="app-sidebar__overlay" data-toggle="sidebar"></div>
@@ -23,23 +44,25 @@ class SideBar extends React.Component {
                             <p className="app-sidebar__user-designation">Frontend Developer</p>
                         </div>
                     </div>
-                    <ul className="app-menu">
-                        <li>
-                            <a className="app-menu__item active" href="dashboard.html">
-                                <i className="app-menu__icon fa fa-dashboard"></i>
-                                <span className="app-menu__label">Dashboard</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a className="app-menu__item" href="docs.html">
-                                <i className="app-menu__icon fa fa-file-code-o"></i>
-                                <span className="app-menu__label">Docs</span>
-                            </a>
-                        </li>
+                    <ul className="app-menu">    
+                        {   
+                            menuItems.map(
+                                menuItem => {   
+                                    return(
+                                        <li key={menuItem.id}>
+                                            <Link className="app-menu__item" to={menuItem.link}>
+                                                <i className={menuItem.icon}></i>
+                                                <span className="app-menu__label">{menuItem.text}</span>
+                                            </Link>
+                                        </li>
+                                    );
+                                }
+                            )
+                        }
                     </ul>
                 </aside>
             </div>
-            );
+        );
     }
 }
 
