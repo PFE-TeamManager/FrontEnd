@@ -4,7 +4,6 @@ import {
   PROJECT_LIST_ERROR,
   PROJECT_LIST_RECEIVED,
   PROJECT_LIST_REQUEST,
-  PROJECT_LIST_SET_PAGE,
   PROJECT_RECEIVED,
   PROJECT_REQUEST,
   PROJECT_UNLOAD,
@@ -22,8 +21,8 @@ import {
   USER_REGISTER_SUCCESS,
   USER_SET_ID
 } from "./constants";
-import {SubmissionError} from "redux-form";
-import {parseApiErrors} from "../apiUtils";
+//import {SubmissionError} from "redux-form";
+//import {parseApiErrors} from "../apiUtils";
 
 export const projectListRequest = () => ({
   type: PROJECT_LIST_REQUEST,
@@ -39,20 +38,15 @@ export const projectListReceived = (data) => ({
   data
 });
 
-export const projectListSetPage = (page) => ({
-  type: PROJECT_LIST_SET_PAGE,
-  page
-});
-
 // Keep it here in case i do the pagination in some entity
-// export const projectListFetch = (page = 1) => {
-//   return (dispatch) => {
-//     dispatch(projectListRequest());
-//     return requests.get(`/projects?_page=${page}`)
-//       .then(response => dispatch(projectListReceived(response)))
-//       .catch(error => dispatch(projectListError(error)));
-//   }
-// };
+export const projectListFetch = () => {
+  return (dispatch) => {
+    dispatch(projectListRequest());
+    return requests.get(`/projects`)
+      .then(response => dispatch(projectListReceived(response)))
+      .catch(error => dispatch(projectListError(error)));
+  }
+};
 
 export const projectRequest = () => ({
   type: PROJECT_REQUEST,
@@ -81,7 +75,8 @@ export const projectFetch = (id) => {
   }
 };
 
-export const projectAdd = (title, content, images = []) => {
+//title, content, images = []
+export const projectAdd = (projectName) => {
   return (dispatch) => {
     return requests.post(
       '/projects',
@@ -95,11 +90,11 @@ export const projectAdd = (title, content, images = []) => {
       if (401 === error.response.status) {
         return dispatch(userLogout());
       } else if (403 === error.response.status) {
-        throw new SubmissionError({
-          _error: 'You do not have rights to publish blog posts!'
-        });
+        // throw new SubmissionError({
+        //   _error: 'You do not have rights to publish blog posts!'
+        // });
       }
-      throw new SubmissionError(parseApiErrors(error));
+      //throw new SubmissionError(parseApiErrors(error));
     })
   }
 };
@@ -121,9 +116,9 @@ export const userLoginAttempt = (username, password) => {
     return requests.post('/login_check', {username, password}, false).then(
       response => dispatch(userLoginSuccess(response.token, response.id))
     ).catch(() => {
-      throw new SubmissionError({
-        _error: 'Username or password is invalid'
-      })
+      // throw new SubmissionError({
+      //   _error: 'Username or password is invalid'
+      // })
     });
   }
 };
@@ -146,7 +141,7 @@ export const userRegister = (username, password, email, phone) => {
     return requests.post('/users', {username, password, email, phone}, false)
       .then(() => dispatch(userRegisterSuccess()))
       .catch(error => {
-        throw new SubmissionError(parseApiErrors(error));
+        //throw new SubmissionError(parseApiErrors(error));
       });
   }
 };
@@ -168,9 +163,9 @@ export const userConfirm = (confirmationToken) => {
     return requests.post('/users/confirm', {confirmationToken}, false)
       .then(() => dispatch(userConfirmationSuccess()))
       .catch(error => {
-        throw new SubmissionError({
-          _error: 'Confirmation token is invalid'
-        });
+        // throw new SubmissionError({
+        //   _error: 'Confirmation token is invalid'
+        // });
       });
   }
 };

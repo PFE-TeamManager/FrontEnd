@@ -11,7 +11,7 @@ import { Provider } from "react-redux";
 import {ConnectedRouter} from "react-router-redux";
 import { Route } from "react-router";
 import App from './App';
-import { reducer } from './redux/reducer';
+import reducer from './redux/reducer';
 import thunkMiddleware from 'redux-thunk';
 import {tokenMiddleware} from "./redux/middleware";
 
