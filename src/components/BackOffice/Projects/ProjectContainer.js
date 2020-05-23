@@ -1,6 +1,6 @@
 import React from 'react';
 import Project from "./Project";
-import {projectFetch} from "../../../redux/actions/actions";
+import {projectFetch,projectUnload} from "../../../redux/actions/actions";
 import {connect} from "react-redux";
 import { Spinner } from '../../Global/Spinner';
 
@@ -9,7 +9,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
-  projectFetch
+  projectFetch,projectUnload
 };
 
 class ProjectContainer extends React.Component {
@@ -17,6 +17,10 @@ class ProjectContainer extends React.Component {
   componentDidMount() {
     //pass the id by parameter
     this.props.projectFetch(this.props.match.params.id);
+  }
+
+  componentWillUnmount() {
+    this.props.projectUnload();
   }
 
   render() {
