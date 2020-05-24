@@ -2,7 +2,6 @@ import {USER_LOGIN_SUCCESS, USER_LOGOUT, USER_PROFILE_ERROR} from "./actions/con
 import {requests} from "./agent";
 import {userLogout} from "./actions/actions";
 
-//Middleware is a curried function, curried function returns other functions
 export const tokenMiddleware = store => next => action => {
   switch (action.type) {
     case USER_LOGIN_SUCCESS:

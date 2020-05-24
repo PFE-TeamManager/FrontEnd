@@ -5,7 +5,7 @@ import {Message} from "../../Global/Message";
 class Project extends React.Component {
   render() {
     const {project} = this.props;
-    
+
     if (null === project) {
       return (<Message message="Project does not exist"/>);
     }
@@ -17,8 +17,7 @@ class Project extends React.Component {
           <h2>{project.projectName}</h2>
           <p className="card-text border-top">
             <small className="text-muted">
-              {timeago().format(project.createdAt)} by&nbsp;
-              {/* {project.author.name} */}
+              {timeago().format(project.createdAt)} by&nbsp; {project.createdBy.username}
             </small>
           </p>
         </div>

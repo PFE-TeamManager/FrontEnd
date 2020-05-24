@@ -1,20 +1,11 @@
 import React from 'react';
-import Login from './Auth/Login';
+import LoginForm from './Auth/LoginForm';
 
 class Guard extends React.Component {
 
-    constructor(props){
-        super(props);
-        this.state = {
-            color : "Green",
-            placeholder : '',
-            valeur : ''
-        }
-    }
-
     render(){
         return (
-            <Login />
+            <LoginForm />
         );
     }
 }

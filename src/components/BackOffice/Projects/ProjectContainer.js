@@ -7,7 +7,7 @@ import { Spinner } from '../../Global/Spinner';
 const mapStateToProps = state => ({
   ...state.project
 });
-
+//Dispatch Actions
 const mapDispatchToProps = {
   projectFetch,projectUnload
 };

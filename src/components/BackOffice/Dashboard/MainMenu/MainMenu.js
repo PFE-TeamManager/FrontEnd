@@ -5,7 +5,7 @@ class MainMenu extends React.Component {
     render(){
         return (
             <div>
-                <header className="app-header"><a className="app-header__logo" href="index.html">Vali</a>
+                <header className="app-header"><a className="app-header__logo" href="index.html">Team Manager</a>
                     <a className="app-sidebar__toggle" href="#" data-toggle="sidebar" aria-label="Hide Sidebar"></a>
                     <ul className="app-nav">
                         <li className="app-search">

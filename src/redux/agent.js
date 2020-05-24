@@ -7,6 +7,7 @@ const responseBody = response => response.body;
 
 let token = null;
 
+//Set The token in Authorization Header
 const tokenPlugin = secured => {
   return (request) => {
     if (token && secured) {
@@ -15,6 +16,7 @@ const tokenPlugin = secured => {
   };
 };
 
+//All The requests here use Token
 export const requests = {
   get: (url, secured = false) => {
     return superagent.get(`${API_ROOT}${url}`).use(tokenPlugin(secured)).then(responseBody);

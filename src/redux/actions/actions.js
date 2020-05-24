@@ -52,7 +52,7 @@ export const projectListFetch = () => {
 };
 
 export const projectRequest = () => ({
-  type: PROJECT_REQUEST,
+  type: PROJECT_REQUEST,//Reducer To get the state
 });
 
 export const projectError = (error) => ({
@@ -71,9 +71,9 @@ export const projectUnload = () => ({
 
 export const projectFetch = (id) => {
   return (dispatch) => {
-    dispatch(projectRequest());
+    dispatch(projectRequest());//GET THE STATE BY REDUCER
     return requests.get(`/projects/${id}`)
-      .then(response => dispatch(projectReceived(response)))
+      .then(response => dispatch(projectReceived(response)))//Fill the state by the returned data
       .catch(error => dispatch(projectError(error)));
   }
 };
