@@ -1,7 +1,7 @@
 import {
     PROJECT_LIST_REQUEST,
     PROJECT_LIST_RECEIVED,
-    PROJECT_LIST_ERROR, PROJECT_LIST_SET_PAGE
+    PROJECT_LIST_ERROR, PROJECT_LIST_SET_PAGE,PROJECT_ADDED
   } from "../../actions/constants";
   //import {hydraPageCount} from "../apiUtils";
   
@@ -12,6 +12,11 @@ import {
     pageCount: null
   }, action) => {
     switch (action.type) {
+      case PROJECT_ADDED:
+        return {
+          ...state,
+          projects: [action.project, ...state.projects]
+        };
       case PROJECT_LIST_REQUEST:
         state = {
           ...state,
