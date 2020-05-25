@@ -28,6 +28,7 @@ class App extends React.Component {
     }
   }
 
+  //Fetch user on Refreshing the page
   componentDidMount() {
     const userId = window.localStorage.getItem('userId');
     const {userSetId} = this.props;
@@ -40,6 +41,7 @@ class App extends React.Component {
   componentDidUpdate(prevProps) {
     const {userId, userData, userProfileFetch} = this.props;
 
+    //Fetch user on Refreshing the page
     if (prevProps.userId !== userId && userId !== null && userData === null) {
       userProfileFetch(userId);
     }

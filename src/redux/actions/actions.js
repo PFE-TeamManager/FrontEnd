@@ -6,7 +6,7 @@ import {
   PROJECT_LIST_REQUEST,
   PROJECT_RECEIVED,
   PROJECT_REQUEST,
-  PROJECT_UNLOAD,
+  PROJECT_UNLOAD,PROJECT_ADDED,
   IMAGE_DELETE_REQUEST, IMAGE_DELETED,
   IMAGE_UPLOAD_ERROR,
   IMAGE_UPLOAD_REQUEST,
@@ -78,24 +78,23 @@ export const projectFetch = (id) => {
   }
 };
 
-//title, content, images = []
+export const projectAdded = (project) => ({
+  type: PROJECT_ADDED,
+  project
+});
+
 export const projectAdd = (projectName) => {
   return (dispatch) => {
     return requests.post(
       '/projects',
       {
-        projectName,
-        // content,
-        // slug: title && title.replace(/ /g, "-").toLowerCase(),
-        // images: images.map(image => `/api/images/${image.id}`)
+        projectName: projectName
       }
+    ).then(
+      response => dispatch(projectAdded(response))
     ).catch((error) => {
       if (401 === error.response.status) {
         return dispatch(userLogout());
-      } else if (403 === error.response.status) {
-        throw new SubmissionError({
-          _error: 'You do not have rights to publish blog posts!'
-        });
       }
       //throw new SubmissionError(parseApiErrors(error));
     })

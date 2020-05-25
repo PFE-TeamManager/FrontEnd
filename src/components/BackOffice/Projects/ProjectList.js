@@ -13,7 +13,8 @@ class ProjectList extends React.Component {
       return (<Message message="No projects available"/>);
     }
 
-    return (<div>
+    return (
+    <div>
       {projects && projects.map(project => (
         <div className="card mb-3 mt-3 shadow-sm" key={project.id}>
           <div className="card-body">
