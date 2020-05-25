@@ -2,10 +2,19 @@ import React from 'react';
 
 class MainMenu extends React.Component {
 
+    constructor(props){
+        super(props);
+        console.log(props);
+    }
+
     render(){
+
         return (
             <div>
-                <header className="app-header"><a className="app-header__logo" href="index.html">Team Manager</a>
+                <header className="app-header">
+                    <a className="app-header__logo" href="index.html">
+                    Team Manager  {this.props.userData.username} 
+                    </a>
                     <a className="app-sidebar__toggle" href="#" data-toggle="sidebar" aria-label="Hide Sidebar"></a>
                     <ul className="app-nav">
                         <li className="app-search">
@@ -54,9 +63,17 @@ class MainMenu extends React.Component {
                         </li>
                         <li className="dropdown"><a className="app-nav__item" href="#" data-toggle="dropdown" aria-label="Open Profile Menu"><i className="fa fa-user fa-lg"></i></a>
                         <ul className="dropdown-menu settings-menu dropdown-menu-right">
-                            <li><a className="dropdown-item" href="page-user.html"><i className="fa fa-cog fa-lg"></i> Settings</a></li>
+                            <li>
+                                <a className="dropdown-item" href="page-user.html">
+                                    <i className="fa fa-cog fa-lg"></i> Settings</a></li>
                             <li><a className="dropdown-item" href="page-user.html"><i className="fa fa-user fa-lg"></i> Profile</a></li>
-                            <li><a className="dropdown-item" href="page-login.html"><i className="fa fa-sign-out fa-lg"></i> Logout</a></li>
+                            <li>
+                                <a className="dropdown-item" 
+                                    href="#" onClick={this.props.logout}>
+                                        <i className="fa fa-sign-out fa-lg"></i> 
+                                        Logout
+                                </a>
+                            </li>
                         </ul>
                         </li>
                     </ul>

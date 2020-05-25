@@ -28,25 +28,28 @@ class App extends React.Component {
     }
   }
 
-  // componentDidMount() {
-  //   const userId = window.localStorage.getItem('userId');
-  //   const {userSetId} = this.props;
+  componentDidMount() {
+    const userId = window.localStorage.getItem('userId');
+    const {userSetId} = this.props;
 
-  //   if (userId) {
-  //     userSetId(userId);
-  //   }
-  // }
+    if (userId) {
+      userSetId(userId);
+    }
+  }
 
-  // componentDidUpdate(prevProps) {
-  //   const {userId, userData, userProfileFetch} = this.props;
+  componentDidUpdate(prevProps) {
+    const {userId, userData, userProfileFetch} = this.props;
 
-  //   if (prevProps.userId !== userId && userId !== null && userData === null) {
-  //     userProfileFetch(userId);
-  //   }
-  // }
+    if (prevProps.userId !== userId && userId !== null && userData === null) {
+      userProfileFetch(userId);
+    }
+  }
 
   render() {
     const {isAuthenticated, userData, userLogout} = this.props;
+    // console.log("App isAuthenticated : "+isAuthenticated);
+    // console.log("App userData : "+userData);
+    // console.log("App userLogout : "+userLogout);
     {/* Must verify The connection of the user to show either dahsboard or Guard  */}
     if( isAuthenticated ){
       return (
