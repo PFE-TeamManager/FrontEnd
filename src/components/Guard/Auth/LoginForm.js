@@ -6,6 +6,7 @@ import {renderField} from "../../../redux/form";
 import {connect} from 'react-redux';
 import {userLoginAttempt} from "../../../redux/actions/actions";
 
+//initial state in reducer
 const mapStateToProps = state => ({
   ...state.auth
 });
@@ -16,11 +17,20 @@ const mapDispatchToProps = {
 
 class LoginForm extends React.Component {
 
+    constructor(props){
+        super(props);
+        console.log(props);
+    }
+
+    //If Token changed , redirect
     componentDidUpdate(prevProps) {
+        //compare the current token in props with the token from prevprops
+        //prevprops & props are automatically available
         if (prevProps.token !== this.props.token) {
           console.log(prevProps);
           console.log(this.props);
-          this.props.history.push('/dashboard');
+          //The history in props is set in reducer.js
+          this.props.history.push('/dashboard');//Redirect when user is loggedin
         }
     }
     
@@ -32,6 +42,7 @@ class LoginForm extends React.Component {
     }
 
     render(){
+        //error are from redux-form
         const {handleSubmit, error} = this.props;
 
         return (

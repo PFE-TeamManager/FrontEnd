@@ -29,6 +29,7 @@ const history = createHistory();
 
 ReactDOM.render((
   <Provider store={store}>
+    {/* https://www.oreilly.com/library/view/learning-redux/9781786462398/53627206-5feb-431c-bf79-c0d0051cd947.xhtml */}
     <ConnectedRouter history={history}>
       <Route path="/" component={App}/>
     </ConnectedRouter>

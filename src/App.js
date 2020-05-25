@@ -1,24 +1,63 @@
 import React from 'react';
+import {connect} from 'react-redux';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-
-import Guard from './components/Guard/Guard';
+import {userLogout, userProfileFetch, userSetId} from "./redux/actions/actions";
 import Dashboard from './components/BackOffice/Dashboard/Dashboard';
 import Register from './components/Guard/Register/Register';
 import Notfound from "./components/Global/notfound";
+import { requests } from './redux/agent';
+import LoginForm from './components/Guard/Auth/LoginForm';
 
-function App() {
-  return (
 
-    <div className="App">
+const mapStateToProps = state => ({
+  ...state.auth
+});
+
+//To dispatch Action
+const mapDispatchToProps = {
+  userProfileFetch , userSetId, userLogout
+};
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+    const token = window.localStorage.getItem('jwtToken');
+
+    //SetToken 
+    if (token) {
+      requests.setToken(token);
+    }
+  }
+
+  // componentDidMount() {
+  //   const userId = window.localStorage.getItem('userId');
+  //   const {userSetId} = this.props;
+
+  //   if (userId) {
+  //     userSetId(userId);
+  //   }
+  // }
+
+  // componentDidUpdate(prevProps) {
+  //   const {userId, userData, userProfileFetch} = this.props;
+
+  //   if (prevProps.userId !== userId && userId !== null && userData === null) {
+  //     userProfileFetch(userId);
+  //   }
+  // }
+
+  render() {
+    return (
+      <div className="App">
           {/* Must verify The connection of the user to show either dahsboard or Guard  */}
           <Switch>
-            <Route exact path="/" component={Guard} />
+            <Route exact path="/" component={LoginForm} />
             <Route path="/dashboard" component={Dashboard} />
             <Route path="/register" component={Register} />
             <Route component={Notfound} />
           </Switch>
-    </div>
-  );
+      </div>
+    )
+  }
 }
 
-export default App;
+export default connect(mapStateToProps, mapDispatchToProps)(App);
