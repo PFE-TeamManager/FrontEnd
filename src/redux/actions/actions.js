@@ -21,7 +21,7 @@ import {
   USER_REGISTER_SUCCESS,
   USER_SET_ID
 } from "./constants";
-//import {SubmissionError} from "redux-form";
+import {SubmissionError} from "redux-form";
 //import {parseApiErrors} from "../apiUtils";
 
 
@@ -93,9 +93,9 @@ export const projectAdd = (projectName) => {
       if (401 === error.response.status) {
         return dispatch(userLogout());
       } else if (403 === error.response.status) {
-        // throw new SubmissionError({
-        //   _error: 'You do not have rights to publish blog posts!'
-        // });
+        throw new SubmissionError({
+          _error: 'You do not have rights to publish blog posts!'
+        });
       }
       //throw new SubmissionError(parseApiErrors(error));
     })
@@ -124,9 +124,9 @@ export const userLoginAttempt = (username, password) => {
     return requests.post('/login_check', {username, password}, false).then(
       response => dispatch(userLoginSuccess(response.token, response.id))
     ).catch(() => {
-      // throw new SubmissionError({
-      //   _error: 'Username or password is invalid'
-      // })
+      throw new SubmissionError({
+        _error: 'Username or password is invalid'
+      })
     });
   }
 };
@@ -171,9 +171,9 @@ export const userConfirm = (confirmationToken) => {
     return requests.post('/users/confirm', {confirmationToken}, false)
       .then(() => dispatch(userConfirmationSuccess()))
       .catch(error => {
-        // throw new SubmissionError({
-        //   _error: 'Confirmation token is invalid'
-        // });
+        throw new SubmissionError({
+          _error: 'Confirmation token is invalid'
+        });
       });
   }
 };

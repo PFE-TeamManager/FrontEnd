@@ -54,8 +54,8 @@ class LoginForm extends React.Component {
                     <div className="logo">
                         <h1>Team Manager</h1>
                     </div>
+                    {error && <div className="alert alert-danger">{error}</div>}
                     <div className="login-box">
-                        {error && <div className="alert alert-danger">{error}</div>}
                         <form className="login-form" onSubmit={handleSubmit(this.onSubmit.bind(this))}>
                             <h3 className="login-head"><i className="fa fa-lg fa-fw fa-user"></i>SIGN IN</h3>
                             <div className="form-group">
