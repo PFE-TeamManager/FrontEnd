@@ -19,7 +19,6 @@ class LoginForm extends React.Component {
 
     constructor(props){
         super(props);
-        console.log(props);
     }
 
     //If Token changed , redirect
@@ -27,14 +26,15 @@ class LoginForm extends React.Component {
         //compare the current token in props with the token from prevprops
         //prevprops & props are automatically available
         if (prevProps.token !== this.props.token) {
-          console.log(prevProps);
-          console.log(this.props);
+        //   console.log(prevProps);
+        //   console.log(this.props);
           //The history in props is set in reducer.js
           this.props.history.push('/dashboard');//Redirect when user is loggedin
         }
     }
     
     onSubmit(values) {
+        //dispatch userLoginAttempt action Then userLoginSuccess reducer where the state is changed
         return this.props.userLoginAttempt(
             values.username,
             values.password

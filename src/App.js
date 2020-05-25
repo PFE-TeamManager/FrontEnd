@@ -46,17 +46,27 @@ class App extends React.Component {
   // }
 
   render() {
-    return (
-      <div className="App">
-          {/* Must verify The connection of the user to show either dahsboard or Guard  */}
-          <Switch>
-            <Route exact path="/" component={LoginForm} />
-            <Route path="/dashboard" component={Dashboard} />
-            <Route path="/register" component={Register} />
-            <Route component={Notfound} />
-          </Switch>
-      </div>
-    )
+    const {isAuthenticated, userData, userLogout} = this.props;
+    {/* Must verify The connection of the user to show either dahsboard or Guard  */}
+    if( isAuthenticated ){
+      return (
+        <div className="App">
+            <Dashboard isAuthenticated={isAuthenticated} userData={userData} logout={userLogout} />
+        </div>
+      )
+    } else {
+      return (
+        <div className="App">
+            {/* Must verify The connection of the user to show either dahsboard or Guard  */}
+            <Switch>
+              <Route exact path="/" component={LoginForm} />
+              <Route path="/register" component={Register} />
+              <Route component={Notfound} />
+            </Switch>
+        </div>
+      )
+    }
+    
   }
 }
 
