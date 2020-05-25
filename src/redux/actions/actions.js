@@ -22,7 +22,7 @@ import {
   USER_SET_ID
 } from "./constants";
 import {SubmissionError} from "redux-form";
-//import {parseApiErrors} from "../apiUtils";
+import {parseApiErrors} from "../../redux/apiUtils";
 
 
 
@@ -96,7 +96,11 @@ export const projectAdd = (projectName) => {
       if (401 === error.response.status) {
         return dispatch(userLogout());
       }
-      //throw new SubmissionError(parseApiErrors(error));
+      throw new SubmissionError(
+        {
+          content: 'This is an error'
+        }
+      );
     })
   }
 };
@@ -170,9 +174,10 @@ export const userConfirm = (confirmationToken) => {
     return requests.post('/users/confirm', {confirmationToken}, false)
       .then(() => dispatch(userConfirmationSuccess()))
       .catch(error => {
-        throw new SubmissionError({
-          _error: 'Confirmation token is invalid'
-        });
+        //parseApiErrors is in apiUtils
+        throw new SubmissionError(
+          parseApiErrors(error)
+        );
       });
   }
 };

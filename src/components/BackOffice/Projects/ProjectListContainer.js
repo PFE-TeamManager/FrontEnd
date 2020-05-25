@@ -3,7 +3,7 @@ import ProjectList from "./ProjectList";
 import {projectListFetch} from "../../../redux/actions/actions";
 import {connect} from "react-redux";
 import { Spinner } from '../../Global/Spinner';
-import ProjectForm from '../../../redux/reducers/project/ProjectForm';
+import ProjectForm from './ProjectForm';
 
 const mapStateToProps = state => ({
   ...state.projectList
