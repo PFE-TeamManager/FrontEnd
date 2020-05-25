@@ -1,9 +1,8 @@
 import {
     PROJECT_LIST_REQUEST,
-    PROJECT_LIST_ADD,
     PROJECT_LIST_RECEIVED,
     PROJECT_LIST_ERROR, PROJECT_LIST_SET_PAGE
-  } from "../actions/constants";
+  } from "../../actions/constants";
   //import {hydraPageCount} from "../apiUtils";
   
   export default(state = {
@@ -33,12 +32,6 @@ import {
           isFetching: false,
           projects: null
         };
-      case PROJECT_LIST_ADD:
-        state = {
-          ...state,
-          projects: state.projects ? state.projects.concat(action.data) : state.projects
-        };
-        return state;
       case PROJECT_LIST_SET_PAGE:
         return {
           ...state,

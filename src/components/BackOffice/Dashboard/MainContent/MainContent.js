@@ -1,7 +1,8 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import ProjectListContainer from '../../Projects/ProjectListContainer';
-import Notfound from "../../../notfound";
+import Notfound from "../../../Global/notfound";
+import ProjectContainer from '../../Projects/ProjectContainer';
 
 class MainContent extends React.Component {
     render(){
@@ -18,15 +19,17 @@ class MainContent extends React.Component {
                         <li className="breadcrumb-item"><a href="#">Dashboard</a></li>
                         </ul>
                     </div>
-                    <div className="row">
+                    
+                        {/* The order of The Routes is so important */}
                         <Switch>
+                            <Route path="/dashboard/projects/:id" component={ProjectContainer} />
                             <Route path="/dashboard/projects" component={ProjectListContainer} />
                             <Route component={Notfound} />
                         </Switch>
-                    </div>
+                    
                 </main>
             </div>
-            );
+        );
     }
 }
 

@@ -6,7 +6,7 @@ import {
   PROJECT_LIST_REQUEST,
   PROJECT_RECEIVED,
   PROJECT_REQUEST,
-  PROJECT_UNLOAD,
+  PROJECT_UNLOAD,PROJECT_ADDED,
   IMAGE_DELETE_REQUEST, IMAGE_DELETED,
   IMAGE_UPLOAD_ERROR,
   IMAGE_UPLOAD_REQUEST,
@@ -21,7 +21,7 @@ import {
   USER_REGISTER_SUCCESS,
   USER_SET_ID
 } from "./constants";
-//import {SubmissionError} from "redux-form";
+import {SubmissionError} from "redux-form";
 //import {parseApiErrors} from "../apiUtils";
 
 
@@ -29,7 +29,7 @@ import {
 /*****************Project Action****************/
 
 export const projectListRequest = () => ({
-  type: PROJECT_LIST_REQUEST,
+  type: PROJECT_LIST_REQUEST,//reducer
 });
 
 export const projectListError = (error) => ({
@@ -38,7 +38,7 @@ export const projectListError = (error) => ({
 });
 
 export const projectListReceived = (data) => ({
-  type: PROJECT_LIST_RECEIVED,
+  type: PROJECT_LIST_RECEIVED,//reducer
   data
 });
 
@@ -52,7 +52,7 @@ export const projectListFetch = () => {
 };
 
 export const projectRequest = () => ({
-  type: PROJECT_REQUEST,
+  type: PROJECT_REQUEST,//Reducer To get the state
 });
 
 export const projectError = (error) => ({
@@ -71,31 +71,30 @@ export const projectUnload = () => ({
 
 export const projectFetch = (id) => {
   return (dispatch) => {
-    dispatch(projectRequest());
+    dispatch(projectRequest());//GET THE STATE BY REDUCER
     return requests.get(`/projects/${id}`)
-      .then(response => dispatch(projectReceived(response)))
+      .then(response => dispatch(projectReceived(response)))//Fill the state by the returned data
       .catch(error => dispatch(projectError(error)));
   }
 };
 
-//title, content, images = []
+export const projectAdded = (project) => ({
+  type: PROJECT_ADDED,
+  project
+});
+
 export const projectAdd = (projectName) => {
   return (dispatch) => {
     return requests.post(
       '/projects',
       {
-        projectName,
-        // content,
-        // slug: title && title.replace(/ /g, "-").toLowerCase(),
-        // images: images.map(image => `/api/images/${image.id}`)
+        projectName: projectName
       }
+    ).then(
+      response => dispatch(projectAdded(response))
     ).catch((error) => {
       if (401 === error.response.status) {
         return dispatch(userLogout());
-      } else if (403 === error.response.status) {
-        // throw new SubmissionError({
-        //   _error: 'You do not have rights to publish blog posts!'
-        // });
       }
       //throw new SubmissionError(parseApiErrors(error));
     })
@@ -124,9 +123,9 @@ export const userLoginAttempt = (username, password) => {
     return requests.post('/login_check', {username, password}, false).then(
       response => dispatch(userLoginSuccess(response.token, response.id))
     ).catch(() => {
-      // throw new SubmissionError({
-      //   _error: 'Username or password is invalid'
-      // })
+      throw new SubmissionError({
+        _error: 'Username or password is invalid'
+      })
     });
   }
 };
@@ -171,9 +170,9 @@ export const userConfirm = (confirmationToken) => {
     return requests.post('/users/confirm', {confirmationToken}, false)
       .then(() => dispatch(userConfirmationSuccess()))
       .catch(error => {
-        // throw new SubmissionError({
-        //   _error: 'Confirmation token is invalid'
-        // });
+        throw new SubmissionError({
+          _error: 'Confirmation token is invalid'
+        });
       });
   }
 };

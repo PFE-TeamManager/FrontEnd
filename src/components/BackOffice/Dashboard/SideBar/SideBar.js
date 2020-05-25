@@ -5,34 +5,27 @@ import { BrowserRouter as Router,Switch,Route,Link } from "react-router-dom";
 const menuItems = [
     {
         id: 1,
-        type: "navItem",
         icon: "app-menu__icon fa fa-dashboard",
         text: "Dashboard",
-        link: "/dashboard",
-        restricted: false
+        link: "/dashboard"
     },
     {
         id: 2,
-        type: "navItem",
         icon: "app-menu__icon fa fa-user-circle",
         text: "Docs",
-        link: "/dashboard/docs",
-        restricted: false
+        link: "/dashboard/docs"
     },
     {
         id: 3,
-        type: "navItem",
         icon: "app-menu__icon fa fa-sign-in",
         text: "Projects",
-        link: "/dashboard/projects",
-        restricted: false
+        link: "/dashboard/projects"
     },
 ];
 
 class SideBar extends React.Component {
 
     render(){
-
         return (
             <div>
                 <div className="app-sidebar__overlay" data-toggle="sidebar"></div>

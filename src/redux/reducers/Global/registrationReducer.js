@@ -1,4 +1,4 @@
-import {USER_CONFIRMATION_SUCCESS, USER_REGISTER_COMPLETE, USER_REGISTER_SUCCESS} from "../actions/constants";
+import {USER_CONFIRMATION_SUCCESS, USER_REGISTER_COMPLETE, USER_REGISTER_SUCCESS} from "../../actions/constants";
 
 export default (state = {
   registrationSuccess: false,

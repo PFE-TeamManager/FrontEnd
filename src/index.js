@@ -13,8 +13,14 @@ import { Route } from "react-router";
 import App from './App';
 import reducer from './redux/reducer';
 import thunkMiddleware from 'redux-thunk';
+//LoginForm
 import {tokenMiddleware} from "./redux/middleware";
 
+//This Store here will dispatch the tokenMiddleware, 
+//then the tokenMiddleware will take care of the Reducer
+//Then the reducer will change the state in store
+// inside tokenMiddleware the token traitement happen
+//The tokenMiddleware will only works if the dispatcher dispatchs it's actions , otherwise it will be skipped
 const store = createStore(
   reducer,
   applyMiddleware(thunkMiddleware, tokenMiddleware)
@@ -23,6 +29,7 @@ const history = createHistory();
 
 ReactDOM.render((
   <Provider store={store}>
+    {/* https://www.oreilly.com/library/view/learning-redux/9781786462398/53627206-5feb-431c-bf79-c0d0051cd947.xhtml */}
     <ConnectedRouter history={history}>
       <Route path="/" component={App}/>
     </ConnectedRouter>

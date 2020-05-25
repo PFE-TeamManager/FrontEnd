@@ -2,6 +2,8 @@ import React from 'react';
 import ProjectList from "./ProjectList";
 import {projectListFetch} from "../../../redux/actions/actions";
 import {connect} from "react-redux";
+import { Spinner } from '../../Global/Spinner';
+import ProjectForm from '../../../redux/reducers/project/ProjectForm';
 
 const mapStateToProps = state => ({
   ...state.projectList
@@ -19,11 +21,21 @@ class ProjectListContainer extends React.Component {
 
   render() {
 
-    const {projects} = this.props;
+    const {projects,isFetching} = this.props;
+
+    if (isFetching) {
+      return (<Spinner />);
+    }
 
     return (
-      <div>
-        <ProjectList projects={projects}/>
+      <div className="row">
+          <div className="col-12 col-md-6">
+            <ProjectList projects={projects}/>
+          </div>
+          <div className="col-12 col-md-6">
+            {/* here must be check of the role chef projet */}
+            <ProjectForm />
+          </div>
       </div>
     )
   }
