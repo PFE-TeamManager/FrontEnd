@@ -93,14 +93,11 @@ export const projectAdd = (projectName) => {
     ).then(
       response => dispatch(projectAdded(response))
     ).catch((error) => {
+      //Token Expired
       if (401 === error.response.status) {
         return dispatch(userLogout());
       }
-      throw new SubmissionError(
-        {
-          content: 'This is an error'
-        }
-      );
+      throw new SubmissionError(parseApiErrors(error));
     })
   }
 };
@@ -152,7 +149,7 @@ export const userRegister = (username, password, email, phone) => {
     return requests.post('/users', {username, password, email, phone}, false)
       .then(() => dispatch(userRegisterSuccess()))
       .catch(error => {
-        //throw new SubmissionError(parseApiErrors(error));
+        throw new SubmissionError(parseApiErrors(error));
       });
   }
 };
