@@ -16741,3 +16741,23 @@ be a descendant of the grid when it is being dragged.
   background: url("./components/Guard/Register/register-bg.jpg");
   background-size: cover;
 }
+
+
+/***************fade *****************/
+.fade-enter {
+  opacity: 0.01;
+}
+
+.fade-enter-active {
+  opacity: 1;
+  transition: opacity 1000ms ease-in;
+}
+
+.fade-exit {
+  opacity: 1;
+}
+
+.fade-exit-active {
+  opacity: 0.01;
+  transition: opacity 1000ms ease-in;
+}

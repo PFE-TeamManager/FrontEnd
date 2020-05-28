@@ -4,7 +4,6 @@ class MainMenu extends React.Component {
 
     constructor(props){
         super(props);
-        console.log(props);
     }
 
     render(){
@@ -25,33 +24,33 @@ class MainMenu extends React.Component {
                         <ul className="app-notification dropdown-menu dropdown-menu-right">
                             <li className="app-notification__title">You have 4 new notifications.</li>
                             <div className="app-notification__content">
-                            <li><a className="app-notification__item" href="javascript:;"><span className="app-notification__icon"><span className="fa-stack fa-lg"><i className="fa fa-circle fa-stack-2x text-primary"></i><i className="fa fa-envelope fa-stack-1x fa-inverse"></i></span></span>
+                            <li><a className="app-notification__item"><span className="app-notification__icon"><span className="fa-stack fa-lg"><i className="fa fa-circle fa-stack-2x text-primary"></i><i className="fa fa-envelope fa-stack-1x fa-inverse"></i></span></span>
                                 <div>
                                     <p className="app-notification__message">Lisa sent you a mail</p>
                                     <p className="app-notification__meta">2 min ago</p>
                                 </div></a></li>
-                            <li><a className="app-notification__item" href="javascript:;"><span className="app-notification__icon"><span className="fa-stack fa-lg"><i className="fa fa-circle fa-stack-2x text-danger"></i><i className="fa fa-hdd-o fa-stack-1x fa-inverse"></i></span></span>
+                            <li><a className="app-notification__item"><span className="app-notification__icon"><span className="fa-stack fa-lg"><i className="fa fa-circle fa-stack-2x text-danger"></i><i className="fa fa-hdd-o fa-stack-1x fa-inverse"></i></span></span>
                                 <div>
                                     <p className="app-notification__message">Mail server not working</p>
                                     <p className="app-notification__meta">5 min ago</p>
                                 </div></a></li>
-                            <li><a className="app-notification__item" href="javascript:;"><span className="app-notification__icon"><span className="fa-stack fa-lg"><i className="fa fa-circle fa-stack-2x text-success"></i><i className="fa fa-money fa-stack-1x fa-inverse"></i></span></span>
+                            <li><a className="app-notification__item"><span className="app-notification__icon"><span className="fa-stack fa-lg"><i className="fa fa-circle fa-stack-2x text-success"></i><i className="fa fa-money fa-stack-1x fa-inverse"></i></span></span>
                                 <div>
                                     <p className="app-notification__message">Transaction complete</p>
                                     <p className="app-notification__meta">2 days ago</p>
                                 </div></a></li>
                             <div className="app-notification__content">
-                                <li><a className="app-notification__item" href="javascript:;"><span className="app-notification__icon"><span className="fa-stack fa-lg"><i className="fa fa-circle fa-stack-2x text-primary"></i><i className="fa fa-envelope fa-stack-1x fa-inverse"></i></span></span>
+                                <li><a className="app-notification__item"><span className="app-notification__icon"><span className="fa-stack fa-lg"><i className="fa fa-circle fa-stack-2x text-primary"></i><i className="fa fa-envelope fa-stack-1x fa-inverse"></i></span></span>
                                     <div>
                                     <p className="app-notification__message">Lisa sent you a mail</p>
                                     <p className="app-notification__meta">2 min ago</p>
                                     </div></a></li>
-                                <li><a className="app-notification__item" href="javascript:;"><span className="app-notification__icon"><span className="fa-stack fa-lg"><i className="fa fa-circle fa-stack-2x text-danger"></i><i className="fa fa-hdd-o fa-stack-1x fa-inverse"></i></span></span>
+                                <li><a className="app-notification__item"><span className="app-notification__icon"><span className="fa-stack fa-lg"><i className="fa fa-circle fa-stack-2x text-danger"></i><i className="fa fa-hdd-o fa-stack-1x fa-inverse"></i></span></span>
                                     <div>
                                     <p className="app-notification__message">Mail server not working</p>
                                     <p className="app-notification__meta">5 min ago</p>
                                     </div></a></li>
-                                <li><a className="app-notification__item" href="javascript:;"><span className="app-notification__icon"><span className="fa-stack fa-lg"><i className="fa fa-circle fa-stack-2x text-success"></i><i className="fa fa-money fa-stack-1x fa-inverse"></i></span></span>
+                                <li><a className="app-notification__item"><span className="app-notification__icon"><span className="fa-stack fa-lg"><i className="fa fa-circle fa-stack-2x text-success"></i><i className="fa fa-money fa-stack-1x fa-inverse"></i></span></span>
                                     <div>
                                     <p className="app-notification__message">Transaction complete</p>
                                     <p className="app-notification__meta">2 days ago</p>

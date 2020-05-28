@@ -14,14 +14,6 @@ export default (state = {
         userId: action.userId,
         isAuthenticated: true
       };
-    case USER_LOGOUT:
-      return {
-        ...state,
-        token: null,
-        userId: null,
-        isAuthenticated: false,
-        userData: null
-      };
     case USER_SET_ID:
       return {
         ...state,
@@ -34,6 +26,14 @@ export default (state = {
         userData: (state.userId === action.userId && state.userData === null)
           ? action.userData : state.userData,
         isAuthenticated: (state.userId === action.userId && state.userData === null)
+      };
+    case USER_LOGOUT:
+      return {
+        ...state,
+        token: null,
+        userId: null,
+        isAuthenticated: false,
+        userData: null
       };
     default:
       return state;
