@@ -26,7 +26,8 @@ import {
   TASK_LIST_REQUEST,
   TASK_RECEIVED,
   TASK_REQUEST,
-  TASK_UNLOAD,TASK_ADDED
+  TASK_UNLOAD,TASK_ADDED,
+  COMMENT_ADDED,COMMENT_LIST_ERROR,COMMENT_LIST_RECEIVED,COMMENT_LIST_REQUEST,COMMENT_LIST_UNLOAD
 } from "./constants";
 import {SubmissionError} from "redux-form";
 import {parseApiErrors} from "../../redux/apiUtils";
@@ -359,3 +360,57 @@ export const taskFormUnload = () => ({
 });
 
 /*****************END Task Action****************/
+
+
+/*********Comment Action**********/
+export const commentListRequest = () => ({
+  type: COMMENT_LIST_REQUEST,
+});
+
+export const commentListError = (error) => ({
+  type: COMMENT_LIST_ERROR,
+  error
+});
+
+export const commentListReceived = (data) => ({
+  type: COMMENT_LIST_RECEIVED,
+  data
+});
+
+export const commentListUnload = () => ({
+  type: COMMENT_LIST_UNLOAD,
+});
+
+export const commentListFetch = (id, page = 1) => {
+  return (dispatch) => {
+    dispatch(commentListRequest());
+    return requests.get(`/tasks/${id}/comments?_page=${page}`)
+      .then(response => dispatch(commentListReceived(response)))
+      .catch(error => dispatch(commentListError(error)));
+  }
+};
+
+export const commentAdded = (comment) => ({
+  type: COMMENT_ADDED,
+  comment
+});
+
+export const commentAdd = (comment, taskId) => {
+  return (dispatch) => {
+    return requests.post(
+      '/comments',
+      {
+        content: comment,
+        Task: `/api/tasks/${taskId}`
+      }
+    ).then(
+      response => dispatch(commentAdded(response))
+    ).catch((error) => {
+      if (401 === error.response.status) {
+        return dispatch(userLogout());
+      }
+      throw new SubmissionError(parseApiErrors(error));
+    })
+  }
+};
+/*************End Comment Action*****************/

@@ -3,6 +3,7 @@ import Task from "./Task";
 import {taskFetch,taskUnload} from "../../../redux/actions/actions";
 import {connect} from "react-redux";
 import { Spinner } from '../../Global/Spinner';
+import CommentListContainer from '../Comment/CommentListContainer';
 
 const mapStateToProps = state => ({
   ...state.task
@@ -34,6 +35,7 @@ class TaskContainer extends React.Component {
     return (
       <div>
         <Task task={task}/>
+        {task && <CommentListContainer taskId={this.props.match.params.id}/>}
       </div>
     )
   }

@@ -9,13 +9,14 @@ import projectList from './reducers/project/projectListReducer';
 import project from './reducers/project/projectReducer';
 import taskList from './reducers/task/taskListReducer';
 import task from './reducers/task/taskReducer';
+import commentList from './reducers/comment/commentListReducer';
 
 
 //keep it That way, always router and form the last
 export default combineReducers({
     registration,auth,
     projectList,project,
-    taskList,task,
+    taskList,task,commentList,
 
     router: routerReducer,
     form: formReducer
