@@ -35,6 +35,11 @@ import {
           //posts: state.posts ? state.posts.concat(action.data) : state.posts
         };
       case TASK_LIST_ERROR:
+        return {
+          ...state,
+          isFetching: false,
+          taskList: null
+        };
       case TASK_LIST_UNLOAD:
         return {
           ...state,

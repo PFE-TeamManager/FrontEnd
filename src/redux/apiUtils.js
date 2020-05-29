@@ -8,6 +8,7 @@ export const parseApiErrors = (error) => {
     );
 };
 
+//for pagination
 export const hydraPageCount = (collection) => {
   if (!collection['hydra:view']) {
     return 1;

@@ -1,12 +1,8 @@
 import {requests} from "../agent";
 import {
+  PROJECT_LIST_ERROR,PROJECT_LIST_RECEIVED,PROJECT_LIST_REQUEST,PROJECT_LIST_SET_PAGE,
+  PROJECT_RECEIVED,PROJECT_REQUEST,PROJECT_UNLOAD,PROJECT_ADDED,
   PROJECT_ERROR, PROJECT_FORM_UNLOAD,
-  PROJECT_LIST_ERROR,
-  PROJECT_LIST_RECEIVED,
-  PROJECT_LIST_REQUEST,
-  PROJECT_RECEIVED,
-  PROJECT_REQUEST,
-  PROJECT_UNLOAD,PROJECT_ADDED,
   IMAGE_DELETE_REQUEST, IMAGE_DELETED,
   IMAGE_UPLOAD_ERROR,
   IMAGE_UPLOAD_REQUEST,
@@ -21,7 +17,8 @@ import {
   USER_REGISTER_SUCCESS,
   USER_SET_ID,
   COMMENT_ADDED,COMMENT_LIST_ERROR,COMMENT_LIST_RECEIVED,COMMENT_LIST_REQUEST,COMMENT_LIST_UNLOAD,
-  TASK_ADDED,TASK_LIST_ERROR,TASK_LIST_RECEIVED,TASK_LIST_REQUEST,TASK_LIST_UNLOAD,TASK_UNLOAD,TASK_REQUEST,TASK_ERROR,TASK_RECEIVED
+  TASK_ADDED,TASK_LIST_ERROR,TASK_LIST_RECEIVED,TASK_LIST_REQUEST,TASK_LIST_UNLOAD,TASK_UNLOAD,
+  TASK_REQUEST,TASK_ERROR,TASK_RECEIVED
 } from "./constants";
 import {SubmissionError} from "redux-form";
 import {parseApiErrors} from "../../redux/apiUtils";
@@ -44,10 +41,15 @@ import {parseApiErrors} from "../../redux/apiUtils";
     data
   });
 
-  export const projectListFetch = () => {
+  export const projectListSetPage = (page) => ({
+    type: PROJECT_LIST_SET_PAGE,
+    page
+  });
+
+  export const projectListFetch = (page = 1) => {
     return (dispatch) => {
       dispatch(projectListRequest());
-      return requests.get(`/projects`)
+      return requests.get(`/projects?_page=${page}`)
         .then(response => dispatch(projectListReceived(response)))
         .catch(error => dispatch(projectListError(error)));
     }

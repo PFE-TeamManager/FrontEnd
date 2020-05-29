@@ -23,6 +23,7 @@ class MainContent extends React.Component {
                     
                         {/* The order of The Routes is so important */}
                         <Switch>
+                            <Route path="/dashboard/projects/page/:page?" component={ProjectListContainer}/>
                             <Route path="/dashboard/projects/:id" component={ProjectContainer} />
                             <Route path="/dashboard/tasks/:id" component={TaskContainer} />
                             <Route path="/dashboard/projects" component={ProjectListContainer} />
