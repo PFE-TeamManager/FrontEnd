@@ -1,17 +1,19 @@
 import React from "react";
 import {Field, reduxForm} from "redux-form";
 import {connect} from "react-redux";
-import {renderField} from "../../form";
-import {projectAdd} from "../../actions/actions";
+import {renderField} from "../../../redux/form";
+import {taskAdd} from "../../../redux/actions/actions";
 
 const mapDispatchToProps = {
-  projectAdd
+  taskAdd
 };
 
-class ProjectForm extends React.Component {
+class TaskForm extends React.Component {
   onSubmit(values) {
-    const {projectAdd} = this.props;
-    return projectAdd(values.projectName);
+    const {taskAdd, reset} = this.props;
+    return taskAdd(values.taskTitle).then(
+                                            () => reset()
+                                          );
   }
 
   render() {
@@ -21,11 +23,11 @@ class ProjectForm extends React.Component {
       <div className="card mb-3 mt-3 shadow-sm">
         <div className="card-body">
           <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
-            <Field name="projectName" label="Type your Project:"
-                   type="textarea" component={renderField}/>
+            <Field name="taskTitle" label="Type your task :"
+                   type="text" component={renderField}/>
             <button type="submit" className="btn btn-primary btn-big btn-block"
                     disabled={submitting}>
-              Add Project
+              Add Task
             </button>
           </form>
         </div>
@@ -35,5 +37,5 @@ class ProjectForm extends React.Component {
 }
 
 export default reduxForm({
-  form: 'ProjectForm'
-})(connect(null, mapDispatchToProps)(ProjectForm))
+  form: 'TaskForm'
+})(connect(null, mapDispatchToProps)(TaskForm))

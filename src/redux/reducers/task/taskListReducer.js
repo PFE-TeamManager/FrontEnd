@@ -1,43 +1,43 @@
 import {
-    PROJECT_LIST_REQUEST,
-    PROJECT_LIST_RECEIVED,
-    PROJECT_LIST_ERROR, PROJECT_LIST_SET_PAGE,PROJECT_ADDED
+    TASK_LIST_REQUEST,
+    TASK_LIST_RECEIVED,
+    TASK_LIST_ERROR, TASK_LIST_SET_PAGE,TASK_ADDED
   } from "../../actions/constants";
   //import {hydraPageCount} from "../apiUtils";
   
   export default(state = {
-    projects: null,
+    tasks: null,
     isFetching: false,
     currentPage: 1,
     pageCount: null
   }, action) => {
     switch (action.type) {
-      case PROJECT_ADDED:
+      case TASK_ADDED:
         return {
           ...state,
-          projects: [action.project, ...state.projects]
+          tasks: [action.task, ...state.tasks]
         };
-      case PROJECT_LIST_REQUEST:
+      case TASK_LIST_REQUEST:
         state = {
           ...state,
           isFetching: true,
         };
         return state;
-      case PROJECT_LIST_RECEIVED:
+      case TASK_LIST_RECEIVED:
         state = {
           ...state,
-          projects: action.data['hydra:member'],
+          tasks: action.data['hydra:member'],
           //pageCount: hydraPageCount(action.data),
           isFetching: false
         };
         return state;
-      case PROJECT_LIST_ERROR:
+      case TASK_LIST_ERROR:
         return {
           ...state,
           isFetching: false,
-          projects: null
+          tasks: null
         };
-      case PROJECT_LIST_SET_PAGE:
+      case TASK_LIST_SET_PAGE:
         return {
           ...state,
           currentPage: action.page

@@ -1,27 +1,27 @@
 import React from 'react';
-import ProjectList from "./ProjectList";
-import {projectListFetch} from "../../../redux/actions/actions";
+import TaskList from "./TaskList";
+import {taskListFetch} from "../../../redux/actions/actions";
 import {connect} from "react-redux";
 import { Spinner } from '../../Global/Spinner';
-import ProjectForm from './ProjectForm';
+import TaskForm from './TaskForm';
 
 const mapStateToProps = state => ({
-  ...state.projectList
+  ...state.taskList
 });
 
 const mapDispatchToProps = {
-  projectListFetch
+  taskListFetch
 };
 
-class ProjectListContainer extends React.Component {
+class TaskListContainer extends React.Component {
 
   componentDidMount() {
-    this.props.projectListFetch();
+    this.props.taskListFetch();
   }
 
   render() {
 
-    const {projects,isFetching} = this.props;
+    const {tasks,isFetching} = this.props;
 
     if (isFetching) {
       return (<Spinner />);
@@ -30,15 +30,15 @@ class ProjectListContainer extends React.Component {
     return (
       <div className="row">
           <div className="col-12 col-md-6">
-            <ProjectList projects={projects}/>
+            <TaskList tasks={tasks}/>
           </div>
           <div className="col-12 col-md-6">
             {/* here must be check of the role chef projet */}
-            <ProjectForm />
+            <TaskForm />
           </div>
       </div>
     )
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ProjectListContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(TaskListContainer);

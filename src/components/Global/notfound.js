@@ -11,7 +11,7 @@ class Notfound extends React.Component {
         if( !this.props.isAuthenticated ){
             setTimeout(() => {
                 this.props.history.push('/');//Redirect when user is not loggedin
-            }, 2000);
+            }, 1000);
         }
     }
 

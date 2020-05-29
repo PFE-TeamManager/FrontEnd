@@ -27,7 +27,7 @@ class Dashboard extends React.Component {
                 return (
                     <div>
                         <MainMenu userData={userData} logout={logout} />
-                        <SideBar />
+                        <SideBar userData={userData} />
                         <MainContent />
                     </div>
                 );

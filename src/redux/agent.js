@@ -18,7 +18,7 @@ const tokenPlugin = secured => {
 
 //All The requests here use Token
 export const requests = {
-  get: (url, secured = false) => {
+  get: (url, secured = true) => {
     return superagent.get(`${API_ROOT}${url}`).use(tokenPlugin(secured)).then(responseBody);
   },
   post: (url, body = null, secured = true) => {
