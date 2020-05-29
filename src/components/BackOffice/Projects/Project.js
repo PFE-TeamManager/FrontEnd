@@ -11,7 +11,6 @@ class Project extends React.Component {
     }
 
     return (
-      
       <div className="card mb-3 mt-3 shadow-sm">
         <div className="card-body">
           <h2>{project.projectName}</h2>

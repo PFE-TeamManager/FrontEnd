@@ -31,15 +31,21 @@ const menuItems = [
 
 class SideBar extends React.Component {
 
+    constructor(props){
+        super(props);
+    }
+
     render(){
         return (
             <div>
                 <div className="app-sidebar__overlay" data-toggle="sidebar"></div>
                 <aside className="app-sidebar">
                     <div className="app-sidebar__user">
-                            <img className="app-sidebar__user-avatar" src="#" alt="User Image" />
-                            <div>
-                            <p className="app-sidebar__user-name">John Doe</p>
+                        <img className="app-sidebar__user-avatar" src="#" alt="User Image" />
+                        <div>
+                            <p className="app-sidebar__user-name">
+                                {this.props.userData.username}
+                            </p>
                             <p className="app-sidebar__user-designation">Frontend Developer</p>
                         </div>
                     </div>

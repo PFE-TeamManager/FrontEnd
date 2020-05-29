@@ -11,11 +11,11 @@ class Dashboard extends React.Component {
         super(props);
     }
 
-    // componentDidMount() {
-    //     if( !this.props.isAuthenticated ){
-    //         this.props.history.push('/');//Redirect when user is not loggedin
-    //     }
-    // }
+    componentDidMount() {
+        if( !this.props.isAuthenticated ){
+            this.props.history.push('/');//Redirect when user is not loggedin
+        }
+    }
 
     render(){
         const {isAuthenticated,userData,logout} = this.props;
@@ -27,7 +27,7 @@ class Dashboard extends React.Component {
                 return (
                     <div>
                         <MainMenu userData={userData} logout={logout} />
-                        <SideBar />
+                        <SideBar userData={userData} />
                         <MainContent />
                     </div>
                 );
