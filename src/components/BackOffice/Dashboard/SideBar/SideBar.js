@@ -20,13 +20,7 @@ const menuItems = [
         icon: "app-menu__icon fa fa-sign-in",
         text: "Projects",
         link: "/dashboard/projects"
-    },
-    {
-        id: 4,
-        icon: "app-menu__icon fa fa-tasks",
-        text: "Tasks",
-        link: "/dashboard/tasks"
-    },
+    }
 ];
 
 class SideBar extends React.Component {

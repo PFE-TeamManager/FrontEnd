@@ -1,42 +1,42 @@
 import React from 'react';
+import {Message} from "../../Global/Message";
 import timeago from 'timeago.js';
 import {Link} from "react-router-dom";
-import {Message} from "../../Global/Message";
 import {TransitionGroup, CSSTransition} from "react-transition-group";
 
-class TaskList extends React.Component {
 
+export class TaskList extends React.Component {
   render() {
-    //The state is in the TaskListReducer
-    const {tasks} = this.props;
+    const {taskList} = this.props;
 
-    if (null === tasks || 0 === tasks.length) {
-      return (<Message message="No tasks available"/>);
+    if (null === taskList || 0 === taskList.length) {
+      return (<Message message="No Tasks yet"/>);
     }
 
     return (
-    <div>
-      <TransitionGroup>
-        {tasks && tasks.map(task => (
-            <CSSTransition classNames="fade" key={task.id} timeout={1000}>
-              <div className="card mb-3 mt-3 shadow-sm">
-                <div className="card-body">
-                  <h3>
+      <div className="card mb-3 mt-3 shadow-sm">
+        <TransitionGroup>
+          {taskList.map(task => {
+            return (
+              <CSSTransition key={task.id} timeout={1000} classNames="fade">
+                <div className="card-body border-bottom">
+                  <h5 className="card-title">
                     <Link to={`/dashboard/tasks/${task.id}`}>{task.TaskTitle}</Link>
-                  </h3>
-                  <p className="card-text bordet-top">
+                  </h5>
+                  <p className="card-text mb-0">
+                    {task.TaskDescription}
+                  </p>
+                  <p className="card-text">
                     <small className="text-muted">
-                      {timeago().format(task.createdAt)}
+                      {timeago().format(task.createdAt)} by&nbsp; {task.createdBy.username}
                     </small>
                   </p>
                 </div>
-              </div>
-            </CSSTransition>
-        ))}
-      </TransitionGroup>
-      
-    </div>)
+              </CSSTransition>
+            );
+          })}
+        </TransitionGroup>
+      </div>
+    )
   }
 }
-
-export default  TaskList;

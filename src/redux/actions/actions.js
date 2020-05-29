@@ -20,14 +20,8 @@ import {
   USER_REGISTER_COMPLETE,
   USER_REGISTER_SUCCESS,
   USER_SET_ID,
-  TASK_ERROR, TASK_FORM_UNLOAD,
-  TASK_LIST_ERROR,
-  TASK_LIST_RECEIVED,
-  TASK_LIST_REQUEST,
-  TASK_RECEIVED,
-  TASK_REQUEST,
-  TASK_UNLOAD,TASK_ADDED,
-  COMMENT_ADDED,COMMENT_LIST_ERROR,COMMENT_LIST_RECEIVED,COMMENT_LIST_REQUEST,COMMENT_LIST_UNLOAD
+  COMMENT_ADDED,COMMENT_LIST_ERROR,COMMENT_LIST_RECEIVED,COMMENT_LIST_REQUEST,COMMENT_LIST_UNLOAD,
+  TASK_ADDED,TASK_LIST_ERROR,TASK_LIST_RECEIVED,TASK_LIST_REQUEST,TASK_LIST_UNLOAD,TASK_UNLOAD,TASK_REQUEST,TASK_ERROR,TASK_RECEIVED
 } from "./constants";
 import {SubmissionError} from "redux-form";
 import {parseApiErrors} from "../../redux/apiUtils";
@@ -280,88 +274,6 @@ export const imageDeleted = (id) => {
 
 
 
-/*****************Task Action****************/
-
-export const taskListRequest = () => ({
-  type: TASK_LIST_REQUEST,//reducer
-});
-
-export const taskListError = (error) => ({
-  type: TASK_LIST_ERROR,
-  error
-});
-
-export const taskListReceived = (data) => ({
-  type: TASK_LIST_RECEIVED,//reducer
-  data
-});
-
-export const taskListFetch = () => {
-  return (dispatch) => {
-    dispatch(taskListRequest());
-    return requests.get(`/tasks`)
-      .then(response => dispatch(taskListReceived(response)))
-      .catch(error => dispatch(taskListError(error)));
-  }
-};
-
-export const taskRequest = () => ({
-  type: TASK_REQUEST,//Reducer To get the state
-});
-
-export const taskError = (error) => ({
-  type: TASK_ERROR,
-  error
-});
-
-export const taskReceived = (data) => ({
-  type: TASK_RECEIVED,
-  data
-});
-
-export const taskUnload = () => ({
-  type: TASK_UNLOAD,
-});
-
-export const taskFetch = (id) => {
-  return (dispatch) => {
-    dispatch(taskRequest());//GET THE STATE BY REDUCER
-    return requests.get(`/tasks/${id}`)
-      .then(response => dispatch(taskReceived(response)))//Fill the state by the returned data
-      .catch(error => dispatch(taskError(error)));
-  }
-};
-
-export const taskAdded = (task) => ({
-  type: TASK_ADDED,
-  task
-});
-
-export const taskAdd = (TaskTitle) => {
-  return (dispatch) => {
-    return requests.post(
-      '/tasks',
-      {
-        TaskTitle: TaskTitle
-      }
-    ).then(
-      response => dispatch(taskAdded(response))
-    ).catch((error) => {
-      if (401 === error.response.status) {
-        return dispatch(userLogout());
-      }
-      throw new SubmissionError(parseApiErrors(error));
-    })
-  }
-};
-
-export const taskFormUnload = () => ({
-  type: TASK_FORM_UNLOAD
-});
-
-/*****************END Task Action****************/
-
-
 /*********Comment Action**********/
 export const commentListRequest = () => ({
   type: COMMENT_LIST_REQUEST,
@@ -414,3 +326,86 @@ export const commentAdd = (comment, taskId) => {
   }
 };
 /*************End Comment Action*****************/
+
+
+
+/*********Task Action**********/
+export const taskListRequest = () => ({
+  type: TASK_LIST_REQUEST,
+});
+
+export const taskListError = (error) => ({
+  type: TASK_LIST_ERROR,
+  error
+});
+
+export const taskListReceived = (data) => ({
+  type: TASK_LIST_RECEIVED,
+  data
+});
+
+export const taskListUnload = () => ({
+  type: TASK_LIST_UNLOAD,
+});
+
+export const taskListFetch = (id, page = 1) => {
+  return (dispatch) => {
+    dispatch(taskListRequest());
+    return requests.get(`/projects/${id}/tasks?_page=${page}`)
+      .then(response => dispatch(taskListReceived(response)))
+      .catch(error => dispatch(taskListError(error)));
+  }
+};
+
+export const taskAdded = (task) => ({
+  type: TASK_ADDED,
+  task
+});
+
+export const taskAdd = (task, projectId) => {
+  return (dispatch) => {
+    return requests.post(
+      '/tasks',
+      {
+        TaskTitle: task.TaskTitle,
+        TaskDescription: task.TaskDescription,
+        IdProject: `/api/projects/${projectId}`
+      }
+    ).then(
+      response => dispatch(taskAdded(response))
+    ).catch((error) => {
+      if (401 === error.response.status) {
+        return dispatch(userLogout());
+      }
+      throw new SubmissionError(parseApiErrors(error));
+    })
+  }
+};
+
+export const taskRequest = () => ({
+  type: TASK_REQUEST,//Reducer To get the state
+});
+
+export const taskError = (error) => ({
+  type: TASK_ERROR,
+  error
+});
+
+export const taskReceived = (data) => ({
+  type: TASK_RECEIVED,
+  data
+});
+
+export const taskUnload = () => ({
+  type: TASK_UNLOAD,
+});
+
+export const taskFetch = (id) => {
+  return (dispatch) => {
+    dispatch(taskRequest());//GET THE STATE BY REDUCER
+    return requests.get(`/tasks/${id}`)
+      .then(response => dispatch(taskReceived(response)))//Fill the state by the returned data
+      .catch(error => dispatch(taskError(error)));
+  }
+};
+/*************End Task Action*****************/

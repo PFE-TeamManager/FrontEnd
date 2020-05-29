@@ -7,8 +7,8 @@ import {routerReducer} from "react-router-redux";
 
 import projectList from './reducers/project/projectListReducer';
 import project from './reducers/project/projectReducer';
-import taskList from './reducers/task/taskListReducer';
-import task from './reducers/task/taskReducer';
+import taskList from './reducers/task/taskListReducer.js';
+import task from './reducers/task/taskReducer.js';
 import commentList from './reducers/comment/commentListReducer';
 
 
@@ -16,7 +16,7 @@ import commentList from './reducers/comment/commentListReducer';
 export default combineReducers({
     registration,auth,
     projectList,project,
-    taskList,task,commentList,
+    taskList,commentList,task,
 
     router: routerReducer,
     form: formReducer

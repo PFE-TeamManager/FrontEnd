@@ -3,7 +3,6 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Notfound from "../../../Global/notfound";
 import ProjectListContainer from '../../Projects/ProjectListContainer';
 import ProjectContainer from '../../Projects/ProjectContainer';
-import TaskListContainer from '../../Tasks/TaskListContainer';
 import TaskContainer from '../../Tasks/TaskContainer';
 
 class MainContent extends React.Component {
@@ -27,7 +26,6 @@ class MainContent extends React.Component {
                             <Route path="/dashboard/projects/:id" component={ProjectContainer} />
                             <Route path="/dashboard/tasks/:id" component={TaskContainer} />
                             <Route path="/dashboard/projects" component={ProjectListContainer} />
-                            <Route path="/dashboard/tasks" component={TaskListContainer} />
                             <Route component={Notfound} />
                         </Switch>
                     

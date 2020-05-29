@@ -10,10 +10,8 @@ const mapDispatchToProps = {
 
 class TaskForm extends React.Component {
   onSubmit(values) {
-    const {taskAdd, reset} = this.props;
-    return taskAdd(values.taskTitle).then(
-                                            () => reset()
-                                          );
+    const {taskAdd, projectId, reset} = this.props;
+    return taskAdd(values, projectId).then(() => reset());
   }
 
   render() {
@@ -23,8 +21,10 @@ class TaskForm extends React.Component {
       <div className="card mb-3 mt-3 shadow-sm">
         <div className="card-body">
           <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
-            <Field name="taskTitle" label="Type your task :"
+            <Field name="TaskTitle" label="Type your task Title :"
                    type="text" component={renderField}/>
+            <Field name="TaskDescription" label="Type your task Description :"
+                   type="textarea" component={renderField}/>
             <button type="submit" className="btn btn-primary btn-big btn-block"
                     disabled={submitting}>
               Add Task

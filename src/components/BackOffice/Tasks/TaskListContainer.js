@@ -1,44 +1,53 @@
 import React from 'react';
-import TaskList from "./TaskList";
-import {taskListFetch} from "../../../redux/actions/actions";
+import {taskListFetch, taskListUnload} from "../../../redux/actions/actions";
 import {connect} from "react-redux";
 import { Spinner } from '../../Global/Spinner';
-import TaskForm from './TaskForm';
+import {TaskList} from "./TaskList";
+import TaskForm from "./TaskForm";
+import {LoadMore} from "../../Global/LoadMore";
 
-const mapStateToProps = state => ({
-  ...state.taskList
+const mapeStateToProps = state => ({
+  ...state.taskList,
+  isAuthenticated: state.auth.isAuthenticated
 });
 
 const mapDispatchToProps = {
-  taskListFetch
+  taskListFetch,
+  taskListUnload
 };
 
 class TaskListContainer extends React.Component {
-
   componentDidMount() {
-    this.props.taskListFetch();
+    this.props.taskListFetch(this.props.projectId);
+  }
+
+  componentWillUnmount() {
+    this.props.taskListUnload();
+  }
+
+  onLoadMoreClick() {
+    const {projectId, currentPage, taskListFetch} = this.props;
+    taskListFetch(projectId, currentPage);
   }
 
   render() {
+    const {isFetching, taskList, isAuthenticated, projectId, currentPage, pageCount} = this.props;
+    const showLoadMore = pageCount > 1 && currentPage <= pageCount;
 
-    const {tasks,isFetching} = this.props;
-
-    if (isFetching) {
-      return (<Spinner />);
+    if (isFetching && currentPage === 1) {
+      return (<Spinner/>);
     }
 
     return (
-      <div className="row">
-          <div className="col-12 col-md-6">
-            <TaskList tasks={tasks}/>
-          </div>
-          <div className="col-12 col-md-6">
-            {/* here must be check of the role chef projet */}
-            <TaskForm />
-          </div>
+      <div>
+        <TaskList taskList={taskList}/>
+        {showLoadMore && <LoadMore label="Load more Tasks..."
+                                   onClick={this.onLoadMoreClick.bind(this)}
+                                   disabled={isFetching}/>}
+        {isAuthenticated && <TaskForm projectId={projectId}/>}
       </div>
     )
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(TaskListContainer);
+export default connect(mapeStateToProps, mapDispatchToProps)(TaskListContainer);

@@ -3,6 +3,7 @@ import Project from "./Project";
 import {projectFetch,projectUnload} from "../../../redux/actions/actions";
 import {connect} from "react-redux";
 import { Spinner } from '../../Global/Spinner';
+import TaskListContainer from '../Tasks/TaskListContainer';
 
 const mapStateToProps = state => ({
   ...state.project
@@ -34,6 +35,7 @@ class ProjectContainer extends React.Component {
     return (
       <div>
         <Project project={project}/>
+        {project && <TaskListContainer projectId={this.props.match.params.id}/>}
       </div>
     )
   }
