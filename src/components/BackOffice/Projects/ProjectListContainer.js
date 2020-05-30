@@ -5,8 +5,10 @@ import {connect} from "react-redux";
 import { Spinner } from '../../Global/Spinner';
 import ProjectForm from './ProjectForm';
 import { Paginator } from "../../Global/Paginator";
+import {canCreateProject} from "../../../redux/apiUtils";
 
 const mapStateToProps = state => ({
+  userData: state.auth.userData,
   ...state.projectList
 });
 
@@ -55,37 +57,73 @@ class ProjectListContainer extends React.Component {
   }
 
   render() {
-
     const {projects,isFetching, currentPage, pageCount} = this.props;
 
-    if (isFetching) {
+     
+    
+    if (canCreateProject(this.props.userData)) {
+
+      if ( isFetching && currentPage === 1 ) {
+        return (
+          <div className="row">
+              <div className="col-12">
+                <Spinner />
+              </div>
+          </div>
+        );
+      }
+
+      if ( isFetching && currentPage > 1 )  {
+        return (
+          <div className="row">
+              <div className="col-12 col-md-6">
+                <Spinner />
+              </div>
+              <div className="col-12 col-md-6">
+                <ProjectForm />
+              </div>
+          </div>
+        );
+      }
       return (
         <div className="row">
             <div className="col-12 col-md-6">
-              <Spinner />
+              <ProjectList projects={projects}/>
+              <Paginator  currentPage={currentPage} pageCount={pageCount}
+                          setPage={this.changePage.bind(this)}
+                          nextPage={this.onNextPageClick.bind(this)}
+                          prevPage={this.onPrevPageClick.bind(this)}/>
             </div>
             <div className="col-12 col-md-6">
+              {/* here must be check of the role chef projet */}
               <ProjectForm />
             </div>
         </div>
-      );
+      )
+    } else {
+      if ( isFetching ) {
+        return (
+          <div className="row">
+              <div className="col-12">
+                <Spinner />
+              </div>
+          </div>
+        );
+      }
+      return (
+        <div className="row">
+            <div className="col-12">
+              <ProjectList projects={projects}/>
+              <Paginator  currentPage={currentPage} pageCount={pageCount}
+                          setPage={this.changePage.bind(this)}
+                          nextPage={this.onNextPageClick.bind(this)}
+                          prevPage={this.onPrevPageClick.bind(this)}/>
+            </div>
+        </div>
+      )
     }
 
-    return (
-      <div className="row">
-          <div className="col-12 col-md-6">
-            <ProjectList projects={projects}/>
-            <Paginator  currentPage={currentPage} pageCount={pageCount}
-                        setPage={this.changePage.bind(this)}
-                        nextPage={this.onNextPageClick.bind(this)}
-                        prevPage={this.onPrevPageClick.bind(this)}/>
-          </div>
-          <div className="col-12 col-md-6">
-            {/* here must be check of the role chef projet */}
-            <ProjectForm />
-          </div>
-      </div>
-    )
+    
   }
 }
 

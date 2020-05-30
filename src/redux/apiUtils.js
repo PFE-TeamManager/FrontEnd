@@ -20,5 +20,15 @@ export const hydraPageCount = (collection) => {
     collection['hydra:view']['hydra:last'].match(/page=(\d+)/)[1]
   );
 };
+
+
+const canCreateProjectRoles = ['ROLE_CHEF_PROJET', 'ROLE_ADMIN', 'ROLE_SUPERADMIN'];
+
+export const canCreateProject = (userData) => {
+  return null !== userData
+    && userData.roles.some(
+      userRoles => canCreateProjectRoles.includes(userRoles)
+    );
+};
   
   

@@ -5,10 +5,12 @@ import { Spinner } from '../../Global/Spinner';
 import {TaskList} from "./TaskList";
 import TaskForm from "./TaskForm";
 import {LoadMore} from "../../Global/LoadMore";
+import {canCreateProject} from "../../../redux/apiUtils";
 
 const mapeStateToProps = state => ({
   ...state.taskList,
-  isAuthenticated: state.auth.isAuthenticated
+  isAuthenticated: state.auth.isAuthenticated,
+  userData: state.auth.userData
 });
 
 const mapDispatchToProps = {
@@ -38,15 +40,27 @@ class TaskListContainer extends React.Component {
       return (<Spinner/>);
     }
 
-    return (
-      <div>
-        <TaskList taskList={taskList}/>
-        {showLoadMore && <LoadMore label="Load more Tasks..."
-                                   onClick={this.onLoadMoreClick.bind(this)}
-                                   disabled={isFetching}/>}
-        {isAuthenticated && <TaskForm projectId={projectId}/>}
-      </div>
-    )
+    if (canCreateProject(this.props.userData)) {
+        return (
+          <div>
+            <TaskList taskList={taskList}/>
+            {showLoadMore && <LoadMore label="Load more Tasks..."
+                                      onClick={this.onLoadMoreClick.bind(this)}
+                                      disabled={isFetching}/>}
+            
+            {isAuthenticated && <TaskForm projectId={projectId}/>}
+          </div>
+        )
+    } else {
+      return (
+        <div>
+          <TaskList taskList={taskList}/>
+          {showLoadMore && <LoadMore label="Load more Tasks..."
+                                    onClick={this.onLoadMoreClick.bind(this)}
+                                    disabled={isFetching}/>}
+        </div>
+      )
+    }
   }
 }
 
