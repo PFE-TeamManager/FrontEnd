@@ -1,11 +1,13 @@
 export const parseApiErrors = (error) => {
-    return error.response.body.violations.reduce(
-      (parsedErrors, violation) => {
-        parsedErrors[violation['propertyPath']] = violation['message'];
-        return parsedErrors;
-      },
-      {}
-    );
+   //if( error.violations ){
+      return error.response.body.violations.reduce(
+        (parsedErrors, violation) => {
+          parsedErrors[violation['propertyPath']] = violation['message'];
+          return parsedErrors;
+        },
+        {}
+      );
+   //}
 };
 
 //for pagination

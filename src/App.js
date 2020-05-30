@@ -3,10 +3,10 @@ import {connect} from 'react-redux';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import {userLogout, userProfileFetch, userSetId} from "./redux/actions/actions";
 import Dashboard from './components/BackOffice/Dashboard/Dashboard';
-import Register from './components/Guard/Register/Register';
 import Notfound from "./components/Global/notfound";
 import { requests } from './redux/agent';
 import LoginForm from './components/Guard/Auth/LoginForm';
+import RegistrationContainer from './components/Guard/Register/RegistrationContainer';
 
 
 const mapStateToProps = state => ({
@@ -65,7 +65,7 @@ class App extends React.Component {
             {/* Must verify The connection of the user to show either dahsboard or Guard  */}
             <Switch>
               <Route exact path="/" component={LoginForm} />
-              <Route path="/register" component={Register} />
+              <Route path="/register" component={RegistrationContainer} />
               <Route component={Notfound} />
             </Switch>
         </div>

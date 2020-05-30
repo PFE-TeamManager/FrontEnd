@@ -69,7 +69,7 @@ class LoginForm extends React.Component {
                                 <Field name="password" label="Password" type="password" component={renderField} />
                             </div>
                             <div className="form-group btn-container">
-                                <button className="btn btn-primary btn-block">
+                                <button type="submit" className="btn btn-primary btn-block">
                                     <i className="fa fa-sign-in fa-lg fa-fw"></i>SIGN IN
                                 </button>
                             </div>

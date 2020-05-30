@@ -147,9 +147,9 @@ export const userRegisterSuccess = () => {
 };
 
 // retypedPassword will be checked in the front no need to send it to the back
-export const userRegister = (username, password, email, phone) => {
+export const userRegister = (username, email, password) => {
   return (dispatch) => {
-    return requests.post('/users', {username, password, email, phone}, false)
+    return requests.post('/users', {username, email, password}, false)
       .then(() => dispatch(userRegisterSuccess()))
       .catch(error => {
         throw new SubmissionError(parseApiErrors(error));
