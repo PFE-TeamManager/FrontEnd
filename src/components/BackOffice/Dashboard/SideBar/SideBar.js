@@ -5,29 +5,31 @@ import { BrowserRouter as Router,Switch,Route,Link } from "react-router-dom";
 const menuItems = [
     {
         id: 1,
-        icon: "app-menu__icon fa fa-dashboard",
+        icon: "app-menu__icon fa fa-charte-line",
         text: "Dashboard",
         link: "/dashboard"
     },
     {
         id: 2,
-        icon: "app-menu__icon fa fa-user-circle",
+        icon: "app-menu__icon fa fa-file-alt",
         text: "Docs",
         link: "/dashboard/docs"
     },
     {
         id: 3,
-        icon: "app-menu__icon fa fa-sign-in",
+        icon: "app-menu__icon fa fa-project-diagram",
         text: "Projects",
         link: "/dashboard/projects"
+    },
+    {
+        id: 4,
+        icon: "app-menu__icon fa fa-users",
+        text: "Teams",
+        link: "/dashboard/teams"
     }
 ];
 
 class SideBar extends React.Component {
-
-    constructor(props){
-        super(props);
-    }
 
     render(){
         return (

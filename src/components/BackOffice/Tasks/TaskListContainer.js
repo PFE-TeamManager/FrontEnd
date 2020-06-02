@@ -5,7 +5,7 @@ import { Spinner } from '../../Global/Spinner';
 import {TaskList} from "./TaskList";
 import TaskForm from "./TaskForm";
 import {LoadMore} from "../../Global/LoadMore";
-import {canCreateProject} from "../../../redux/apiUtils";
+import {canCreateAuthorization} from "../../../redux/apiUtils";
 
 const mapeStateToProps = state => ({
   ...state.taskList,
@@ -40,7 +40,7 @@ class TaskListContainer extends React.Component {
       return (<Spinner/>);
     }
 
-    if (canCreateProject(this.props.userData)) {
+    if (canCreateAuthorization(this.props.userData)) {
         return (
           <div>
             <TaskList taskList={taskList}/>

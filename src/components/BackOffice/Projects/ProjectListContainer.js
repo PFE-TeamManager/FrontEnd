@@ -5,7 +5,7 @@ import {connect} from "react-redux";
 import { Spinner } from '../../Global/Spinner';
 import ProjectForm from './ProjectForm';
 import { Paginator } from "../../Global/Paginator";
-import {canCreateProject} from "../../../redux/apiUtils";
+import {canCreateAuthorization} from "../../../redux/apiUtils";
 
 const mapStateToProps = state => ({
   userData: state.auth.userData,
@@ -61,7 +61,7 @@ class ProjectListContainer extends React.Component {
 
      
     
-    if (canCreateProject(this.props.userData)) {
+    if (canCreateAuthorization(this.props.userData)) {
 
       if ( isFetching && currentPage === 1 ) {
         return (

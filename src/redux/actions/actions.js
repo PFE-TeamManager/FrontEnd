@@ -18,7 +18,12 @@ import {
   USER_SET_ID,
   COMMENT_ADDED,COMMENT_LIST_ERROR,COMMENT_LIST_RECEIVED,COMMENT_LIST_REQUEST,COMMENT_LIST_UNLOAD,
   TASK_ADDED,TASK_LIST_ERROR,TASK_LIST_RECEIVED,TASK_LIST_REQUEST,TASK_LIST_UNLOAD,TASK_UNLOAD,
-  TASK_REQUEST,TASK_ERROR,TASK_RECEIVED
+  TASK_REQUEST,TASK_ERROR,TASK_RECEIVED,
+
+  TEAM_LIST_ERROR,TEAM_LIST_RECEIVED,TEAM_LIST_REQUEST,TEAM_LIST_SET_PAGE,
+  TEAM_RECEIVED,TEAM_REQUEST,TEAM_UNLOAD,TEAM_ADDED,
+
+  MEMBER_LIST_REQUEST,MEMBER_LIST_ERROR,MEMBER_LIST_RECEIVED
 } from "./constants";
 import {SubmissionError} from "redux-form";
 import {parseApiErrors} from "../../redux/apiUtils";
@@ -411,3 +416,120 @@ export const taskFetch = (id) => {
   }
 };
 /*************End Task Action*****************/
+
+
+/*****************Team Action****************/
+
+export const teamListRequest = () => ({
+  type: TEAM_LIST_REQUEST,//reducer
+});
+
+export const teamListError = (error) => ({
+  type: TEAM_LIST_ERROR,
+  error
+});
+
+export const teamListReceived = (data) => ({
+  type: TEAM_LIST_RECEIVED,//reducer
+  data
+});
+
+export const teamListSetPage = (page) => ({
+  type: TEAM_LIST_SET_PAGE,
+  page
+});
+
+export const teamListFetch = () => {
+  return (dispatch) => {
+    dispatch(teamListRequest());
+    return requests.get(`#`)
+      .then(response => dispatch(teamListReceived(response)))
+      .catch(error => dispatch(teamListError(error)));
+  }
+};
+
+export const teamRequest = () => ({
+  type: TEAM_REQUEST,//Reducer To get the state
+});
+
+// export const teamError = (error) => ({
+//   type: TEAM_ERROR,
+//   error
+// });
+
+export const teamReceived = (data) => ({
+  type: TEAM_RECEIVED,
+  data
+});
+
+export const teamUnload = () => ({
+  type: TEAM_UNLOAD,
+});
+
+export const teamFetch = (id) => {
+  return (dispatch) => {
+    dispatch(teamRequest());//GET THE STATE BY REDUCER
+    return requests.get(`/teams/${id}`)
+      .then(response => dispatch(teamReceived(response)));//Fill the state by the returned data
+      //.catch(error => dispatch(teamError(error)));
+  }
+};
+
+export const teamAdded = (team) => ({
+  type: TEAM_ADDED,
+  team
+});
+
+export const teamAdd = (teamName) => {
+  return (dispatch) => {
+    return requests.post(
+      '/teams',
+      {
+        teamName: teamName
+      }
+    ).then(
+      response => dispatch(teamAdded(response))
+    ).catch((error) => {
+      if (401 === error.response.status) {
+        return dispatch(userLogout());//Token Expired
+      }
+      throw new SubmissionError(parseApiErrors(error));
+    })
+  }
+};
+
+// export const teamFormUnload = () => ({
+//   type: TEAM_FORM_UNLOAD
+// });
+
+/*****************END Team Action****************/
+
+
+/*********Member Action*******/
+
+export const memberListRequest = () => ({
+  type: MEMBER_LIST_REQUEST,//reducer
+});
+
+export const memberListError = (error) => ({
+  type: MEMBER_LIST_ERROR,
+  error
+});
+
+export const memberListReceived = (data) => ({
+  type: MEMBER_LIST_RECEIVED,//reducer
+  data
+});
+
+export const memberListFetch = () => {
+  return (dispatch) => {
+    dispatch(memberListRequest());
+    return requests.get(`/usersdatatable`)
+      .then(response => dispatch(memberListReceived(response)))
+      .catch(error => dispatch(memberListError(error)));
+  }
+};
+
+
+
+/*****************END Member Action****************/

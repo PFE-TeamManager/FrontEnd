@@ -4,6 +4,7 @@ import Notfound from "../../../Global/notfound";
 import ProjectListContainer from '../../Projects/ProjectListContainer';
 import ProjectContainer from '../../Projects/ProjectContainer';
 import TaskContainer from '../../Tasks/TaskContainer';
+import MemberListContainer from '../../Teams/MemberListContainer';
 
 class MainContent extends React.Component {
     render(){
@@ -27,6 +28,7 @@ class MainContent extends React.Component {
                             <Route path="/dashboard/projects/:id" component={ProjectContainer} />
                             <Route path="/dashboard/tasks/:id" component={TaskContainer} />
                             <Route path="/dashboard/projects" component={ProjectListContainer} />
+                            <Route path="/dashboard/teams" component={MemberListContainer} />
                             <Route component={Notfound} />
                         </Switch>
                     

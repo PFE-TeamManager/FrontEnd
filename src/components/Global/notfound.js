@@ -2,7 +2,6 @@ import React from 'react';
 
 class Notfound extends React.Component {
 
-    //Pour Afficher le contenue des tables , on doit utiliser une boucle
     constructor(props){
         super(props);
     }

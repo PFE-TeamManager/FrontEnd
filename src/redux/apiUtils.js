@@ -22,12 +22,12 @@ export const hydraPageCount = (collection) => {
 };
 
 
-const canCreateProjectRoles = ['ROLE_CHEF_PROJET', 'ROLE_ADMIN', 'ROLE_SUPERADMIN'];
+const canCreateAuthorizationRoles = ['ROLE_CHEF_PROJET', 'ROLE_ADMIN'];
 
-export const canCreateProject = (userData) => {
+export const canCreateAuthorization = (userData) => {
   return null !== userData
     && userData.roles.some(
-      userRoles => canCreateProjectRoles.includes(userRoles)
+      userRoles => canCreateAuthorizationRoles.includes(userRoles)
     );
 };
   
