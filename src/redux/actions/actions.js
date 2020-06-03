@@ -442,7 +442,7 @@ export const teamListSetPage = (page) => ({
 export const teamListFetch = () => {
   return (dispatch) => {
     dispatch(teamListRequest());
-    return requests.get(`#`)
+    return requests.get(`/teamsdatatable`)
       .then(response => dispatch(teamListReceived(response)))
       .catch(error => dispatch(teamListError(error)));
   }
