@@ -3,6 +3,7 @@ import {
   PROJECT_LIST_ERROR,PROJECT_LIST_RECEIVED,PROJECT_LIST_REQUEST,PROJECT_LIST_SET_PAGE,
   PROJECT_RECEIVED,PROJECT_REQUEST,PROJECT_UNLOAD,PROJECT_ADDED,
   PROJECT_ERROR, PROJECT_FORM_UNLOAD,
+
   IMAGE_DELETE_REQUEST, IMAGE_DELETED,
   IMAGE_UPLOAD_ERROR,
   IMAGE_UPLOAD_REQUEST,
@@ -16,14 +17,16 @@ import {
   USER_REGISTER_COMPLETE,
   USER_REGISTER_SUCCESS,
   USER_SET_ID,
+
   COMMENT_ADDED,COMMENT_LIST_ERROR,COMMENT_LIST_RECEIVED,COMMENT_LIST_REQUEST,COMMENT_LIST_UNLOAD,
+
   TASK_ADDED,TASK_LIST_ERROR,TASK_LIST_RECEIVED,TASK_LIST_REQUEST,TASK_LIST_UNLOAD,TASK_UNLOAD,
   TASK_REQUEST,TASK_ERROR,TASK_RECEIVED,
 
   TEAM_LIST_ERROR,TEAM_LIST_RECEIVED,TEAM_LIST_REQUEST,TEAM_LIST_SET_PAGE,
   TEAM_RECEIVED,TEAM_REQUEST,TEAM_UNLOAD,TEAM_ADDED,
 
-  MEMBER_LIST_REQUEST,MEMBER_LIST_ERROR,MEMBER_LIST_RECEIVED
+  MEMBER_LIST_REQUEST,MEMBER_LIST_ERROR,MEMBER_LIST_RECEIVED,MEMBER_PATCHED
 } from "./constants";
 import {SubmissionError} from "redux-form";
 import {parseApiErrors} from "../../redux/apiUtils";
@@ -521,6 +524,11 @@ export const memberListReceived = (data) => ({
   data
 });
 
+export const memberPatched = (member) => ({
+  type: MEMBER_PATCHED,
+  member
+});
+
 export const memberListFetch = () => {
   return (dispatch) => {
     dispatch(memberListRequest());
@@ -530,6 +538,36 @@ export const memberListFetch = () => {
   }
 };
 
+//memberPatched , dispatch logic not working
+export const memberPATCH = (role1, role2, memberId) => {
+  //console.log("From action memberPATCH : "+role1+" "+role2+" "+memberId); 
+  //return (dispatch) => {  
+    //return console.log("From action memberPATCH : "+roles.Role+" "+memberId);
+    return requests.patch(`/users/${memberId}`,{roles: [role1,role2]});
+    // .then(response => memberPatched(response))
+    // .catch(error => { console.log(error) });
+  //}
+};
 
+
+// export const taskAdd = (task, projectId) => {
+//   return (dispatch) => {
+//     return requests.post(
+//       '/tasks',
+//       {
+//         TaskTitle: task.TaskTitle,
+//         TaskDescription: task.TaskDescription,
+//         IdProject: `/api/projects/${projectId}`
+//       }
+//     ).then(
+//       response => dispatch(taskAdded(response))
+//     ).catch((error) => {
+//       if (401 === error.response.status) {
+//         return dispatch(userLogout());
+//       }
+//       throw new SubmissionError(parseApiErrors(error));
+//     })
+//   }
+// };
 
 /*****************END Member Action****************/

@@ -29,6 +29,8 @@
     "redux-thunk": "^2.3.0",
     "superagent": "^3.8.2",
     "superagent-promise": "^1.1.0",
+    "sweetalert2": "^9.14.0",
+    "sweetalert2-react-content": "^3.0.1",
     "timeago.js": "^3.0.2"
   },
   "scripts": {

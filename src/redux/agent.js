@@ -31,5 +31,8 @@ export const requests = {
   delete: (url, secured = true) => {
     return superagent.del(`${API_ROOT}${url}`).use(tokenPlugin(secured)).then(responseBody)
   },
+  patch: (url, body = null, secured = true) => {
+    return superagent.patch(`${API_ROOT}${url}`, body).use(tokenPlugin(secured)).then(responseBody);
+  },
   setToken: (newJwtToken) => token = newJwtToken //used in App.js & in the middleware
 };

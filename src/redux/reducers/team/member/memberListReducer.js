@@ -1,5 +1,5 @@
 import {
-    MEMBER_LIST_REQUEST,MEMBER_LIST_ERROR,MEMBER_LIST_RECEIVED
+    MEMBER_LIST_REQUEST,MEMBER_LIST_ERROR,MEMBER_LIST_RECEIVED,MEMBER_PATCHED
   } from "../../../actions/constants";
 
 export default(state = {
@@ -9,6 +9,11 @@ export default(state = {
     pageCount: null
     }, action) => {
     switch (action.type) {
+        case MEMBER_PATCHED:
+            return {
+                ...state,
+                members: [action.member, ...state.members]
+            };
         case MEMBER_LIST_REQUEST:
             state = {
                 ...state,
