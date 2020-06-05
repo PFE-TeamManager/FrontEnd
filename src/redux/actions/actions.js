@@ -484,21 +484,7 @@ export const teamAdded = (team) => ({
 });
 
 export const teamAdd = (teamName) => {
-  return (dispatch) => {
-    return requests.post(
-      '/teams',
-      {
-        teamName: teamName
-      }
-    ).then(
-      response => dispatch(teamAdded(response))
-    ).catch((error) => {
-      if (401 === error.response.status) {
-        return dispatch(userLogout());//Token Expired
-      }
-      throw new SubmissionError(parseApiErrors(error));
-    })
-  }
+  return requests.post('/teams',{teamName: teamName});
 };
 
 // export const teamFormUnload = () => ({

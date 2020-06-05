@@ -4,12 +4,12 @@ import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
 import {Message} from "../../Global/Message";
 import {BootstrapTable, TableHeaderColumn} from 'react-bootstrap-table';
-import {teamPATCHActivity} from "../../../redux/actions/actions";
+import {teamPATCHActivity,teamAdd} from "../../../redux/actions/actions";
 
-const MyReactSwal = withReactContent(Swal)
+const MyReactSwal = withReactContent(Swal);
 
 const mapDispatchToProps = {
-  teamPATCHActivity
+  teamPATCHActivity,teamAdd
 };
 
 function onAfterSaveCell(row, cellName, cellValue) {
@@ -22,11 +22,45 @@ function onBeforeSaveCell(row, cellName, cellValue) {
   teamPATCHActivity(row["idTeam"]);
 }
 
+function onAfterInsertRow(row) {
+
+  for (const prop in row) {
+    if( prop == "teamName" ){
+      MyReactSwal.fire({
+        icon: 'success'
+      })
+      return teamAdd(row[prop]);
+    }
+  }
+
+}
+
+function createCustomModalHeader(onClose, onSave) {
+  const headerStyle = {
+    fontWeight: 'bold',
+    fontSize: 'large',
+    textAlign: 'center',
+    backgroundColor: '#eeeeee'
+  };
+  return (
+    <div className='modal-header' style={ headerStyle }>
+      <h3>Add Team</h3>
+    </div>
+  );
+}
+
 class TeamList extends React.Component {
 
   render() {
     //The state is in the TeamListReducer
     const {teams} = this.props;
+
+    const options = {
+      searchDelayTime: 1500,
+      insertText: 'New Team',
+      insertModalHeader: createCustomModalHeader,
+      afterInsertRow: onAfterInsertRow// A hook for after insert rows
+    };
 
     const cellEditProp = {
       mode: 'click',
@@ -41,14 +75,18 @@ class TeamList extends React.Component {
 
     return (
     <div className="card p-2">
-        <BootstrapTable data={teams} striped hover pagination 
-                        insertRow={ true } cellEdit={ cellEditProp } version='4'>
-            <TableHeaderColumn dataField='idTeam' isKey={ true } editable={ false }>Team ID</TableHeaderColumn>
+        <BootstrapTable version='4' striped hover pagination searchPlaceholder='Search...'
+                        data={teams} cellEdit={ cellEditProp } options={ options }
+                        insertRow={ true } search={ true }  >
+            <TableHeaderColumn  dataField='idTeam' isKey={ true } autoValue={ true }
+                                editable={ false } searchable={ false } >Team ID</TableHeaderColumn>
             <TableHeaderColumn dataField='teamName'>Team Name</TableHeaderColumn>
-            <TableHeaderColumn  dataField='teamenabled'
-                                editable={ { type: 'checkbox', options: { values: 'Active:Non Active' } } } 
-                                >Active</TableHeaderColumn>
-            <TableHeaderColumn dataField='projectName' editable={ false }>Project</TableHeaderColumn>
+            <TableHeaderColumn  dataField='teamenabled' searchable={ false }
+                                autoValue={ true }
+                                editable={ { type: 'checkbox', options: { values: 'Active:Non Active' } } }>
+                                Active</TableHeaderColumn>
+            <TableHeaderColumn  dataField='projectName' 
+                                editable={ false } autoValue={ true }>Project</TableHeaderColumn>
         </BootstrapTable>
     </div>)
   }
