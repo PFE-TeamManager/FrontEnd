@@ -63,6 +63,7 @@ export const TEAM_ERROR = 'TEAM_ERROR';
 export const TEAM_UNLOAD = 'TEAM_UNLOAD';
 export const TEAM_FORM_UNLOAD = 'TEAM_FORM_UNLOAD';
 export const TEAM_ADDED = 'TEAM_ADDED';
+export const TEAM_PATCHED = 'TEAM_PATCHED';
 
 
 export const MEMBER_LIST_REQUEST = 'MEMBER_LIST_REQUEST';

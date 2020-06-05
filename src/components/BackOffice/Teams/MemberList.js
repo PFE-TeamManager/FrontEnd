@@ -4,7 +4,6 @@ import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
 import {Message} from "../../Global/Message";
 import {BootstrapTable, TableHeaderColumn} from 'react-bootstrap-table';
-import ActiveFormatter from './DatatableGlobal/ActiveFormatter';
 import {memberPATCH} from "../../../redux/actions/actions";
 
 const MyReactSwal = withReactContent(Swal)
@@ -15,8 +14,7 @@ const mapDispatchToProps = {
 
 function onAfterSaveCell(row, cellName, cellValue) {
   MyReactSwal.fire({
-    icon: 'success',
-    title: 'Successful Modification'
+    icon: 'success'
   })
 }
 
@@ -46,12 +44,6 @@ class MemberList extends React.Component {
     if (null === members || 0 === members.length) {
       return (<Message message="No members available"/>);
     }
-
-    function activeFormatter(cell, row) {
-      return (
-        <ActiveFormatter active={ cell } />
-      );
-    }
     
     return (
     <div className="card p-2">
@@ -65,8 +57,6 @@ class MemberList extends React.Component {
                               editable={ { type: 'select', options: { values: roles } } }> 
                                 Roles
           </TableHeaderColumn>
-          <TableHeaderColumn  dataField='userenabled' 
-                              dataFormat={activeFormatter}>Active</TableHeaderColumn>
           <TableHeaderColumn  dataField='dateembauchement' 
                               editable={ false }>Date Embauchement</TableHeaderColumn>
       </BootstrapTable>

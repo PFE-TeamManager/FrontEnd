@@ -549,6 +549,10 @@ export const memberPATCH = (role1, role2, memberId) => {
   //}
 };
 
+export const teamPATCHActivity = (teamId) => {
+  return requests.patch(`/teamsactivity/${teamId}`,{});
+}
+
 
 // export const taskAdd = (task, projectId) => {
 //   return (dispatch) => {
