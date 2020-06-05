@@ -1,6 +1,6 @@
 import React from 'react';
 import ProjectList from "./ProjectList";
-import {projectListFetch,projectListSetPage} from "../../../redux/actions/actions";
+import {projectListFetch,projectListSetPage,teamListFetch} from "../../../redux/actions/actions";
 import {connect} from "react-redux";
 import { Spinner } from '../../Global/Spinner';
 import ProjectForm from './ProjectForm';
@@ -9,17 +9,19 @@ import {canCreateAuthorization} from "../../../redux/apiUtils";
 
 const mapStateToProps = state => ({
   userData: state.auth.userData,
-  ...state.projectList
+  ...state.teamList,// teamList est dans combineReducers dans reducer.js
+  ...state.projectList// projectList est dans combineReducers dans reducer.js
 });
 
 const mapDispatchToProps = {
-  projectListFetch,projectListSetPage
+  projectListFetch,projectListSetPage,teamListFetch
 };
 
 class ProjectListContainer extends React.Component {
 
   componentDidMount() {
     this.props.projectListFetch(this.getQueryParamPage());
+    this.props.teamListFetch();
   }
 
   componentDidUpdate(prevProps) {
@@ -57,9 +59,7 @@ class ProjectListContainer extends React.Component {
   }
 
   render() {
-    const {projects,isFetching, currentPage, pageCount} = this.props;
-
-     
+    const {teams,projects,isFetching, currentPage, pageCount} = this.props;
     
     if (canCreateAuthorization(this.props.userData)) {
 
@@ -80,7 +80,7 @@ class ProjectListContainer extends React.Component {
                 <Spinner />
               </div>
               <div className="col-12 col-md-6">
-                <ProjectForm />
+                <ProjectForm teams={teams} />
               </div>
           </div>
         );
@@ -96,7 +96,7 @@ class ProjectListContainer extends React.Component {
             </div>
             <div className="col-12 col-md-6">
               {/* here must be check of the role chef projet */}
-              <ProjectForm />
+              <ProjectForm teams={teams} />
             </div>
         </div>
       )

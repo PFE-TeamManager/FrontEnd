@@ -95,12 +95,15 @@ import {parseApiErrors} from "../../redux/apiUtils";
     project
   });
 
-  export const projectAdd = (projectName) => {
+  export const projectAdd = (projectName,teamId) => {
     return (dispatch) => {
       return requests.post(
         '/projects',
         {
-          projectName: projectName
+          projectName: projectName,
+          Teams: [
+            `/api/teams/${teamId}`
+          ]
         }
       ).then(
         response => dispatch(projectAdded(response))
