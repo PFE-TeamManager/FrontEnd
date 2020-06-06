@@ -4,12 +4,12 @@ import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
 import {Message} from "../../Global/Message";
 import {BootstrapTable, TableHeaderColumn} from 'react-bootstrap-table';
-import {teamPATCHActivity,teamAdd} from "../../../redux/actions/actions";
+import {teamPATCHActivity,teamAdd,teamPATCH} from "../../../redux/actions/actions";
 
 const MyReactSwal = withReactContent(Swal);
 
 const mapDispatchToProps = {
-  teamPATCHActivity,teamAdd
+  teamPATCHActivity,teamAdd,teamPATCH
 };
 
 function onAfterSaveCell(row, cellName, cellValue) {
@@ -19,7 +19,20 @@ function onAfterSaveCell(row, cellName, cellValue) {
 }
 
 function onBeforeSaveCell(row, cellName, cellValue) {
-  teamPATCHActivity(row["idTeam"]);
+
+  if( cellName == "teamName" ){
+    teamPATCH(row["idTeam"],cellValue);
+  }
+
+  if( cellName == "teamenabled" ){
+    if( cellValue == "Active" ){
+      teamPATCHActivity(row["idTeam"],true);
+    }
+    if( cellValue == "Non Active" ){
+      teamPATCHActivity(row["idTeam"],false);
+    }
+  }
+  
 }
 
 function onAfterInsertRow(row) {

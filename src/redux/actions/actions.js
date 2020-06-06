@@ -536,10 +536,13 @@ export const memberTeamPATCH = (memberId,teamId) => {
   return requests.patch(`/users/${memberId}`,{ teams: `/api/teams/${teamId}` });
 };
 
-export const teamPATCHActivity = (teamId) => {
-  return requests.patch(`/teamsactivity/${teamId}`,{});
+export const teamPATCHActivity = (teamId,enabledstate) => {
+  return requests.patch(`/teams/${teamId}`,{enabled: enabledstate});
 }
 
+export const teamPATCH = (teamId,teamName) => {
+  return requests.patch(`/teams/${teamId}`,{teamName: teamName});
+}
 
 // export const taskAdd = (task, projectId) => {
 //   return (dispatch) => {
