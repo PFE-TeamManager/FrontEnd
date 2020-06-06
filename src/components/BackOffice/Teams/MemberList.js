@@ -4,12 +4,12 @@ import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
 import {Message} from "../../Global/Message";
 import {BootstrapTable, TableHeaderColumn} from 'react-bootstrap-table';
-import {memberPATCH} from "../../../redux/actions/actions";
+import {memberPATCH,memberTeamPATCH} from "../../../redux/actions/actions";
 
 const MyReactSwal = withReactContent(Swal)
 
 const mapDispatchToProps = {
-  memberPATCH
+  memberPATCH,memberTeamPATCH
 };
 
 function onAfterSaveCell(row, cellName, cellValue) {
@@ -22,15 +22,25 @@ function onBeforeSaveCell(row, cellName, cellValue) {
   //call the redux action and pass the id of member and value of change
   if( cellValue == "Développeur" ){
     return memberPATCH('ROLE_MEMBRE','ROLE_DEV', row["idMember"]);
-  }else{
+  }else if( cellValue == "Membre" ){
     return memberPATCH('ROLE_MEMBRE','null', row["idMember"]);
+  }else {
+    let teamId = cellValue.charAt(0);
+    return memberTeamPATCH(row["idMember"],teamId);
   }
 }
 class MemberList extends React.Component {
 
   render() {
     //The state is in the TeamListReducer
-    const {members} = this.props;
+    const {members,teams} = this.props;
+    const teamsArray = [];
+
+    { teams && teams.map(
+      (team) => {
+        teamsArray.push(team.idTeam+" - "+team.teamName)
+      }
+    )}
 
     const cellEditProp = {
       mode: 'click',
@@ -48,9 +58,10 @@ class MemberList extends React.Component {
     return (
     <div className="card p-2">
       <BootstrapTable version='4' data={members} 
-                      striped hover pagination 
+                      striped hover pagination search={ true }
                       cellEdit={ cellEditProp }>
-          <TableHeaderColumn dataField='idMember' isKey={ true }>User ID</TableHeaderColumn>
+          <TableHeaderColumn  dataField='idMember' isKey={ true } 
+                              editable={ false } searchable={ false }>User ID</TableHeaderColumn>
           <TableHeaderColumn dataField='username' editable={ false }>User Name</TableHeaderColumn>
           <TableHeaderColumn dataField='email' editable={ false }>User Email</TableHeaderColumn>
           <TableHeaderColumn  dataField='roles' 
@@ -59,6 +70,8 @@ class MemberList extends React.Component {
           </TableHeaderColumn>
           <TableHeaderColumn  dataField='dateembauchement' 
                               editable={ false }>Date Embauchement</TableHeaderColumn>
+          <TableHeaderColumn  dataField='teamName' 
+                              editable={ { type: 'select', options: { values: teamsArray } } }>Equipe</TableHeaderColumn>
       </BootstrapTable>
     </div>)
   }

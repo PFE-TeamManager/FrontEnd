@@ -529,13 +529,11 @@ export const memberListFetch = () => {
 
 //memberPatched , dispatch logic not working
 export const memberPATCH = (role1, role2, memberId) => {
-  //console.log("From action memberPATCH : "+role1+" "+role2+" "+memberId); 
-  //return (dispatch) => {  
-    //return console.log("From action memberPATCH : "+roles.Role+" "+memberId);
-    return requests.patch(`/users/${memberId}`,{roles: [role1,role2]});
-    // .then(response => memberPatched(response))
-    // .catch(error => { console.log(error) });
-  //}
+  return requests.patch(`/users/${memberId}`,{roles: [role1,role2]});
+};
+
+export const memberTeamPATCH = (memberId,teamId) => {
+  return requests.patch(`/users/${memberId}`,{ teams: `/api/teams/${teamId}` });
 };
 
 export const teamPATCHActivity = (teamId) => {

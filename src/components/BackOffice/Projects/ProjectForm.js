@@ -3,7 +3,7 @@ import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
 import {Field, reduxForm} from "redux-form";
 import {connect} from "react-redux";
-import {renderField,selectRenderField} from "../../../redux/form";
+import {renderField} from "../../../redux/form";
 import {projectAdd} from "../../../redux/actions/actions";
 
 const MyReactSwal = withReactContent(Swal);
@@ -43,12 +43,11 @@ class ProjectForm extends React.Component {
           <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
               <Field name="projectName" label="Type your Project :"
                     type="text" component={renderField}/>
-
+              <div className="form-group">
                 <select name="team" className="form-control" 
                         onChange={(e) => this.setState({ team: e.target.value })}>
                     <option>Choose your team</option>
-                    {
-                      teams && teams.map( (team,i) => {
+                    { teams && teams.map( (team,i) => {
                           if( (team.idProject === null) && (team.teamenabled == "Active") ){
                             return <option key={i} value={team.idTeam}>{team.teamName}</option>
                           }
@@ -56,7 +55,7 @@ class ProjectForm extends React.Component {
                       ) 
                     }
                 </select>
-              
+              </div>
               <button type="submit" className="btn btn-primary btn-big btn-block "
                       disabled={submitting}>
                 Add Project

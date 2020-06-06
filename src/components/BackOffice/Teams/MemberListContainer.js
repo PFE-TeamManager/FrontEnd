@@ -53,11 +53,11 @@ class MemberListContainer extends React.Component {
         <div className="row">
             <div className="col-12">
               <Tabs defaultActiveKey="2" activeKey={this.state.key} onSelect={this.handleSelect} >
-                <Tab eventKey={1} title="Equipe">
+                <Tab eventKey={1} title="Team">
                     <TeamList teams={teams}/>
                 </Tab>
                 <Tab eventKey={2} title="Member">
-                    <MemberList members={members}/>
+                    <MemberList members={members} teams={teams}/>
                 </Tab>
               </Tabs>
             </div>
