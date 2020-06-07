@@ -30,32 +30,45 @@ class Project extends React.Component {
   }
 
   deactivateProject = (project) => {
-    projectPATCHActivity(project.id,false);
     this.setState({
       projectState: false
     });
     MyReactSwal.fire({
       icon: 'success'
     });
+    projectPATCHActivity(project.id,false);
   }
 
   activateProject = (project) => {
-    projectPATCHActivity(project.id,true);
     this.setState({
       projectState: true
     });
     MyReactSwal.fire({
       icon: 'success'
     });
+    projectPATCHActivity(project.id,true);
   }
 
   handleActivityBtn = (project) => {
-    if( (project.enabled === true) || (this.state.projectState === true) ){
-      return <button onClick={ () => { this.deactivateProject(project) } } className="btn btn-danger float-right"> Deactivate Project </button>
+
+    if( (this.state.projectState === true) ){
+      return <button  onClick={ () => { this.deactivateProject(project) } } 
+                      className="btn btn-danger float-right"> Deactivate Project </button>
     } 
-    if( (project.enabled === false) || (this.state.projectState === false) ) {
-      return <button onClick={ () => { this.activateProject(project) } } className="btn btn-success float-right"> Activate Project </button>
+    if( (this.state.projectState === false) ) {
+      return <button  onClick={ () => { this.activateProject(project) } } 
+                      className="btn btn-success float-right"> Activate Project </button>
     }
+
+    if( (this.state.projectState == "") && (project.enabled === true) ){
+      return <button  onClick={ () => { this.deactivateProject(project) } } 
+                      className="btn btn-danger float-right"> Deactivate Project </button>
+    } 
+    if( (this.state.projectState == "") && (project.enabled === false) ) {
+      return <button  onClick={ () => { this.activateProject(project) } } 
+                      className="btn btn-success float-right"> Activate Project </button>
+    }
+
   }
 
 

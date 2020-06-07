@@ -429,6 +429,15 @@ export const taskFetch = (id) => {
       .catch(error => dispatch(taskError(error)));
   }
 };
+
+export const taskPATCHActivity = (taskId,enabledstate) => {
+  return requests.patch(`/tasks/${taskId}`,{enabled: enabledstate});
+}
+
+export const taskPATCH = (taskId,TaskTitle) => {
+  return requests.patch(`/tasks/${taskId}`,{TaskTitle: TaskTitle});
+}
+
 /*************End Task Action*****************/
 
 
