@@ -120,6 +120,14 @@ import {parseApiErrors} from "../../redux/apiUtils";
     type: PROJECT_FORM_UNLOAD
   });
 
+  export const projectPATCHActivity = (projectId,enabledstate) => {
+    return requests.patch(`/projects/${projectId}`,{enabled: enabledstate});
+  }
+
+  export const projectPATCH = (projectId,projectName) => {
+    return requests.patch(`/projects/${projectId}`,{projectName: projectName});
+  }
+
 /*****************END Project Action****************/
 
 

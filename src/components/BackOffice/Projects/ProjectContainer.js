@@ -6,7 +6,7 @@ import { Spinner } from '../../Global/Spinner';
 import TaskListContainer from '../Tasks/TaskListContainer';
 
 const mapStateToProps = state => ({
-  ...state.project
+  ...state.project//combineReducers
 });
 //Dispatch Actions
 const mapDispatchToProps = {
