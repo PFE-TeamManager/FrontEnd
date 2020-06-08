@@ -54,20 +54,20 @@ class Task extends React.Component {
 
     if( (this.state.taskState === true) ){
       return <button  onClick={ () => { this.deactivateTask(task) } } 
-                      className="btn btn-danger float-right"> Deactivate Task </button>
+                      className="btn btn-danger float-right m-1"> Deactivate Task </button>
     } 
     if( (this.state.taskState === false) ) {
       return <button  onClick={ () => { this.activateTask(task) } } 
-                      className="btn btn-success float-right"> Activate Task </button>
+                      className="btn btn-success float-right m-1"> Activate Task </button>
     }
     
     if( (this.state.taskState == "") && (task.enabled === true) ){
       return <button  onClick={ () => { this.deactivateTask(task) } } 
-                      className="btn btn-danger float-right"> Deactivate Task </button>
+                      className="btn btn-danger float-right m-1"> Deactivate Task </button>
     } 
     if( (this.state.taskState == "") && (task.enabled === false) ) {
       return <button  onClick={ () => { this.activateTask(task) } } 
-                      className="btn btn-success float-right"> Activate Task </button>
+                      className="btn btn-success float-right m-1"> Activate Task </button>
     }
 
   }
@@ -127,7 +127,14 @@ class Task extends React.Component {
               {timeago().format(singleTask.createdAt)} by&nbsp; {singleTask.createdBy.username}
             </small>
           </p>
-          <button className="btn btn-info float-right" onClick={this.showEditInput}>
+          <p className="card-text border-top">
+              { singleTask.labels && singleTask.labels.map( (label,i) => {
+                  return <span  key={i} className="badge m-1"
+                                style={{backgroundColor: label.color}}>{label.labelName}</span>
+                })
+              }
+          </p>
+          <button className="btn btn-info float-right m-1" onClick={this.showEditInput}>
             Edit Task
           </button>
           { this.handleActivityBtn(singleTask) }

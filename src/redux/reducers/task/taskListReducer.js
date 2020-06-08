@@ -8,7 +8,7 @@ import {
   import {hydraPageCount} from "../../apiUtils";
   
   export default (state = {
-    taskList: null,
+    taskList: null,labelList: null,
     isFetching: false,
     currentPage: 1,
     pageCount: null

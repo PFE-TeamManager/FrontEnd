@@ -8,6 +8,7 @@ import {routerReducer} from "react-router-redux";
 import projectList from './reducers/project/projectListReducer';
 import project from './reducers/project/projectReducer';
 import taskList from './reducers/task/taskListReducer.js';
+import labelList from './reducers/task/labelListReducer.js';
 import task from './reducers/task/taskReducer.js';
 import commentList from './reducers/comment/commentListReducer';
 import teamList from "./reducers/team/teamListReducer";
@@ -20,6 +21,7 @@ export default combineReducers({
     projectList,project,
     taskList,commentList,
     task,teamList,memberList,
+    labelList,
 
     router: routerReducer,
     form: formReducer

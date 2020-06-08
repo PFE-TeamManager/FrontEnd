@@ -23,6 +23,8 @@ import {
   TASK_ADDED,TASK_LIST_ERROR,TASK_LIST_RECEIVED,TASK_LIST_REQUEST,TASK_LIST_UNLOAD,TASK_UNLOAD,
   TASK_REQUEST,TASK_ERROR,TASK_RECEIVED,
 
+  LABEL_LIST_REQUEST,LABEL_ADDED,LABEL_LIST_ERROR,LABEL_LIST_RECEIVED,
+
   TEAM_LIST_ERROR,TEAM_LIST_RECEIVED,TEAM_LIST_REQUEST,TEAM_LIST_SET_PAGE,
   TEAM_RECEIVED,TEAM_REQUEST,TEAM_UNLOAD,TEAM_ADDED,
 
@@ -30,7 +32,6 @@ import {
 } from "./constants";
 import {SubmissionError} from "redux-form";
 import {parseApiErrors} from "../../redux/apiUtils";
-
 
 
 /*****************Project Action****************/
@@ -378,22 +379,73 @@ export const taskListFetch = (id, page = 1) => {
   }
 };
 
+export const labelListRequest = () => ({
+  type: LABEL_LIST_REQUEST,
+});
+
+export const labelListError = (error) => ({
+  type: LABEL_LIST_ERROR,
+  error
+});
+
+export const labelListReceived = (data) => ({
+  type: LABEL_LIST_RECEIVED,
+  data
+});
+
+export const labelListFetch = () => {
+  return (dispatch) => {
+    dispatch(labelListRequest());
+    return requests.get(`/labels`)
+      .then(response => dispatch(labelListReceived(response)))
+      .catch(error => dispatch(labelListError(error)));
+  }
+};
+
 export const taskAdded = (task) => ({
   type: TASK_ADDED,
   task
 });
 
-export const taskAdd = (task, projectId) => {
+export const taskAdd = (task, projectId, labels) => {
   return (dispatch) => {
     return requests.post(
       '/tasks',
       {
         TaskTitle: task.TaskTitle,
         TaskDescription: task.TaskDescription,
-        IdProject: `/api/projects/${projectId}`
+        IdProject: `/api/projects/${projectId}`,
+        labels:labels
       }
     ).then(
       response => dispatch(taskAdded(response))
+    ).catch((error) => {
+      if (401 === error.response.status) {
+        return dispatch(userLogout());
+      }
+      throw new SubmissionError(parseApiErrors(error));
+    })
+  }
+};
+
+
+
+export const labelAdded = (label) => ({
+  type: LABEL_ADDED,
+  label
+});
+
+export const labelAdd = (label,color) => {
+
+  return (dispatch) => {
+    return requests.post(
+      '/labels',
+      {
+        labelName: label.LabelName,
+        color: "#"+color
+      }
+    ).then(
+      response => dispatch(labelAdded(response))
     ).catch((error) => {
       if (401 === error.response.status) {
         return dispatch(userLogout());
