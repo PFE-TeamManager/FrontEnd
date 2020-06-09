@@ -11,18 +11,12 @@ const menuItems = [
     },
     {
         id: 2,
-        icon: "app-menu__icon fa fa-file-alt",
-        text: "Docs",
-        link: "/dashboard/docs"
-    },
-    {
-        id: 3,
         icon: "app-menu__icon fa fa-project-diagram",
         text: "Projects",
         link: "/dashboard/projects"
     },
     {
-        id: 4,
+        id: 3,
         icon: "app-menu__icon fa fa-users",
         text: "Teams",
         link: "/dashboard/teams"

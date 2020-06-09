@@ -53,20 +53,20 @@ class Project extends React.Component {
 
     if( (this.state.projectState === true) ){
       return <button  onClick={ () => { this.deactivateProject(project) } } 
-                      className="btn btn-danger float-right"> Deactivate Project </button>
+                      className="btn btn-danger float-right m-1"> Deactivate Project </button>
     } 
     if( (this.state.projectState === false) ) {
       return <button  onClick={ () => { this.activateProject(project) } } 
-                      className="btn btn-success float-right"> Activate Project </button>
+                      className="btn btn-success float-right m-1"> Activate Project </button>
     }
 
     if( (this.state.projectState == "") && (project.enabled === true) ){
       return <button  onClick={ () => { this.deactivateProject(project) } } 
-                      className="btn btn-danger float-right"> Deactivate Project </button>
+                      className="btn btn-danger float-right m-1"> Deactivate Project </button>
     } 
     if( (this.state.projectState == "") && (project.enabled === false) ) {
       return <button  onClick={ () => { this.activateProject(project) } } 
-                      className="btn btn-success float-right"> Activate Project </button>
+                      className="btn btn-success float-right m-1"> Activate Project </button>
     }
 
   }
@@ -119,14 +119,15 @@ class Project extends React.Component {
 
     return (
       <div className="card mb-3 mt-3 shadow-sm">
-        <div className="card-body"> 
+        <div className="card-body">
+          { project.enabled ? <i className="text-success fa fa-circle float-right"></i> : <i className="text-danger fa fa-circle float-right"></i> }
           { this.handleEditingName(project) }
           <p className="card-text border-top">
             <small className="text-muted">
               {timeago().format(project.createdAt)} by&nbsp; {project.createdBy.username}
             </small>
           </p>
-          <button className="btn btn-info float-right" onClick={this.showEditInput}>
+          <button className="btn btn-info float-right m-1" onClick={this.showEditInput}>
             Edit Project
           </button>
           { this.handleActivityBtn(project) }

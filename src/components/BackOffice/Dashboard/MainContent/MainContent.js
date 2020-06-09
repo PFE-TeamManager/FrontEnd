@@ -5,6 +5,7 @@ import ProjectListContainer from '../../Projects/ProjectListContainer';
 import ProjectContainer from '../../Projects/ProjectContainer';
 import TaskContainer from '../../Tasks/TaskContainer';
 import MemberListContainer from '../../Teams/MemberListContainer';
+import DashboardContent from '../DashboardContent/DashboardContent';
 
 class MainContent extends React.Component {
     render(){
@@ -29,6 +30,7 @@ class MainContent extends React.Component {
                             <Route path="/dashboard/tasks/:id" component={TaskContainer} />
                             <Route path="/dashboard/projects" component={ProjectListContainer} />
                             <Route path="/dashboard/teams" component={MemberListContainer} />
+                            <Route path="/dashboard" component={DashboardContent} />
                             <Route component={Notfound} />
                         </Switch>
                     

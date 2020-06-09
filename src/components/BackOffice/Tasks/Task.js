@@ -121,6 +121,7 @@ class Task extends React.Component {
       
       <div className="card mb-3 mt-3 shadow-sm">
         <div className="card-body">
+          { singleTask.enabled ? <i className="text-success fa fa-circle float-right"></i> : <i className="text-danger fa fa-circle float-right"></i> }
           { this.handleEditingName(singleTask) }
           <p className="card-text border-top">
             <small className="text-muted">

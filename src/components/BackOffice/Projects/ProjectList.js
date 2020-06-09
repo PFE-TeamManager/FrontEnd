@@ -15,13 +15,13 @@ class ProjectList extends React.Component {
     }
 
     return (
-    <div>
+    <div className="mb-3 mt-3 shadow-sm card-project">
       <TransitionGroup>
         {projects && projects.map(project => (
             <CSSTransition classNames="fade" key={project.id} timeout={1000}>
-              <div className="card mb-3 mt-3 shadow-sm">
+              <div className={"card "+( project.enabled ? "bg-success" : "bg-danger" )+" mb-3"} >
                 <div className="card-body">
-                  <h3>
+                  <h3 className="card-title">
                     <Link to={`/dashboard/projects/${project.id}`}>{project.projectName}</Link>
                   </h3>
                   <p className="card-text bordet-top">

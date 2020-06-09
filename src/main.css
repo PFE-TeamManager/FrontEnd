@@ -16761,3 +16761,7 @@ be a descendant of the grid when it is being dragged.
   opacity: 0.01;
   transition: opacity 1000ms ease-in;
 }
+
+.card-project .card-title a,.card-task .card-title a{
+  color: white;
+}
