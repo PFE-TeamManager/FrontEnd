@@ -5,8 +5,13 @@ import {connect} from "react-redux";
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
 import {taskPATCHActivity,taskPATCH} from "../../../redux/actions/actions";
+import {canCreateAuthorization} from "../../../redux/apiUtils";
 
-const MyReactSwal = withReactContent(Swal)
+const MyReactSwal = withReactContent(Swal);
+
+const mapStateToProps = state => ({
+  userData: state.auth.userData
+});
 
 const mapDispatchToProps = {
   taskPATCHActivity,taskPATCH
@@ -116,33 +121,54 @@ class Task extends React.Component {
     if (null === singleTask) {
       return (<Message message="Task does not exist"/>);
     }
-
-    return (
-      
-      <div className="card mb-3 mt-3 shadow-sm">
-        <div className="card-body">
-          { singleTask.enabled ? <i className="text-success fa fa-circle float-right"></i> : <i className="text-danger fa fa-circle float-right"></i> }
-          { this.handleEditingName(singleTask) }
-          <p className="card-text border-top">
-            <small className="text-muted">
-              {timeago().format(singleTask.createdAt)} by&nbsp; {singleTask.createdBy.username}
-            </small>
-          </p>
-          <p className="card-text border-top">
-              { singleTask.labels && singleTask.labels.map( (label,i) => {
-                  return <span  key={i} className="badge m-1"
-                                style={{backgroundColor: label.color}}>{label.labelName}</span>
-                })
-              }
-          </p>
-          <button className="btn btn-info float-right m-1" onClick={this.showEditInput}>
-            Edit Task
-          </button>
-          { this.handleActivityBtn(singleTask) }
+    if (canCreateAuthorization(this.props.userData)) {
+        return (
+          <div className="card mb-3 mt-3 shadow-sm">
+            <div className="card-body">
+              { singleTask.enabled ? <i className="text-success fa fa-circle float-right"></i> : <i className="text-danger fa fa-circle float-right"></i> }
+              { this.handleEditingName(singleTask) }
+              <p className="card-text border-top">
+                <small className="text-muted">
+                  {timeago().format(singleTask.createdAt)} by&nbsp; {singleTask.createdBy.username}
+                </small>
+              </p>
+              <p className="card-text border-top">
+                  { singleTask.labels && singleTask.labels.map( (label,i) => {
+                      return <span  key={i} className="badge m-1"
+                                    style={{backgroundColor: label.color}}>{label.labelName}</span>
+                    })
+                  }
+              </p>
+              <button className="btn btn-info float-right m-1" onClick={this.showEditInput}>
+                Edit Task
+              </button>
+              { this.handleActivityBtn(singleTask) }
+            </div>
+          </div>
+        )
+    } else {
+      return (
+        <div className="card mb-3 mt-3 shadow-sm">
+          <div className="card-body">
+            { singleTask.enabled ? <i className="text-success fa fa-circle float-right"></i> : <i className="text-danger fa fa-circle float-right"></i> }
+            { this.handleEditingName(singleTask) }
+            <p className="card-text border-top">
+              <small className="text-muted">
+                {timeago().format(singleTask.createdAt)} by&nbsp; {singleTask.createdBy.username}
+              </small>
+            </p>
+            <p className="card-text border-top">
+                { singleTask.labels && singleTask.labels.map( (label,i) => {
+                    return <span  key={i} className="badge m-1"
+                                  style={{backgroundColor: label.color}}>{label.labelName}</span>
+                  })
+                }
+            </p>
+          </div>
         </div>
-      </div>
-    )
+      )     
+    }
   }
 }
 
-export default connect(null, mapDispatchToProps)(Task);
+export default connect(mapStateToProps, mapDispatchToProps)(Task);

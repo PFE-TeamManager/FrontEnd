@@ -7,6 +7,7 @@ import TaskForm from "./TaskForm";
 import LabelForm from "./Labels/LabelForm";
 import {LoadMore} from "../../Global/LoadMore";
 import {canCreateAuthorization} from "../../../redux/apiUtils";
+import { TaskListDEV } from './TaskListDEV';
 
 const mapeStateToProps = state => ({
   ...state.taskList,
@@ -61,12 +62,12 @@ class TaskListContainer extends React.Component {
     } else {
       return (
         <div className="row">
-            <div className="col-12">
-              <TaskList taskList={taskList}/>
+          <div className="col-12">
+              <TaskListDEV taskList={taskList}/>
               {showLoadMore && <LoadMore label="Load more Tasks..."
                                         onClick={this.onLoadMoreClick.bind(this)}
                                         disabled={isFetching}/>}
-            </div>
+          </div>
         </div>
       )
     }

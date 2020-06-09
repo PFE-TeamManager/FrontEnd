@@ -377,6 +377,15 @@ export const taskListFetch = (id, page = 1) => {
   }
 };
 
+export const allTasksListFetch = (page = 1) => {
+  return (dispatch) => {
+    dispatch(taskListRequest());
+    return requests.get(`/tasks?_page=${page}`)
+      .then(response => dispatch(taskListReceived(response)))
+      .catch(error => dispatch(taskListError(error)));
+  }
+};
+
 export const labelListRequest = () => ({
   type: LABEL_LIST_REQUEST,
 });

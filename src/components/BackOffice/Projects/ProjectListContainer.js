@@ -1,5 +1,6 @@
 import React from 'react';
 import ProjectList from "./ProjectList";
+import ProjectListDev from "./ProjectListDev";
 import {projectListFetch,projectListSetPage,teamListFetch} from "../../../redux/actions/actions";
 import {connect} from "react-redux";
 import { Spinner } from '../../Global/Spinner';
@@ -112,13 +113,13 @@ class ProjectListContainer extends React.Component {
       }
       return (
         <div className="row">
-            <div className="col-12">
-              <ProjectList projects={projects}/>
+          <div className="col-12">
+              <ProjectListDev projects={projects}/>
               <Paginator  currentPage={currentPage} pageCount={pageCount}
                           setPage={this.changePage.bind(this)}
                           nextPage={this.onNextPageClick.bind(this)}
                           prevPage={this.onPrevPageClick.bind(this)}/>
-            </div>
+          </div>
         </div>
       )
     }

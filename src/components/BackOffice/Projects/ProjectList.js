@@ -34,8 +34,8 @@ class ProjectList extends React.Component {
             </CSSTransition>
         ))}
       </TransitionGroup>
-      
-    </div>)
+    </div>
+    )
   }
 }
 
