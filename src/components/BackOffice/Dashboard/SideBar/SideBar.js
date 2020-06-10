@@ -40,7 +40,7 @@ const menuItemsDEV = [
         id: 3,
         icon: "app-menu__icon fa fa-doc",
         text: "Tasks",
-        link: "/dashboard/taskslistdev"
+        link: "/dashboard/alltasks"
     }
 ];
 

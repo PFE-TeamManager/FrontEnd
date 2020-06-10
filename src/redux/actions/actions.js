@@ -20,6 +20,8 @@ import {
 
   TASK_ADDED,TASK_LIST_ERROR,TASK_LIST_RECEIVED,TASK_LIST_REQUEST,TASK_LIST_UNLOAD,TASK_UNLOAD,
   TASK_REQUEST,TASK_ERROR,TASK_RECEIVED,
+  
+  ALL_TASKS_LIST_SET_PAGE,ALL_TASKS_LIST_REQUEST,ALL_TASKS_LIST_ERROR,ALL_TASKS_LIST_RECEIVED,
 
   LABEL_LIST_REQUEST,LABEL_ADDED,LABEL_LIST_ERROR,LABEL_LIST_RECEIVED,
 
@@ -354,8 +356,17 @@ export const taskListRequest = () => ({
   type: TASK_LIST_REQUEST,
 });
 
+export const allTaskListRequest = () => ({
+  type: ALL_TASKS_LIST_REQUEST,
+});
+
 export const taskListError = (error) => ({
   type: TASK_LIST_ERROR,
+  error
+});
+
+export const allTaskListError = (error) => ({
+  type: ALL_TASKS_LIST_ERROR,
   error
 });
 
@@ -364,8 +375,18 @@ export const taskListReceived = (data) => ({
   data
 });
 
+export const allTaskListReceived = (data) => ({
+  type: ALL_TASKS_LIST_RECEIVED,
+  data
+});
+
 export const taskListUnload = () => ({
   type: TASK_LIST_UNLOAD,
+});
+
+export const allTasksListSetPage = (page) => ({
+  type: ALL_TASKS_LIST_SET_PAGE,
+  page
 });
 
 export const taskListFetch = (id, page = 1) => {
@@ -379,10 +400,10 @@ export const taskListFetch = (id, page = 1) => {
 
 export const allTasksListFetch = (page = 1) => {
   return (dispatch) => {
-    dispatch(taskListRequest());
+    dispatch(allTaskListRequest());
     return requests.get(`/tasks?_page=${page}`)
-      .then(response => dispatch(taskListReceived(response)))
-      .catch(error => dispatch(taskListError(error)));
+      .then(response => dispatch(allTaskListReceived(response)))
+      .catch(error => dispatch(allTaskListError(error)));
   }
 };
 

@@ -14,6 +14,12 @@ import {
     pageCount: null
   }, action) => {
     switch (action.type) {
+      case TASK_ADDED:
+        return {
+          ...state,
+          taskList: [action.task, ...state.taskList]
+          //posts: state.posts ? state.posts.concat(action.data) : state.posts
+        };
       case TASK_LIST_REQUEST:
         return {
           ...state,
@@ -27,12 +33,6 @@ import {
           isFetching: false,
           currentPage: state.currentPage + 1,
           pageCount: hydraPageCount(action.data)
-        };
-      case TASK_ADDED:
-        return {
-          ...state,
-          taskList: [action.task, ...state.taskList]
-          //posts: state.posts ? state.posts.concat(action.data) : state.posts
         };
       case TASK_LIST_ERROR:
         return {

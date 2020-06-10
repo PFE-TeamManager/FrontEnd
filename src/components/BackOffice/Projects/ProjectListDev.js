@@ -17,8 +17,8 @@ class ProjectListDev extends React.Component {
         <div className="mb-3 mt-3 card-project">
             <div className="row">
                 {projects && projects.map(project => (
-                    <div className="col-12 col-md-6">
-                        <div  key={project.id} 
+                    <div key={project.id} className="col-12 col-md-6">
+                        <div   
                             className={"card "+( project.enabled ? "bg-success" : "bg-danger" )+" mb-3"} >
                             <div className="card-body">
                                 <h3 className="card-title">
