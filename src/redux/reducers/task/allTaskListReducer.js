@@ -2,8 +2,7 @@ import {
     ALL_TASKS_LIST_SET_PAGE,
     ALL_TASKS_LIST_ERROR,
     ALL_TASKS_LIST_RECEIVED,
-    ALL_TASKS_LIST_REQUEST,
-    ALL_TASKS_LIST_UNLOAD,
+    ALL_TASKS_LIST_REQUEST
 
   } from "../../actions/constants";
   import {hydraPageCount} from "../../apiUtils";

@@ -6,10 +6,10 @@ import {Link} from "react-router-dom";
 export class TaskListDEV extends React.Component {
   render() {
     //,all
-    const {taskList} = this.props;
-
+    const {taskList,userData} = this.props;
+console.log(userData.teams.id);
     if (null === taskList || 0 === taskList.length) {
-      return (<Message message="No Tasks yet"/>);
+      return (<Message message="No Tasks DEV yet"/>);
     }
 
     // if( all ){
@@ -44,6 +44,7 @@ export class TaskListDEV extends React.Component {
         <div className="mb-3 mt-3 card-task">
             <div className="row">
               {taskList.map( task => {
+                if( (userData.teams.id === task.IdProject.Teams[0].id ) ){
                   return (
                       <div key={task.id} className="col-12 col-md-6">
                           <div className={"card text-white "+( task.enabled ? "bg-success" : "bg-danger" )+" mb-3"} >
@@ -62,6 +63,7 @@ export class TaskListDEV extends React.Component {
                           </div>
                       </div>
                   );
+                }
               })}
             </div>
         </div>

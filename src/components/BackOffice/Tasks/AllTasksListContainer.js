@@ -77,8 +77,7 @@ class AllTasksListContainer extends React.Component {
         return (
         <div className="row">
             <div className="col-12">
-            {/* all={this.state.all}  */}
-                <TaskListDEV taskList={allTasksListReducer}/>
+                <TaskListDEV taskList={allTasksListReducer} userData={this.props.userData}/>
                 <Paginator  currentPage={currentPage} pageCount={pageCount}
                             setPage={this.changePage.bind(this)}
                             nextPage={this.onNextPageClick.bind(this)}
