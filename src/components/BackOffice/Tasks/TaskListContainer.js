@@ -7,7 +7,7 @@ import TaskForm from "./TaskForm";
 import LabelForm from "./Labels/LabelForm";
 import {LoadMore} from "../../Global/LoadMore";
 import {canCreateAuthorization} from "../../../redux/apiUtils";
-import { TaskListDEV } from './TaskListDEV';
+import TaskListDEV from './TaskListDEV';
 
 const mapeStateToProps = state => ({
   ...state.taskList,

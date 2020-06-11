@@ -518,6 +518,10 @@ export const taskPATCH = (taskId,TaskTitle) => {
   return requests.patch(`/tasks/${taskId}`,{TaskTitle: TaskTitle});
 }
 
+export const affectDEVTotaskPATCH = (taskId,userId) => {
+  return requests.patch(`/tasks/${taskId}`,{user: `/api/users/${userId}`});
+}
+
 /*************End Task Action*****************/
 
 

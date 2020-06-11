@@ -3,7 +3,7 @@ import {allTasksListFetch,allTasksListSetPage} from "../../../redux/actions/acti
 import {connect} from "react-redux";
 import { Spinner } from '../../Global/Spinner';
 import { Paginator } from "../../Global/Paginator";
-import { TaskListDEV } from './TaskListDEV';
+import TaskListDEV from './TaskListDEV';
 
 const mapeStateToProps = state => ({
   userData: state.auth.userData,
@@ -77,7 +77,7 @@ class AllTasksListContainer extends React.Component {
         return (
         <div className="row">
             <div className="col-12">
-                <TaskListDEV taskList={allTasksListReducer} userData={this.props.userData}/>
+                <TaskListDEV taskList={allTasksListReducer} />
                 <Paginator  currentPage={currentPage} pageCount={pageCount}
                             setPage={this.changePage.bind(this)}
                             nextPage={this.onNextPageClick.bind(this)}
