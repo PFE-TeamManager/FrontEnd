@@ -78,7 +78,6 @@ class TaskListDEV extends React.Component {
                             <Link to={`/dashboard/tasks/${task.id}`}> {task.TaskTitle} </Link>
                             </h5>
                             <p className="card-text mb-0"> {task.TaskDescription} </p>
-                            
                             <p className="card-text"> 
                               {task.labels && task.labels.map( (label,i) => {
                                 return <span  key={i} className="badge m-1"

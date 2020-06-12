@@ -26,6 +26,13 @@ export class TaskList extends React.Component {
                       <Link to={`/dashboard/tasks/${task.id}`}> {task.TaskTitle} </Link>
                     </h5>
                     <p className="card-text mb-0"> {task.TaskDescription} </p>
+                    <p className="card-text"> 
+                      {task.labels && task.labels.map( (label,i) => {
+                        return <span  key={i} className="badge m-1"
+                                      style={{backgroundColor: label.color}}>{label.labelName}</span>
+                      }
+                      )} 
+                    </p>
                     <p className="card-text">
                       <small className="text-muted">
                         {timeago().format(task.createdAt)} by&nbsp; {task.createdBy.username}
