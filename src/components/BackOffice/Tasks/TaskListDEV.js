@@ -20,16 +20,16 @@ const mapDispatchToProps = {
 class TaskListDEV extends React.Component {
 
   constructor(props){
-    super();
+    super(props);
     this.state = {
-      affectedTaskId: '',
+      affectedTaskId: [],
       taskAffectedTo : ''
     }
   }
 
   affectToUser = (taskId) => {
     this.setState({
-      affectedTaskId: taskId,
+      affectedTaskId: [...this.state.affectedTaskId, taskId],
       taskAffectedTo: "Task Affected To "+this.props.userData.username
     });
     MyReactSwal.fire({
@@ -40,12 +40,8 @@ class TaskListDEV extends React.Component {
 
   handleAffectation = (taskUser,taskId) => {
     if( ((this.state.taskAffectedTo == "") && taskUser && taskUser.id) || ((this.state.taskAffectedTo) && taskUser && taskUser.id) ){
-      return (
-        <p className="card-text">
-          Task Affected To {taskUser.username}
-        </p>
-      )
-    } else if( (this.state.taskAffectedTo) && (taskId === this.state.affectedTaskId) ) {
+      return (<p className="card-text" > Task Affected To Member {taskUser.username} </p>)
+    } else if( (this.state.taskAffectedTo) && ( this.state.affectedTaskId.some(item => taskId === item) ) ) {
       return (
         <p className="card-text">
           {this.state.taskAffectedTo}
@@ -63,71 +59,39 @@ class TaskListDEV extends React.Component {
   }
 
   render() {
-    //,all
     const {taskList} = this.props;
 
     if (null === taskList || 0 === taskList.length) {
       return (<Message message="No Tasks DEV yet"/>);
     }
-
-    // if( all ){
-    //   return (
-    //     <div className="mb-3 mt-3 card-task">
-    //         <div className="row">
-    //           {taskList.map( task => {
-    //               return (
-    //                   <div key={task.id} className="col-12 col-md-4">
-    //                       <div className={"card text-white "+( task.enabled ? "bg-success" : "bg-danger" )+" mb-3"} >
-    //                       <div className="card-header"> Tache N° {task.id} </div>
-    //                       <div className="card-body border-bottom">
-    //                           <h5 className="card-title">
-    //                           <Link to={`/dashboard/tasks/${task.id}`}> {task.TaskTitle} </Link>
-    //                           </h5>
-    //                           <p className="card-text mb-0"> {task.TaskDescription} </p>
-    //                           <p className="card-text">
-    //                           <small className="text-muted">
-    //                               {timeago().format(task.createdAt)} by&nbsp; {task.createdBy.username}
-    //                           </small>
-    //                           </p>
-    //                       </div>
-    //                       </div>
-    //                   </div>
-    //               );
-    //           })}
-    //         </div>
-    //     </div>
-    //   )
-    // } else {
-      return (
-        <div className="mb-3 mt-3 card-task">
-            <div className="row">
-              {taskList.map( task => {
-                if( (this.props.userData.teams.id === task.IdProject.Teams[0].id ) ){
-                  return (
-                      <div key={task.id} className="col-12 col-md-6">
-                          <div className={"card text-white "+( task.enabled ? "bg-success" : "bg-danger" )+" mb-3"} >
-                          <div className="card-header"> Tache N° {task.id} </div>
-                          <div className="card-body border-bottom">
-                              <h5 className="card-title">
-                              <Link to={`/dashboard/tasks/${task.id}`}> {task.TaskTitle} </Link>
-                              </h5>
-                              <p className="card-text mb-0"> {task.TaskDescription} </p>
-                              <p className="card-text">
-                                <small className="text-muted">
-                                    {timeago().format(task.createdAt)} by&nbsp; {task.createdBy.username}
-                                </small>
-                              </p>
-                              { this.handleAffectation(task.user,task.id) }
-                          </div>
-                          </div>
-                      </div>
-                  );
-                }
-              })}
-            </div>
-        </div>
-      )
-    //}
+    
+    return (
+      <div className="mb-3 mt-3 card-task">
+          <div className="row">
+            {taskList.map( task => {
+                return (
+                    <div key={task.id} className="col-12 col-md-6">
+                        <div className={"card text-white "+( task.enabled ? "bg-success" : "bg-danger" )+" mb-3"} >
+                        <div className="card-header"> Tache N° {task.id} </div>
+                        <div className="card-body border-bottom">
+                            <h5 className="card-title">
+                            <Link to={`/dashboard/tasks/${task.id}`}> {task.TaskTitle} </Link>
+                            </h5>
+                            <p className="card-text mb-0"> {task.TaskDescription} </p>
+                            <p className="card-text">
+                              <small className="text-muted">
+                                  {timeago().format(task.createdAt)} by&nbsp; {task.createdBy.username}
+                              </small>
+                            </p>
+                            { this.handleAffectation(task.user,task.id) }
+                        </div>
+                        </div>
+                    </div>
+                );
+            })}
+          </div>
+      </div>
+    )
 
   }
 }

@@ -172,6 +172,7 @@ export const userRegister = (username, email, password) => {
     return requests.post('/users', {username, email, password}, false)
       .then(() => dispatch(userRegisterSuccess()))
       .catch(error => {
+        //console.log(error);
         throw new SubmissionError(parseApiErrors(error));
       });
   }
@@ -397,11 +398,11 @@ export const taskListFetch = (id, page = 1) => {
       .catch(error => dispatch(taskListError(error)));
   }
 };
-
-export const allTasksListFetch = (page = 1) => {
+//`/tasks?_page=${page}`
+export const allTasksListFetch = (id,page = 1) => {
   return (dispatch) => {
     dispatch(allTaskListRequest());
-    return requests.get(`/tasks?_page=${page}`)
+    return requests.get(`/projects/${id}/tasks?_page=${page}`)
       .then(response => dispatch(allTaskListReceived(response)))
       .catch(error => dispatch(allTaskListError(error)));
   }

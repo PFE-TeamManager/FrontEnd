@@ -24,7 +24,7 @@ class AllTasksListContainer extends React.Component {
     }
 
     componentDidMount() {
-        this.props.allTasksListFetch(this.getQueryParamPage());
+        this.props.allTasksListFetch(this.props.userData.teams.project.id,this.getQueryParamPage());
     }
     
     componentDidUpdate(prevProps) {
@@ -35,7 +35,7 @@ class AllTasksListContainer extends React.Component {
         }
 
         if (prevProps.currentPage !== currentPage) {
-            allTasksListFetch(currentPage);
+            allTasksListFetch(this.props.userData.teams.project.id,currentPage);
         }
     }
     
@@ -56,9 +56,9 @@ class AllTasksListContainer extends React.Component {
     }
 
     onPrevPageClick(e) {
-    const {currentPage} = this.props;
-    const newPage = Math.max(currentPage - 1, 1);
-    this.changePage(newPage);
+        const {currentPage} = this.props;
+        const newPage = Math.max(currentPage - 1, 1);
+        this.changePage(newPage);
     }
 
     render() {

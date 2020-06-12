@@ -32,12 +32,6 @@ const menuItemsDEV = [
     },
     {
         id: 2,
-        icon: "app-menu__icon fa fa-project-diagram",
-        text: "Projects",
-        link: "/dashboard/projects"
-    },
-    {
-        id: 3,
         icon: "app-menu__icon fa fa-doc",
         text: "Tasks",
         link: "/dashboard/alltasks"
