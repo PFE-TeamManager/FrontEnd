@@ -4,6 +4,7 @@ import {connect} from "react-redux";
 import { Spinner } from '../../Global/Spinner';
 import KanbanBoard from './KanbanBoard';
 import { TaskCards } from './TaskCards';
+import { ComponentTitle } from '../../Global/ComponentTitle';
 import "./css/kanban.css";
 
 const mapeStateToProps = state => ({
@@ -39,6 +40,10 @@ class KanbanBoardContainer extends React.Component {
         }
 
         return (
+        <div>
+          <ComponentTitle   icon="fa fa-tasks" title="My Board" 
+                            introduction="Board of Tasks" />
+          
         <div className="row">
             <div className="col-12">
                 <div className="mb-3 mt-3 shadow-sm">
@@ -57,7 +62,7 @@ class KanbanBoardContainer extends React.Component {
                             tasksToDoList 
                             && tasksToDoList.map( 
                             (task,i) => {
-                                if( task.ToDo ){
+                                if( task.ToDo && task.enabled ){
                                     return (
                                         <TaskCards  key={i} id={"card-"+task.id} 
                                                     dataid={task.id} datasource="board-to-do"
@@ -76,7 +81,7 @@ class KanbanBoardContainer extends React.Component {
                             tasksToDoList 
                             && tasksToDoList.map( 
                             (task,i) => {
-                                if( task.doing ){
+                                if( task.doing && task.enabled ){
                                     return (
                                         <TaskCards  key={i} id={"card-"+task.id} 
                                                     dataid={task.id} datasource="board-doing"
@@ -95,7 +100,7 @@ class KanbanBoardContainer extends React.Component {
                             tasksToDoList 
                             && tasksToDoList.map( 
                             (task,i) => {
-                                if( task.done ){
+                                if( task.done && task.enabled ){
                                     return (
                                         <TaskCards  key={i} id={"card-"+task.id} 
                                                     dataid={task.id} datasource="board-done"
@@ -110,6 +115,7 @@ class KanbanBoardContainer extends React.Component {
                     </KanbanBoard>
                 </main>
             </div>
+        </div>
         </div>
         )
     }

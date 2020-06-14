@@ -4,6 +4,7 @@ import {connect} from "react-redux";
 import { Spinner } from '../../Global/Spinner';
 import { Paginator } from "../../Global/Paginator";
 import TaskListDEV from './TaskListDEV';
+import { ComponentTitle } from '../../Global/ComponentTitle';
 
 const mapeStateToProps = state => ({
   userData: state.auth.userData,
@@ -75,13 +76,17 @@ class AllTasksListContainer extends React.Component {
         }
 
         return (
-        <div className="row">
-            <div className="col-12">
-                <TaskListDEV taskList={allTasksListReducer} />
-                <Paginator  currentPage={currentPage} pageCount={pageCount}
-                            setPage={this.changePage.bind(this)}
-                            nextPage={this.onNextPageClick.bind(this)}
-                            prevPage={this.onPrevPageClick.bind(this)}/>
+        <div>
+          <ComponentTitle   icon="fa fa-tasks" title="Team's Tasks" 
+                            introduction="Tasks of My Team" />
+            <div className="row">
+                <div className="col-12">
+                    <TaskListDEV taskList={allTasksListReducer} />
+                    <Paginator  currentPage={currentPage} pageCount={pageCount}
+                                setPage={this.changePage.bind(this)}
+                                nextPage={this.onNextPageClick.bind(this)}
+                                prevPage={this.onPrevPageClick.bind(this)}/>
+                </div>
             </div>
         </div>
         )

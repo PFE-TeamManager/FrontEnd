@@ -11,7 +11,7 @@ const menuItemsCHEF = [
     },
     {
         id: 2,
-        icon: "app-menu__icon fa fa-project-diagram",
+        icon: "app-menu__icon fa fa-product-hunt",
         text: "Projects",
         link: "/dashboard/projects"
     },
@@ -32,13 +32,13 @@ const menuItemsDEV = [
     },
     {
         id: 2,
-        icon: "app-menu__icon fa fa-doc",
+        icon: "app-menu__icon fa fa-tasks",
         text: "All Tasks",
         link: "/dashboard/alltasks"
     },
     {
         id: 3,
-        icon: "app-menu__icon fa fa-doc",
+        icon: "app-menu__icon fa fa-tasks",
         text: "My Tasks",
         link: "/dashboard/mytasks"
     }
