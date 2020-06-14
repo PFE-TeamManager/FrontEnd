@@ -34,7 +34,7 @@ class TaskContainer extends React.Component {
 
     return (
       <div>
-        <Task task={task}/>
+        <Task singleTask={task}/>
         {task && <CommentListContainer taskId={this.props.match.params.id}/>}
       </div>
     )

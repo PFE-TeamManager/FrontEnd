@@ -1,12 +1,14 @@
 import {
-    TASK_LIST_REQUEST,
+    TASK_ADDED,
+    TASK_LIST_ERROR,
     TASK_LIST_RECEIVED,
-    TASK_LIST_ERROR, TASK_LIST_SET_PAGE,TASK_ADDED
+    TASK_LIST_REQUEST,
+    TASK_LIST_UNLOAD
   } from "../../actions/constants";
-  //import {hydraPageCount} from "../apiUtils";
+  import {hydraPageCount} from "../../apiUtils";
   
-  export default(state = {
-    tasks: null,
+  export default (state = {
+    taskList: null,labelList: null,
     isFetching: false,
     currentPage: 1,
     pageCount: null
@@ -15,32 +17,36 @@ import {
       case TASK_ADDED:
         return {
           ...state,
-          tasks: [action.task, ...state.tasks]
+          taskList: [action.task, ...state.taskList]
+          //posts: state.posts ? state.posts.concat(action.data) : state.posts
         };
       case TASK_LIST_REQUEST:
-        state = {
+        return {
           ...state,
           isFetching: true,
         };
-        return state;
       case TASK_LIST_RECEIVED:
-        state = {
+        return {
           ...state,
-          tasks: action.data['hydra:member'],
-          //pageCount: hydraPageCount(action.data),
-          isFetching: false
+          taskList: !state.taskList ? action.data['hydra:member']
+            : state.taskList.concat(action.data['hydra:member']),
+          isFetching: false,
+          currentPage: state.currentPage + 1,
+          pageCount: hydraPageCount(action.data)
         };
-        return state;
       case TASK_LIST_ERROR:
         return {
           ...state,
           isFetching: false,
-          tasks: null
+          taskList: null
         };
-      case TASK_LIST_SET_PAGE:
+      case TASK_LIST_UNLOAD:
         return {
           ...state,
-          currentPage: action.page
+          isFetching: false,
+          taskList: null,
+          currentPage: 1,
+          pageCount: null
         };
       default:
         return state;

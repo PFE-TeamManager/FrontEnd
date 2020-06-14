@@ -9,24 +9,29 @@ class ProjectList extends React.Component {
   render() {
     //The state is in the projectListReducer
     const {projects} = this.props;
-
+    
     if (null === projects || 0 === projects.length) {
       return (<Message message="No projects available"/>);
     }
 
     return (
-    <div>
+    <div className="mb-3 mt-3 shadow-sm card-project">
       <TransitionGroup>
         {projects && projects.map(project => (
             <CSSTransition classNames="fade" key={project.id} timeout={1000}>
-              <div className="card mb-3 mt-3 shadow-sm">
+              <div className={"card "+( project.enabled ? "bg-success" : "bg-danger" )+" mb-3"} >
                 <div className="card-body">
-                  <h3>
+                  <h3 className="card-title">
                     <Link to={`/dashboard/projects/${project.id}`}>{project.projectName}</Link>
                   </h3>
                   <p className="card-text bordet-top">
-                    <small className="text-muted">
-                      {timeago().format(project.createdAt)}
+                    <small className="text-white">
+                        {project.Teams[0].teamName}
+                    </small>
+                  </p>
+                  <p className="card-text bordet-top">
+                    <small className="text-white">
+                        {timeago().format(project.createdAt)}
                     </small>
                   </p>
                 </div>
@@ -34,8 +39,8 @@ class ProjectList extends React.Component {
             </CSSTransition>
         ))}
       </TransitionGroup>
-      
-    </div>)
+    </div>
+    )
   }
 }
 

@@ -3,7 +3,7 @@ import {
     PROJECT_LIST_RECEIVED,
     PROJECT_LIST_ERROR, PROJECT_LIST_SET_PAGE,PROJECT_ADDED
   } from "../../actions/constants";
-  //import {hydraPageCount} from "../apiUtils";
+  import {hydraPageCount} from "../../apiUtils";
   
   export default(state = {
     projects: null,
@@ -27,20 +27,20 @@ import {
         state = {
           ...state,
           projects: action.data['hydra:member'],
-          //pageCount: hydraPageCount(action.data),
+          pageCount: hydraPageCount(action.data),
           isFetching: false
         };
         return state;
+      case PROJECT_LIST_SET_PAGE:
+        return {
+          ...state,
+          currentPage: action.page
+        };
       case PROJECT_LIST_ERROR:
         return {
           ...state,
           isFetching: false,
           projects: null
-        };
-      case PROJECT_LIST_SET_PAGE:
-        return {
-          ...state,
-          currentPage: action.page
         };
       default:
         return state;

@@ -1,44 +1,77 @@
 import React from 'react';
-import TaskList from "./TaskList";
-import {taskListFetch} from "../../../redux/actions/actions";
+import {taskListFetch, taskListUnload,labelListFetch} from "../../../redux/actions/actions";
 import {connect} from "react-redux";
 import { Spinner } from '../../Global/Spinner';
-import TaskForm from './TaskForm';
+import {TaskList} from "./TaskList";
+import TaskForm from "./TaskForm";
+import LabelForm from "./Labels/LabelForm";
+import {LoadMore} from "../../Global/LoadMore";
+import {canCreateAuthorization} from "../../../redux/apiUtils";
+import TaskListDEV from './TaskListDEV';
 
-const mapStateToProps = state => ({
-  ...state.taskList
+const mapeStateToProps = state => ({
+  ...state.taskList,
+  ...state.labelList,
+  isAuthenticated: state.auth.isAuthenticated,
+  userData: state.auth.userData
 });
 
 const mapDispatchToProps = {
-  taskListFetch
+  taskListFetch,labelListFetch,
+  taskListUnload
 };
 
 class TaskListContainer extends React.Component {
-
   componentDidMount() {
-    this.props.taskListFetch();
+    this.props.taskListFetch(this.props.projectId);
+    this.props.labelListFetch();
+  }
+
+  componentWillUnmount() {
+    this.props.taskListUnload();
+  }
+
+  onLoadMoreClick() {
+    const {projectId, currentPage, taskListFetch} = this.props;
+    taskListFetch(projectId, currentPage);
   }
 
   render() {
+    const {labelList,isFetching, taskList, isAuthenticated, projectId, currentPage, pageCount} = this.props;
+    const showLoadMore = pageCount > 1 && currentPage <= pageCount;
 
-    const {tasks,isFetching} = this.props;
-
-    if (isFetching) {
-      return (<Spinner />);
+    if (isFetching && currentPage === 1) {
+      return (<Spinner/>);
     }
 
-    return (
-      <div className="row">
-          <div className="col-12 col-md-6">
-            <TaskList tasks={tasks}/>
+    if (canCreateAuthorization(this.props.userData)) {
+        return (
+          <div className="row">
+            <div className="col-12 col-md-6">
+              <TaskList taskList={taskList}/>
+              {showLoadMore && <LoadMore label="Load more Tasks..."
+                                        onClick={this.onLoadMoreClick.bind(this)}
+                                        disabled={isFetching}/>}
+            </div>
+            <div className="col-12 col-md-6">
+              {isAuthenticated && <LabelForm />}
+              {isAuthenticated && <TaskForm labelList={labelList} projectId={projectId}/>}
+            </div>
           </div>
-          <div className="col-12 col-md-6">
-            {/* here must be check of the role chef projet */}
-            <TaskForm />
+        )
+    } else {
+      return (
+        <div className="row">
+          <div className="col-12">
+              <TaskListDEV taskList={taskList}/>
+              {showLoadMore && <LoadMore label="Load more Tasks..."
+                                        onClick={this.onLoadMoreClick.bind(this)}
+                                        disabled={isFetching}/>}
           </div>
-      </div>
-    )
+        </div>
+      )
+    }
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(TaskListContainer);
+export default connect(mapeStateToProps, mapDispatchToProps)(TaskListContainer);

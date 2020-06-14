@@ -1,13 +1,16 @@
 export const parseApiErrors = (error) => {
-    return error.response.body.violations.reduce(
-      (parsedErrors, violation) => {
-        parsedErrors[violation['propertyPath']] = violation['message'];
-        return parsedErrors;
-      },
-      {}
-    );
+   //if( error.violations ){
+      return error.response.body.violations.reduce(
+        (parsedErrors, violation) => {
+          parsedErrors[violation['propertyPath']] = violation['message'];
+          return parsedErrors;
+        },
+        {}
+      );
+   //}
 };
 
+//for pagination
 export const hydraPageCount = (collection) => {
   if (!collection['hydra:view']) {
     return 1;
@@ -16,6 +19,16 @@ export const hydraPageCount = (collection) => {
   return Number(
     collection['hydra:view']['hydra:last'].match(/page=(\d+)/)[1]
   );
+};
+
+
+const canCreateAuthorizationRoles = ['ROLE_CHEF_PROJET', 'ROLE_ADMIN'];
+
+export const canCreateAuthorization = (userData) => {
+  return null !== userData
+    && userData.roles.some(
+      userRoles => canCreateAuthorizationRoles.includes(userRoles)
+    );
 };
   
   

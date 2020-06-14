@@ -1,8 +1,8 @@
 import React from 'react';
 import { BrowserRouter as Router,Switch,Route,Link } from "react-router-dom";
+import Avatar from 'react-avatar';
 
-
-const menuItems = [
+const menuItemsCHEF = [
     {
         id: 1,
         icon: "app-menu__icon fa fa-dashboard",
@@ -11,29 +11,40 @@ const menuItems = [
     },
     {
         id: 2,
-        icon: "app-menu__icon fa fa-user-circle",
-        text: "Docs",
-        link: "/dashboard/docs"
-    },
-    {
-        id: 3,
-        icon: "app-menu__icon fa fa-sign-in",
+        icon: "app-menu__icon fa fa-project-diagram",
         text: "Projects",
         link: "/dashboard/projects"
     },
     {
-        id: 4,
-        icon: "app-menu__icon fa fa-tasks",
-        text: "Tasks",
-        link: "/dashboard/tasks"
+        id: 3,
+        icon: "app-menu__icon fa fa-users",
+        text: "Teams",
+        link: "/dashboard/teams"
+    }
+];
+
+const menuItemsDEV = [
+    {
+        id: 1,
+        icon: "app-menu__icon fa fa-dashboard",
+        text: "Dashboard",
+        link: "/dashboard"
     },
+    {
+        id: 2,
+        icon: "app-menu__icon fa fa-doc",
+        text: "All Tasks",
+        link: "/dashboard/alltasks"
+    },
+    {
+        id: 3,
+        icon: "app-menu__icon fa fa-doc",
+        text: "My Tasks",
+        link: "/dashboard/mytasks"
+    }
 ];
 
 class SideBar extends React.Component {
-
-    constructor(props){
-        super(props);
-    }
 
     render(){
         return (
@@ -41,17 +52,34 @@ class SideBar extends React.Component {
                 <div className="app-sidebar__overlay" data-toggle="sidebar"></div>
                 <aside className="app-sidebar">
                     <div className="app-sidebar__user">
-                        <img className="app-sidebar__user-avatar" src="#" alt="User Image" />
+                        <Avatar name={this.props.userData.username} />
                         <div>
                             <p className="app-sidebar__user-name">
                                 {this.props.userData.username}
                             </p>
-                            <p className="app-sidebar__user-designation">Frontend Developer</p>
+                            <p className="app-sidebar__user-designation">
+                                { this.props.userData.roles.includes("ROLE_DEV") ? <h4>Développeur</h4> : "" }
+                                { this.props.userData.roles.includes("ROLE_CHEF_PROJET") ? <h4>Chef Projet</h4> : "" }
+                            </p>
                         </div>
                     </div>
                     <ul className="app-menu">    
                         {   
-                            menuItems.map(
+                            this.props.userData.roles.includes("ROLE_CHEF_PROJET") && menuItemsCHEF.map(
+                                menuItem => {   
+                                    return(
+                                        <li key={menuItem.id}>
+                                            <Link className="app-menu__item" to={menuItem.link}>
+                                                <i className={menuItem.icon}></i>
+                                                <span className="app-menu__label">{menuItem.text}</span>
+                                            </Link>
+                                        </li>
+                                    );
+                                }
+                            )
+                        }
+                        {   
+                            this.props.userData.roles.includes("ROLE_DEV") && menuItemsDEV.map(
                                 menuItem => {   
                                     return(
                                         <li key={menuItem.id}>

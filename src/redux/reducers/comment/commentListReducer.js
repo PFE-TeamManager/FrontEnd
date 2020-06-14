@@ -34,6 +34,11 @@ import {
           commentList: [action.comment, ...state.commentList]
         };
       case COMMENT_LIST_ERROR:
+        return {
+          ...state,
+          isFetching: false,
+          commentList: null
+        };
       case COMMENT_LIST_UNLOAD:
         return {
           ...state,
