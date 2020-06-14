@@ -9,7 +9,7 @@ class ProjectList extends React.Component {
   render() {
     //The state is in the projectListReducer
     const {projects} = this.props;
-
+    
     if (null === projects || 0 === projects.length) {
       return (<Message message="No projects available"/>);
     }
@@ -25,8 +25,13 @@ class ProjectList extends React.Component {
                     <Link to={`/dashboard/projects/${project.id}`}>{project.projectName}</Link>
                   </h3>
                   <p className="card-text bordet-top">
-                    <small className="text-muted">
-                      {timeago().format(project.createdAt)}
+                    <small className="text-white">
+                        {project.Teams[0].teamName}
+                    </small>
+                  </p>
+                  <p className="card-text bordet-top">
+                    <small className="text-white">
+                        {timeago().format(project.createdAt)}
                     </small>
                   </p>
                 </div>

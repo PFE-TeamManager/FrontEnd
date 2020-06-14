@@ -5,7 +5,7 @@ import { BrowserRouter as Router,Switch,Route,Link } from "react-router-dom";
 const menuItemsCHEF = [
     {
         id: 1,
-        icon: "app-menu__icon fa fa-charte-line",
+        icon: "app-menu__icon fa fa-dashboard",
         text: "Dashboard",
         link: "/dashboard"
     },
@@ -26,7 +26,7 @@ const menuItemsCHEF = [
 const menuItemsDEV = [
     {
         id: 1,
-        icon: "app-menu__icon fa fa-charte-line",
+        icon: "app-menu__icon fa fa-dashboard",
         text: "Dashboard",
         link: "/dashboard"
     },

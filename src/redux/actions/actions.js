@@ -343,6 +343,7 @@ export const commentAdd = (comment, taskId) => {
     ).then(
       response => dispatch(commentAdded(response))
     ).catch((error) => {
+      //console.log(error);
       if (401 === error.response.status) {
         return dispatch(userLogout());
       }
