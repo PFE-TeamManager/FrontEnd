@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router,Switch,Route,Link } from "react-router-dom";
-
+import Avatar from 'react-avatar';
 
 const menuItemsCHEF = [
     {
@@ -52,7 +52,7 @@ class SideBar extends React.Component {
                 <div className="app-sidebar__overlay" data-toggle="sidebar"></div>
                 <aside className="app-sidebar">
                     <div className="app-sidebar__user">
-                        <img className="app-sidebar__user-avatar" src="#" alt="User Image" />
+                        <Avatar name={this.props.userData.username} />
                         <div>
                             <p className="app-sidebar__user-name">
                                 {this.props.userData.username}
