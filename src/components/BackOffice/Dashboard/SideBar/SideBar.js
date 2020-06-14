@@ -33,8 +33,14 @@ const menuItemsDEV = [
     {
         id: 2,
         icon: "app-menu__icon fa fa-doc",
-        text: "Tasks",
+        text: "All Tasks",
         link: "/dashboard/alltasks"
+    },
+    {
+        id: 3,
+        icon: "app-menu__icon fa fa-doc",
+        text: "My Tasks",
+        link: "/dashboard/mytasks"
     }
 ];
 

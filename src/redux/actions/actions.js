@@ -25,6 +25,8 @@ import {
 
   LABEL_LIST_REQUEST,LABEL_ADDED,LABEL_LIST_ERROR,LABEL_LIST_RECEIVED,
 
+  MY_TASKS_LIST_ERROR,MY_TASKS_LIST_RECEIVED,MY_TASKS_LIST_REQUEST,
+
   TEAM_LIST_ERROR,TEAM_LIST_RECEIVED,TEAM_LIST_REQUEST,TEAM_LIST_SET_PAGE,
   TEAM_RECEIVED,TEAM_REQUEST,TEAM_UNLOAD,TEAM_ADDED,
 
@@ -519,11 +521,79 @@ export const taskPATCH = (taskId,TaskTitle) => {
   return requests.patch(`/tasks/${taskId}`,{TaskTitle: TaskTitle});
 }
 
+let date = new Date();
 export const affectDEVTotaskPATCH = (taskId,userId) => {
-  return requests.patch(`/tasks/${taskId}`,{user: `/api/users/${userId}`});
+  return requests.patch(`/tasks/${taskId}`,
+                        {
+                          user: `/api/users/${userId}`,
+                          ToDo: true,
+                          ToDoDate: date.toISOString()
+                        });
+}
+
+
+
+export const taskEtatPATCH = (taskId,place) => {
+  if( place == "board-to-do" ){
+    return requests.patch(`/tasks/${taskId}`,
+      {
+        ToDo: true,
+        doing: false,
+        done: false,
+        ToDoDate: date.toISOString()
+      });
+  }
+
+  if( place == "board-doing" ){
+    return requests.patch(`/tasks/${taskId}`,
+      {
+        doing: true,
+        ToDo: false,
+        done: false,
+        datedoing: date.toISOString()
+      });
+  }
+
+  if( place == "board-done" ){
+    return requests.patch(`/tasks/${taskId}`,
+      {
+        done: true,
+        doing: false,
+        ToDo: false,
+        datedone: date.toISOString()
+      });
+  }
 }
 
 /*************End Task Action*****************/
+
+
+/******************My Tasks Action**************/
+
+export const myTasksListRequest = () => ({
+  type: MY_TASKS_LIST_REQUEST,
+});
+
+export const myTasksListError = (error) => ({
+  type: MY_TASKS_LIST_ERROR,
+  error
+});
+
+export const myTasksListReceived = (data) => ({
+  type: MY_TASKS_LIST_RECEIVED,
+  data
+});
+
+export const myTasksListFetch = (id) => {
+  return (dispatch) => {
+    dispatch(myTasksListRequest());
+    return requests.get(`/users/${id}/affected_tasks`)
+      .then(response => dispatch(myTasksListReceived(response)))
+      .catch(error => dispatch(myTasksListError(error)));
+  }
+};
+
+/******************END My Tasks Action**************/
 
 
 /*****************Team Action****************/

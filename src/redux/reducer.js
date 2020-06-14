@@ -9,6 +9,7 @@ import projectList from './reducers/project/projectListReducer';
 import project from './reducers/project/projectReducer';
 import taskList from './reducers/task/taskListReducer.js';
 import allTasksListReducer from './reducers/task/allTaskListReducer.js';
+import tasksToDoList from './reducers/task/tasksToDoList.js';
 import labelList from './reducers/task/labelListReducer.js';
 import task from './reducers/task/taskReducer.js';
 import commentList from './reducers/comment/commentListReducer';
@@ -22,7 +23,7 @@ export default combineReducers({
     projectList,project,
     taskList,commentList,
     task,teamList,memberList,
-    labelList,allTasksListReducer,
+    labelList,allTasksListReducer,tasksToDoList,
 
     router: routerReducer,
     form: formReducer

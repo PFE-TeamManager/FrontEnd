@@ -5,7 +5,6 @@ import {
     LABEL_LIST_REQUEST,
     LABEL_LIST_UNLOAD
   } from "../../actions/constants";
-  import {hydraPageCount} from "../../apiUtils";
   
   export default (state = {
     labelList: null,
