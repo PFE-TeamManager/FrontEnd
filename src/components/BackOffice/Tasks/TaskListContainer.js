@@ -46,16 +46,23 @@ class TaskListContainer extends React.Component {
 
     if (canCreateAuthorization(this.props.userData)) {
         return (
-          <div className="row">
-            <div className="col-12 col-md-6">
-              <TaskList taskList={taskList}/>
-              {showLoadMore && <LoadMore label="Load more Tasks..."
-                                        onClick={this.onLoadMoreClick.bind(this)}
-                                        disabled={isFetching}/>}
+          <div>
+            <div className="row">
+                <div className="col-12 col-md-6">
+                    {isAuthenticated && <LabelForm />}
+                </div>
+                <div className="col-12 col-md-6">
+                  {isAuthenticated && <TaskForm labelList={labelList} projectId={projectId}/>}
+                  
+                </div>
             </div>
-            <div className="col-12 col-md-6">
-              {isAuthenticated && <LabelForm />}
-              {isAuthenticated && <TaskForm labelList={labelList} projectId={projectId}/>}
+            <div className="row">
+                <div className="col-12">
+                      <TaskList taskList={taskList}/>
+                      {showLoadMore && <LoadMore label="Load more Tasks..."
+                                                onClick={this.onLoadMoreClick.bind(this)}
+                                                disabled={isFetching}/>}
+                </div>
             </div>
           </div>
         )

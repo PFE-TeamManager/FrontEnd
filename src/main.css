@@ -6985,13 +6985,13 @@ button.bg-secondary:focus {
   background-color: #545b62 !important;
 }
 
-.bg-success {
+.bg-success-app {
   background-color: #28a745 !important;
 }
 
-a.bg-success:hover, a.bg-success:focus,
-button.bg-success:hover,
-button.bg-success:focus {
+a.bg-success-app:hover, a.bg-success-app:focus,
+button.bg-success-app:hover,
+button.bg-success-app:focus {
   background-color: #1e7e34 !important;
 }
 
@@ -7015,13 +7015,13 @@ button.bg-warning:focus {
   background-color: #d39e00 !important;
 }
 
-.bg-danger {
+.bg-danger-app {
   background-color: #dc3545 !important;
 }
 
-a.bg-danger:hover, a.bg-danger:focus,
-button.bg-danger:hover,
-button.bg-danger:focus {
+a.bg-danger-app:hover, a.bg-danger-app:focus,
+button.bg-danger-app:hover,
+button.bg-danger-app:focus {
   background-color: #bd2130 !important;
 }
 

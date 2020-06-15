@@ -52,7 +52,7 @@ class SideBar extends React.Component {
                 <div className="app-sidebar__overlay" data-toggle="sidebar"></div>
                 <aside className="app-sidebar">
                     <div className="app-sidebar__user">
-                        <Avatar name={this.props.userData.username} />
+                        <Avatar className="app-sidebar__user-avatar" name={this.props.userData.username} />
                         <div>
                             <p className="app-sidebar__user-name">
                                 {this.props.userData.username}
