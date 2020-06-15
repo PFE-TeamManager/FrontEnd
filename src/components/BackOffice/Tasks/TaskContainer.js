@@ -4,6 +4,7 @@ import {taskFetch,taskUnload} from "../../../redux/actions/actions";
 import {connect} from "react-redux";
 import { Spinner } from '../../Global/Spinner';
 import CommentListContainer from '../Comment/CommentListContainer';
+import BugListContainer from '../Bug/BugListContainer';
 
 const mapStateToProps = state => ({
   ...state.task
@@ -33,9 +34,14 @@ class TaskContainer extends React.Component {
     }
 
     return (
-      <div>
-        <Task singleTask={task}/>
-        {task && <CommentListContainer taskId={this.props.match.params.id}/>}
+      <div className="row">
+        <div className="col-12 col-md-6">
+            <Task singleTask={task}/>
+            {task && <CommentListContainer taskId={this.props.match.params.id}/>}
+        </div>
+        <div className="col-12 col-md-6">
+            {task && <BugListContainer taskId={this.props.match.params.id}/>}
+        </div>
       </div>
     )
   }

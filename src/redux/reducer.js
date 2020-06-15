@@ -16,6 +16,9 @@ import commentList from './reducers/comment/commentListReducer';
 import teamList from "./reducers/team/teamListReducer";
 import memberList from "./reducers/team/member/memberListReducer";
 
+import bugList from './reducers/bug/bugListReducer.js';
+import bug from './reducers/bug/bugReducer.js';
+
 
 //keep it That way, always router and form the last
 export default combineReducers({
@@ -24,6 +27,7 @@ export default combineReducers({
     taskList,commentList,
     task,teamList,memberList,
     labelList,allTasksListReducer,tasksToDoList,
+    bugList,bug,
 
     router: routerReducer,
     form: formReducer

@@ -25,7 +25,10 @@ import {
   TEAM_LIST_ERROR,TEAM_LIST_RECEIVED,TEAM_LIST_REQUEST,TEAM_LIST_SET_PAGE,
   TEAM_RECEIVED,TEAM_REQUEST,TEAM_UNLOAD,TEAM_ADDED,
 
-  MEMBER_LIST_REQUEST,MEMBER_LIST_ERROR,MEMBER_LIST_RECEIVED,MEMBER_PATCHED
+  MEMBER_LIST_REQUEST,MEMBER_LIST_ERROR,MEMBER_LIST_RECEIVED,MEMBER_PATCHED,
+
+  BUG_ADDED,BUG_UNLOAD,BUG_REQUEST,BUG_RECEIVED,BUG_ERROR,BUG_LIST_REQUEST,
+  BUG_LIST_RECEIVED,BUG_LIST_ERROR,BUG_LIST_UNLOAD
 } from "./constants";
 import {SubmissionError} from "redux-form";
 import {parseApiErrors} from "../../redux/apiUtils";
@@ -678,3 +681,98 @@ export const teamPATCH = (teamId,teamName) => {
 // };
 
 /*****************END Member Action****************/
+
+
+/*********Bug Action**********/
+export const bugListRequest = () => ({
+  type: BUG_LIST_REQUEST,
+});
+
+
+export const bugListError = (error) => ({
+  type: BUG_LIST_ERROR,
+  error
+});
+
+
+export const bugListReceived = (data) => ({
+  type: BUG_LIST_RECEIVED,
+  data
+});
+
+
+export const bugListUnload = () => ({
+  type: BUG_LIST_UNLOAD,
+});
+
+
+export const bugListFetch = (id, page = 1) => {
+  return (dispatch) => {
+    dispatch(bugListRequest());
+    return requests.get(`/tasks/${id}/bugs?_page=${page}`)
+      .then(response => dispatch(bugListReceived(response)))
+      .catch(error => dispatch(bugListError(error)));
+  }
+};
+
+export const bugAdded = (bug) => ({
+  type: BUG_ADDED,
+  bug
+});
+
+export const bugAdd = (bug, taskId) => {
+  return (dispatch) => {
+    return requests.post(
+      '/bugs',
+      {
+        BugTitle: bug.BugTitle,
+        BugDescription: bug.BugDescription,
+        IdTask: `/api/tasks/${taskId}`
+      }
+    ).then(
+      response => dispatch(bugAdded(response))
+    ).catch((error) => {
+      if (401 === error.response.status) {
+        return dispatch(userLogout());
+      }
+      throw new SubmissionError(parseApiErrors(error));
+    })
+  }
+};
+
+export const bugRequest = () => ({
+  type: BUG_REQUEST,//Reducer To get the state
+});
+
+export const bugError = (error) => ({
+  type: BUG_ERROR,
+  error
+});
+
+export const bugReceived = (data) => ({
+  type: BUG_RECEIVED,
+  data
+});
+
+export const bugUnload = () => ({
+  type: BUG_UNLOAD,
+});
+
+export const bugFetch = (id) => {
+  return (dispatch) => {
+    dispatch(bugRequest());//GET THE STATE BY REDUCER
+    return requests.get(`/bugs/${id}`)
+      .then(response => dispatch(bugReceived(response)))//Fill the state by the returned data
+      .catch(error => dispatch(bugError(error)));
+  }
+};
+
+export const bugPATCHActivity = (bugId,enabledstate) => {
+  return requests.patch(`/bugs/${bugId}`,{enabled: enabledstate});
+}
+
+export const bugPATCH = (bugId,BugTitle) => {
+  return requests.patch(`/bugs/${bugId}`,{BugTitle: BugTitle});
+}
+
+/*************End Bug Action*****************/

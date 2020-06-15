@@ -6995,23 +6995,23 @@ button.bg-success-app:focus {
   background-color: #1e7e34 !important;
 }
 
-.bg-info {
+.bg-info-app {
   background-color: #17a2b8 !important;
 }
 
-a.bg-info:hover, a.bg-info:focus,
-button.bg-info:hover,
-button.bg-info:focus {
+a.bg-info-app:hover, a.bg-info-app:focus,
+button.bg-info-app:hover,
+button.bg-info-app:focus {
   background-color: #117a8b !important;
 }
 
-.bg-warning {
+.bg-warning-app {
   background-color: #ffc107 !important;
 }
 
-a.bg-warning:hover, a.bg-warning:focus,
-button.bg-warning:hover,
-button.bg-warning:focus {
+a.bg-warning-app:hover, a.bg-warning-app:focus,
+button.bg-warning-app:hover,
+button.bg-warning-app:focus {
   background-color: #d39e00 !important;
 }
 
@@ -16762,6 +16762,6 @@ be a descendant of the grid when it is being dragged.
   transition: opacity 1000ms ease-in;
 }
 
-.card-project .card-title a,.card-task .card-title a{
+.card-project .card-title a,.card-bug .card-title a,.card-task .card-title a{
   color: white;
 }
