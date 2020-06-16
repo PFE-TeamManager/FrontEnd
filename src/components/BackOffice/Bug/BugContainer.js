@@ -3,7 +3,7 @@ import Bug from "./Bug";
 import {bugFetch,bugUnload} from "../../../redux/actions/actions";
 import {connect} from "react-redux";
 import { Spinner } from '../../Global/Spinner';
-//import CommentListContainer from '../Comment/CommentListContainer';
+import CommentListContainer from '../Comment/CommentListContainer';
 
 const mapStateToProps = state => ({
   ...state.bug
@@ -36,7 +36,7 @@ class BugContainer extends React.Component {
       <div className="row">
         <div className="col-12">
             <Bug singleBug={bug}/>
-            {/* {bug && <CommentListContainer bugId={this.props.match.params.id}/>} */}
+            {bug && <CommentListContainer bugId={this.props.match.params.id}/>}
         </div>
       </div>
     )

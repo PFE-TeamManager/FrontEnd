@@ -2,16 +2,23 @@ import React from "react";
 import {Field, reduxForm} from "redux-form";
 import {connect} from "react-redux";
 import {renderField} from "../../../redux/form";
-import {commentAdd} from "../../../redux/actions/actions";
+import {commentAddTask,commentAddBug} from "../../../redux/actions/actions";
 
 const mapDispatchToProps = {
-  commentAdd
+  commentAddTask,commentAddBug
 };
 
 class CommentForm extends React.Component {
   onSubmit(values) {
-    const {commentAdd, taskId, reset} = this.props;
-    return commentAdd(values.content, taskId).then(() => reset());
+
+    const {commentAddTask, commentAddBug, taskId, bugId, reset} = this.props;
+    if( taskId ){
+      return commentAddTask(values.content, taskId).then(() => reset());
+    }
+    if( bugId ){
+      return commentAddBug(values.content, bugId).then(() => reset());
+    }
+    
   }
 
   render() {

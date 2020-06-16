@@ -261,10 +261,19 @@ export const commentListUnload = () => ({
   type: COMMENT_LIST_UNLOAD,
 });
 
-export const commentListFetch = (id, page = 1) => {
+export const commentListFetchTask = (id, page = 1) => {
   return (dispatch) => {
     dispatch(commentListRequest());
     return requests.get(`/tasks/${id}/comments?_page=${page}`)
+      .then(response => dispatch(commentListReceived(response)))
+      .catch(error => dispatch(commentListError(error)));
+  }
+};
+
+export const commentListFetchBug = (id, page = 1) => {
+  return (dispatch) => {
+    dispatch(commentListRequest());
+    return requests.get(`/bugs/${id}/comments?_page=${page}`)
       .then(response => dispatch(commentListReceived(response)))
       .catch(error => dispatch(commentListError(error)));
   }
@@ -275,13 +284,33 @@ export const commentAdded = (comment) => ({
   comment
 });
 
-export const commentAdd = (comment, taskId) => {
+export const commentAddTask = (comment, taskId) => {
   return (dispatch) => {
     return requests.post(
       '/comments',
       {
         content: comment,
         Task: `/api/tasks/${taskId}`
+      }
+    ).then(
+      response => dispatch(commentAdded(response))
+    ).catch((error) => {
+      //console.log(error);
+      if (401 === error.response.status) {
+        return dispatch(userLogout());
+      }
+      throw new SubmissionError(parseApiErrors(error));
+    })
+  }
+};
+
+export const commentAddBug = (comment, bugId) => {
+  return (dispatch) => {
+    return requests.post(
+      '/comments',
+      {
+        content: comment,
+        Bug: `/api/bugs/${bugId}`
       }
     ).then(
       response => dispatch(commentAdded(response))
