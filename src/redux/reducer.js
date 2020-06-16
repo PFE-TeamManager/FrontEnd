@@ -18,6 +18,8 @@ import memberList from "./reducers/team/member/memberListReducer";
 
 import bugList from './reducers/bug/bugListReducer.js';
 import bug from './reducers/bug/bugReducer.js';
+import allBugsListReducer from './reducers/bug/allBugListReducer.js';
+import bugsToDoList from './reducers/bug/bugsToDoList.js';
 
 
 //keep it That way, always router and form the last
@@ -27,7 +29,7 @@ export default combineReducers({
     taskList,commentList,
     task,teamList,memberList,
     labelList,allTasksListReducer,tasksToDoList,
-    bugList,bug,
+    bugList,bug,allBugsListReducer,bugsToDoList,
 
     router: routerReducer,
     form: formReducer

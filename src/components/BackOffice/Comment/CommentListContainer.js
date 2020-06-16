@@ -8,7 +8,8 @@ import {LoadMore} from "../../Global/LoadMore";
 
 const mapeStateToProps = state => ({
   ...state.commentList,
-  isAuthenticated: state.auth.isAuthenticated
+  isAuthenticated: state.auth.isAuthenticated,
+  userData: state.auth.userData
 });
 
 const mapDispatchToProps = {
@@ -52,7 +53,7 @@ class CommentListContainer extends React.Component {
 
     return (
       <div>
-        <CommentList commentList={commentList}/>
+        <CommentList userData={this.props.userData} commentList={commentList}/>
         {showLoadMore && <LoadMore label="Load more comments..."
                                    onClick={this.onLoadMoreClick.bind(this)}
                                    disabled={isFetching}/>}

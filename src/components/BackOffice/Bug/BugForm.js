@@ -15,8 +15,8 @@ class BugForm extends React.Component {
   }
 
   onSubmit(values) {
-    const {bugAdd, taskId, reset} = this.props;
-    return bugAdd(values, taskId).then(() => reset());
+    const {bugAdd, taskId, projectId, reset} = this.props;
+    return bugAdd(values, taskId, projectId).then(() => reset());
   }
 
   render() {

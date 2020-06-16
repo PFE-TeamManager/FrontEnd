@@ -20,6 +20,12 @@ const menuItemsCHEF = [
         icon: "app-menu__icon fa fa-users",
         text: "Teams",
         link: "/dashboard/teams"
+    },
+    {
+        id: 4,
+        icon: "app-menu__icon fa fa-tasks",
+        text: "All Bugs",
+        link: "/dashboard/allbugs"
     }
 ];
 
@@ -33,14 +39,20 @@ const menuItemsDEV = [
     {
         id: 2,
         icon: "app-menu__icon fa fa-tasks",
-        text: "All Tasks",
-        link: "/dashboard/alltasks"
+        text: "The Board",
+        link: "/dashboard/board"
     },
     {
         id: 3,
         icon: "app-menu__icon fa fa-tasks",
-        text: "My Tasks",
-        link: "/dashboard/mytasks"
+        text: "All Tasks",
+        link: "/dashboard/alltasks"
+    },
+    {
+        id: 4,
+        icon: "app-menu__icon fa fa-tasks",
+        text: "All Bugs",
+        link: "/dashboard/allbugs"
     }
 ];
 
@@ -52,7 +64,9 @@ class SideBar extends React.Component {
                 <div className="app-sidebar__overlay" data-toggle="sidebar"></div>
                 <aside className="app-sidebar">
                     <div className="app-sidebar__user">
-                        <Avatar className="app-sidebar__user-avatar" name={this.props.userData.username} />
+                        <Avatar size="60" 
+                                className="app-sidebar__user-avatar" 
+                                name={this.props.userData.username} />
                         <div>
                             <p className="app-sidebar__user-name">
                                 {this.props.userData.username}

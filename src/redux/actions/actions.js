@@ -17,10 +17,12 @@ import {
   TASK_REQUEST,TASK_ERROR,TASK_RECEIVED,
   
   ALL_TASKS_LIST_SET_PAGE,ALL_TASKS_LIST_REQUEST,ALL_TASKS_LIST_ERROR,ALL_TASKS_LIST_RECEIVED,
+  ALL_BUGS_LIST_SET_PAGE,ALL_BUGS_LIST_REQUEST,ALL_BUGS_LIST_ERROR,ALL_BUGS_LIST_RECEIVED,
 
   LABEL_LIST_REQUEST,LABEL_ADDED,LABEL_LIST_ERROR,LABEL_LIST_RECEIVED,
 
   MY_TASKS_LIST_ERROR,MY_TASKS_LIST_RECEIVED,MY_TASKS_LIST_REQUEST,
+  MY_BUGS_LIST_ERROR,MY_BUGS_LIST_RECEIVED,MY_BUGS_LIST_REQUEST,
 
   TEAM_LIST_ERROR,TEAM_LIST_RECEIVED,TEAM_LIST_REQUEST,TEAM_LIST_SET_PAGE,
   TEAM_RECEIVED,TEAM_REQUEST,TEAM_UNLOAD,TEAM_ADDED,
@@ -494,13 +496,13 @@ export const taskPATCH = (taskId,TaskTitle) => {
   return requests.patch(`/tasks/${taskId}`,{TaskTitle: TaskTitle});
 }
 
-let date = new Date();
+let dateTask = new Date();
 export const affectDEVTotaskPATCH = (taskId,userId) => {
   return requests.patch(`/tasks/${taskId}`,
                         {
                           user: `/api/users/${userId}`,
                           ToDo: true,
-                          ToDoDate: date.toISOString()
+                          ToDoDate: dateTask.toISOString()
                         });
 }
 
@@ -513,7 +515,7 @@ export const taskEtatPATCH = (taskId,place) => {
         ToDo: true,
         doing: false,
         done: false,
-        ToDoDate: date.toISOString()
+        ToDoDate: dateTask.toISOString()
       });
   }
 
@@ -523,7 +525,7 @@ export const taskEtatPATCH = (taskId,place) => {
         doing: true,
         ToDo: false,
         done: false,
-        datedoing: date.toISOString()
+        datedoing: dateTask.toISOString()
       });
   }
 
@@ -533,7 +535,7 @@ export const taskEtatPATCH = (taskId,place) => {
         done: true,
         doing: false,
         ToDo: false,
-        datedone: date.toISOString()
+        datedone: dateTask.toISOString()
       });
   }
 }
@@ -689,26 +691,6 @@ export const teamPATCH = (teamId,teamName) => {
   return requests.patch(`/teams/${teamId}`,{teamName: teamName});
 }
 
-// export const taskAdd = (task, projectId) => {
-//   return (dispatch) => {
-//     return requests.post(
-//       '/tasks',
-//       {
-//         TaskTitle: task.TaskTitle,
-//         TaskDescription: task.TaskDescription,
-//         IdProject: `/api/projects/${projectId}`
-//       }
-//     ).then(
-//       response => dispatch(taskAdded(response))
-//     ).catch((error) => {
-//       if (401 === error.response.status) {
-//         return dispatch(userLogout());
-//       }
-//       throw new SubmissionError(parseApiErrors(error));
-//     })
-//   }
-// };
-
 /*****************END Member Action****************/
 
 
@@ -749,14 +731,15 @@ export const bugAdded = (bug) => ({
   bug
 });
 
-export const bugAdd = (bug, taskId) => {
+export const bugAdd = (bug, taskId, projectId) => {
   return (dispatch) => {
     return requests.post(
       '/bugs',
       {
         BugTitle: bug.BugTitle,
         BugDescription: bug.BugDescription,
-        IdTask: `/api/tasks/${taskId}`
+        IdTask: `/api/tasks/${taskId}`,
+        IdProject: `/api/projects/${projectId}`,
       }
     ).then(
       response => dispatch(bugAdded(response))
@@ -804,4 +787,112 @@ export const bugPATCH = (bugId,BugTitle) => {
   return requests.patch(`/bugs/${bugId}`,{BugTitle: BugTitle});
 }
 
+
+export const allBugListRequest = () => ({
+  type: ALL_BUGS_LIST_REQUEST,
+});
+
+export const allBugListError = (error) => ({
+  type: ALL_BUGS_LIST_ERROR,
+  error
+});
+
+export const allBugListReceived = (data) => ({
+  type: ALL_BUGS_LIST_RECEIVED,
+  data
+});
+
+export const allBugsListSetPage = (page) => ({
+  type: ALL_BUGS_LIST_SET_PAGE,
+  page
+});
+
+export const allBugsListFetch = (id,page = 1) => {
+  if(id){
+    return (dispatch) => {
+      dispatch(allBugListRequest());
+      return requests.get(`/projects/${id}/bugs?_page=${page}`)
+        .then(response => dispatch(allBugListReceived(response)))
+        .catch(error => dispatch(allBugListError(error)));
+    }
+  } else {
+    return (dispatch) => {
+      dispatch(allBugListRequest());
+      return requests.get(`/bugs?_page=${page}`)
+        .then(response => dispatch(allBugListReceived(response)))
+        .catch(error => dispatch(allBugListError(error)));
+    }
+  }
+
+};
+
+let dateBug = new Date();
+export const affectDEVTobugPATCH = (bugId,userId) => {
+  return requests.patch(`/bugs/${bugId}`,
+                        {
+                          user: `/api/users/${userId}`,
+                          ToDo: true,
+                          ToDoDate: dateBug.toISOString()
+                        });
+}
+
+export const bugEtatPATCH = (bugId,place) => {
+  if( place == "board-to-do" ){
+    return requests.patch(`/bugs/${bugId}`,
+      {
+        ToDo: true,
+        doing: false,
+        done: false,
+        ToDoDate: dateBug.toISOString()
+      });
+  }
+
+  if( place == "board-doing" ){
+    return requests.patch(`/bugs/${bugId}`,
+      {
+        doing: true,
+        ToDo: false,
+        done: false,
+        datedoing: dateBug.toISOString()
+      });
+  }
+
+  if( place == "board-done" ){
+    return requests.patch(`/bugs/${bugId}`,
+      {
+        done: true,
+        doing: false,
+        ToDo: false,
+        datedone: dateBug.toISOString()
+      });
+  }
+}
+
 /*************End Bug Action*****************/
+
+/******************My Bugs Action**************/
+
+export const myBugsListRequest = () => ({
+  type: MY_BUGS_LIST_REQUEST,
+});
+
+export const myBugsListError = (error) => ({
+  type: MY_BUGS_LIST_ERROR,
+  error
+});
+
+export const myBugsListReceived = (data) => ({
+  type: MY_BUGS_LIST_RECEIVED,
+  data
+});
+
+export const myBugsListFetch = (id) => {
+  return (dispatch) => {
+    dispatch(myBugsListRequest());
+    return requests.get(`/users/${id}/affected_bugs`)
+      .then(response => dispatch(myBugsListReceived(response)))
+      .catch(error => dispatch(myBugsListError(error)));
+  }
+};
+
+/******************END My Bugs Action**************/

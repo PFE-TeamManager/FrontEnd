@@ -40,7 +40,7 @@ class TaskContainer extends React.Component {
             {task && <CommentListContainer taskId={this.props.match.params.id}/>}
         </div>
         <div className="col-12 col-md-6">
-            {task && <BugListContainer taskId={this.props.match.params.id}/>}
+            {task && <BugListContainer projectId={task.IdProject.id} taskId={this.props.match.params.id}/>}
         </div>
       </div>
     )

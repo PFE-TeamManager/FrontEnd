@@ -9,6 +9,7 @@ import DashboardContent from '../DashboardContent/DashboardContent';
 import AllTasksListContainer from '../../Tasks/AllTasksListContainer';
 import KanbanBoardContainer from '../../Kanban/KanbanBoardContainer';
 import BugContainer from '../../Bug/BugContainer';
+import AllBugsListContainer from '../../Bug/AllBugsListContainer';
 
 class MainContent extends React.Component {
     render(){
@@ -19,13 +20,15 @@ class MainContent extends React.Component {
                     <Switch>
                         <Route path="/dashboard/projects/page/:page?" component={ProjectListContainer}/>
                         <Route path="/dashboard/alltasks/page/:page?" component={AllTasksListContainer} />
+                        <Route path="/dashboard/allbugs/page/:page?" component={AllBugsListContainer} />
                         <Route path="/dashboard/projects/:id" component={ProjectContainer} />
                         <Route path="/dashboard/tasks/:id" component={TaskContainer} />
                         <Route path="/dashboard/bugs/:id" component={BugContainer} />
                         <Route path="/dashboard/projects" component={ProjectListContainer} />
                         <Route path="/dashboard/alltasks" component={AllTasksListContainer} />
+                        <Route path="/dashboard/allbugs" component={AllBugsListContainer} />
                         <Route path="/dashboard/teams" component={MemberListContainer} />
-                        <Route path="/dashboard/mytasks" component={KanbanBoardContainer} />
+                        <Route path="/dashboard/board" component={KanbanBoardContainer} />
                         <Route path="/dashboard" component={DashboardContent} />
                         <Route component={Notfound} />
                     </Switch>

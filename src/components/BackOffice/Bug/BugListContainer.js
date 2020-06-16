@@ -31,7 +31,7 @@ class BugListContainer extends React.Component {
   }
 
   render() {
-    const {isFetching, bugList, isAuthenticated, taskId, currentPage, pageCount} = this.props;
+    const {isFetching, bugList, isAuthenticated, taskId, projectId, currentPage, pageCount} = this.props;
     const showLoadMore = pageCount > 1 && currentPage <= pageCount;
 
     if (isFetching && currentPage === 1) {
@@ -40,7 +40,7 @@ class BugListContainer extends React.Component {
 
     return (
         <div>
-            {isAuthenticated && <BugForm taskId={taskId}/>}
+            {isAuthenticated && <BugForm projectId={projectId} taskId={taskId}/>}
             
             <BugList bugList={bugList}/>
             {showLoadMore && <LoadMore label="Load more Bugs..."
