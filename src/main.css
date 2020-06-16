@@ -3300,7 +3300,7 @@ input[type="button"].btn-block {
   z-index: 1000;
   display: none;
   float: left;
-  min-width: 10rem;
+  min-width: 15rem;
   padding: 0 0;
   margin: 0 0 0;
   font-size: 0.875rem;
@@ -15420,7 +15420,9 @@ be a descendant of the grid when it is being dragged.
 
 .dropdown-menu.dropdown-menu-right {
   left: auto;
-  right: 0;
+  right: 0; 
+  min-width: 15rem !important; 
+  padding: 0rem 0 !important;
 }
 
 .dropdown-item .fa,

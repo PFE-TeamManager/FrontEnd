@@ -826,6 +826,27 @@ export const allBugsListFetch = (id,page = 1) => {
 
 };
 
+
+
+export const allBugsListNotifFetch = (id) => {
+  if(id){
+    return (dispatch) => {
+      dispatch(allBugListRequest());
+      return requests.get(`/projects/${id}/bugs`)
+        .then(response => dispatch(allBugListReceived(response)))
+        .catch(error => dispatch(allBugListError(error)));
+    }
+  } else {
+    return (dispatch) => {
+      dispatch(allBugListRequest());
+      return requests.get(`/bugs`)
+        .then(response => dispatch(allBugListReceived(response)))
+        .catch(error => dispatch(allBugListError(error)));
+    }
+  }
+
+};
+
 let dateBug = new Date();
 export const affectDEVTobugPATCH = (bugId,userId) => {
   return requests.patch(`/bugs/${bugId}`,

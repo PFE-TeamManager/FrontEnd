@@ -17,7 +17,11 @@ class DashboardContent extends React.Component {
     render(){
         const {userData,isFetching} = this.props;
 
-        if (canCreateAuthorization(this.props.userData)) {
+        if (isFetching)  {
+            return (<Spinner/>);
+        }
+
+        if (canCreateAuthorization(userData)) {
             return (
                 <div className="row">
                     <div className="col-12">

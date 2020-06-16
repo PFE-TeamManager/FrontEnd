@@ -68,7 +68,7 @@ class BugListDEV extends React.Component {
     return (
       <div className="mb-3 mt-3 card-bug">
           <div className="row">
-            {bugList.map( bug => {
+            {bugList && bugList.map( bug => {
                 return (
                     <div key={bug.id} className="col-12 col-md-6">
                         <div className={"card text-white "+( bug.enabled ? "bg-success-app" : "bg-danger-app" )+" mb-3"} >
