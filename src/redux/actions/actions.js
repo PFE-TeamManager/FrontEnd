@@ -241,6 +241,13 @@ export const userProfileFetch = (userId) => {
     ).catch(() => dispatch(userProfileError(userId)))
   }
 };
+
+export const userPATCH = (content,userId) => {
+  return (dispatch) => {
+    return requests.patch(`/users/${userId}`,{description: content});
+  }
+}
+
 /*****************END User Action****************/
 
 

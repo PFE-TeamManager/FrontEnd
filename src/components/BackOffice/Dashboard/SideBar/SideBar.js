@@ -72,8 +72,8 @@ class SideBar extends React.Component {
                                 {this.props.userData.username}
                             </p>
                             <p className="app-sidebar__user-designation">
-                                { this.props.userData.roles.includes("ROLE_DEV") ? <h4>Développeur</h4> : "" }
-                                { this.props.userData.roles.includes("ROLE_CHEF_PROJET") ? <h4>Chef Projet</h4> : "" }
+                                { this.props.userData.roles.includes("ROLE_DEV") ? "Développeur" : "" }
+                                { this.props.userData.roles.includes("ROLE_CHEF_PROJET") ? "Chef Projet" : "" }
                             </p>
                         </div>
                     </div>

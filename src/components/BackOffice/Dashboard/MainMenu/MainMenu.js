@@ -99,16 +99,11 @@ class MainMenu extends React.Component {
                                 <ul className="dropdown-menu settings-menu dropdown-menu-right" 
                                     id="dropdown-menu-list">
                                     <li>
-                                        <a className="dropdown-item" href="#">
+                                        <Link className="dropdown-item" 
+                                            to={`/dashboard/profil`}>
                                             <i className="fa fa-user fa-lg"></i> 
                                             {this.props.userData.username}
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a className="dropdown-item" href="#">
-                                            <i className="fa fa-cog fa-lg"></i> 
-                                            Settings
-                                        </a>
+                                        </Link>
                                     </li>
                                     <li>
                                         <a className="dropdown-item" href="#" 

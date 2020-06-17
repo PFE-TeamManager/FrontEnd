@@ -10,6 +10,7 @@ import AllTasksListContainer from '../../Tasks/AllTasksListContainer';
 import KanbanBoardContainer from '../../Kanban/KanbanBoardContainer';
 import BugContainer from '../../Bug/BugContainer';
 import AllBugsListContainer from '../../Bug/AllBugsListContainer';
+import ProfileContainer from '../../Profil/ProfileContainer';
 
 class MainContent extends React.Component {
     render(){
@@ -29,6 +30,7 @@ class MainContent extends React.Component {
                         <Route path="/dashboard/allbugs" component={AllBugsListContainer} />
                         <Route path="/dashboard/teams" component={MemberListContainer} />
                         <Route path="/dashboard/board" component={KanbanBoardContainer} />
+                        <Route path="/dashboard/profil" component={ProfileContainer} />
                         <Route path="/dashboard" component={DashboardContent} />
                         <Route component={Notfound} />
                     </Switch>
