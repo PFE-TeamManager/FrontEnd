@@ -21,6 +21,8 @@ import {
 
   LABEL_LIST_REQUEST,LABEL_ADDED,LABEL_LIST_ERROR,LABEL_LIST_RECEIVED,
 
+  SEARCH_TASK_REQUEST,SEARCH_TASK_ERROR,SEARCH_TASK_RECEIVED,
+
   MY_TASKS_LIST_ERROR,MY_TASKS_LIST_RECEIVED,MY_TASKS_LIST_REQUEST,
   MY_BUGS_LIST_ERROR,MY_BUGS_LIST_RECEIVED,MY_BUGS_LIST_REQUEST,
 
@@ -246,6 +248,31 @@ export const userPATCH = (content,userId) => {
   //return (dispatch) => {
     return requests.patch(`/users/${userId}`,{description: content});
   //}
+}
+
+
+
+export const searchTaskRequest = () => ({
+  type: SEARCH_TASK_REQUEST,
+});
+
+export const searchTaskError = (error) => ({
+  type: SEARCH_TASK_ERROR,
+  error
+});
+
+export const searchTaskReceived = (data) => ({
+  type: SEARCH_TASK_RECEIVED,
+  data
+});
+
+export const searchTask = (searchparam) => {
+  return (dispatch) => {
+    dispatch(searchTaskRequest());
+    return requests.get(`/tasks?TaskTitle=${searchparam}`)
+      .then(response => dispatch(searchTaskReceived(response)))
+      .catch(error => dispatch(searchTaskError(error)));
+  }
 }
 
 /*****************END User Action****************/
