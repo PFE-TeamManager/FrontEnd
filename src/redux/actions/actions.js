@@ -243,9 +243,9 @@ export const userProfileFetch = (userId) => {
 };
 
 export const userPATCH = (content,userId) => {
-  return (dispatch) => {
+  //return (dispatch) => {
     return requests.patch(`/users/${userId}`,{description: content});
-  }
+  //}
 }
 
 /*****************END User Action****************/

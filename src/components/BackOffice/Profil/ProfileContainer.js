@@ -1,17 +1,35 @@
 import React from 'react';
 import {connect} from "react-redux";
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
 import { Spinner } from '../../Global/Spinner';
 import Avatar from 'react-avatar';
-import InfoProfileForm from './information/InfoProfileForm';
+import { userPATCH } from "../../../redux/actions/actions";
+
+const MyReactSwal = withReactContent(Swal);
 
 const mapeStateToProps = state => ({
   userData: state.auth.userData
 });
 
+const mapDispatchToProps = {
+    userPATCH
+};
+
 class ProfileContainer extends React.Component {
     
     constructor(props){
         super(props);
+        this.state = {
+            editing: '',
+            newDesc: ''
+        }
+    }
+
+    showEditInput = () => {
+        this.setState({
+            editing: true
+        })
     }
 
     showInfo = (event) => {
@@ -28,13 +46,39 @@ class ProfileContainer extends React.Component {
         appMenu.classList.toggle("show");
     }
 
-    handleDescription = () => {
-        {
-            if( this.props.userData.description ){
-                return ( this.props.userData.description )
-            } else {
-                return ( <InfoProfileForm /> )
-            }
+    editFunction = () => {
+        userPATCH(this.refs.newDesc.value,this.props.userData.id);
+        this.setState({
+          editing: false,
+          newDesc: this.refs.newDesc.value
+        });
+        MyReactSwal.fire({
+          icon: 'success'
+        });
+    }
+
+    handleEditingDesc = (description) => {
+        if( (this.state.editing === true) ){
+          return (
+            <div>
+                <textarea  ref="newDesc" className="form-control"
+                        defaultValue={ this.state.newDesc ? this.state.newDesc : description }></textarea>
+                <button className="btn btn-info" 
+                        onClick={ () => {this.editFunction()} } >
+                        <i className="app-menu__icon fa fa-edit"></i>
+                </button>
+                <button className="btn btn-warning" 
+                        onClick={ () => {this.setState({editing:''})} } >
+                        <i className="app-menu__icon fa fa-window-close"></i>
+                </button>
+            </div>
+          )
+        }
+        if( (this.state.editing === false) ){
+          return <p>{this.state.newDesc}</p>
+        }
+        if( (this.state.editing === '') ){
+          return <p>{ this.state.newDesc ? this.state.newDesc : description }</p>
         }
     }
 
@@ -84,8 +128,20 @@ class ProfileContainer extends React.Component {
                 <div className="col-md-9">
                     <div className="tab-content">
                         <div className="tab-pane tab-profil active" id="user-info">
+                            <button className="btn btn-info float-right m-1" 
+                                    onClick={this.showEditInput}>
+                                <i className="app-menu__icon fa fa-edit"></i>
+                            </button>
                             <div className="card p-4">
-                                { this.handleDescription() }
+                                { this.handleEditingDesc(this.props.userData.description) }
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="tab-content">
+                        <div className="tab-pane tab-profil active" id="user-info">
+                            <div className="card p-4">
+                                System of Trophies needed
                             </div>
                         </div>
                     </div>
@@ -94,4 +150,4 @@ class ProfileContainer extends React.Component {
         )
     }
 }
-export default connect(mapeStateToProps, null)(ProfileContainer);
+export default connect(mapeStateToProps, mapDispatchToProps)(ProfileContainer);
