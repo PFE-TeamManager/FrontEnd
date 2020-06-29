@@ -32,7 +32,10 @@ import {
   MEMBER_LIST_REQUEST,MEMBER_LIST_ERROR,MEMBER_LIST_RECEIVED,MEMBER_PATCHED,
 
   BUG_ADDED,BUG_UNLOAD,BUG_REQUEST,BUG_RECEIVED,BUG_ERROR,BUG_LIST_REQUEST,
-  BUG_LIST_RECEIVED,BUG_LIST_ERROR,BUG_LIST_UNLOAD
+  BUG_LIST_RECEIVED,BUG_LIST_ERROR,BUG_LIST_UNLOAD,
+
+  DASHBOARD_COUNT_TASKS_PROJECTS_REQUEST,DASHBOARD_COUNT_TASKS_PROJECTS_ERROR,
+  DASHBOARD_COUNT_TASKS_PROJECTS_RECEIVED
 } from "./constants";
 import {SubmissionError} from "redux-form";
 import {parseApiErrors} from "../../redux/apiUtils";
@@ -951,3 +954,32 @@ export const myBugsListFetch = (id) => {
 };
 
 /******************END My Bugs Action**************/
+
+
+
+
+/**************Dashboard Action**************/
+
+export const dashboardCountTasksByProjectRequest = () => ({
+  type: DASHBOARD_COUNT_TASKS_PROJECTS_REQUEST,
+});
+
+export const dashboardCountTasksByProjectError = (error) => ({
+  type: DASHBOARD_COUNT_TASKS_PROJECTS_ERROR,
+  error
+});
+
+export const dashboardCountTasksByProjectReceived = (data) => ({
+  type: DASHBOARD_COUNT_TASKS_PROJECTS_RECEIVED,
+  data
+});
+
+export const dashboardCountTasksByProject = () => {
+  return (dispatch) => {
+    dispatch(dashboardCountTasksByProjectRequest());
+    return requests.get(`/dashboard/projects/tasks`)
+      .then(response => dispatch(dashboardCountTasksByProjectReceived(response)))
+      .catch(error => dispatch(dashboardCountTasksByProjectError(error)));
+  }
+};
+/**************END Dashboard Action**************/
