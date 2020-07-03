@@ -3,15 +3,17 @@ import {connect} from "react-redux";
 import {canCreateAuthorization} from "../../../../redux/apiUtils";
 import { Spinner } from '../../../Global/Spinner';
 import ChartTaskByProjects from './charts/ChartTaskByProjects';
-import {dashboardCountTasksByProject} from "../../../../redux/actions/actions";
+import ChartBugByProjects from './charts/ChartBugByProjects';
+import {dashboardCountTasksByProject,dashboardCountBugsByProject} from "../../../../redux/actions/actions";
 
 const mapStateToProps = state => ({
     userData: state.auth.userData,
-    ...state.dataCountTasksProjectsReducer
+    ...state.dataCountTasksProjectsReducer,
+    ...state.dataCountBugsProjectsReducer
 });
 
 const mapDispatchToProps = {
-    dashboardCountTasksByProject
+    dashboardCountTasksByProject,dashboardCountBugsByProject
 };
 
 
@@ -23,11 +25,12 @@ class DashboardContent extends React.Component {
 
     componentDidMount() {
         this.props.dashboardCountTasksByProject();
+        this.props.dashboardCountBugsByProject();
     }
 
     render(){
-        const {userData, dataCountTasksProjectsReducer,isFetching} = this.props;
-console.log(dataCountTasksProjectsReducer);
+        const {userData, dataCountTasksProjectsReducer, dataCountBugsProjectsReducer,isFetching} = this.props;
+
         if (isFetching)  {
             return (<Spinner/>);
         }
@@ -35,16 +38,23 @@ console.log(dataCountTasksProjectsReducer);
         if (canCreateAuthorization(userData)) {
             return (
                 <div className="row">
-                    <div className="col-12">
-                        Dashboard For Chef Projet
-                    </div>
-                    <div className="col-12">
+                    <div className="col-md-6 col-12">
                         <div className="mixed-chart">
                             <div className="card">
                                 {dataCountTasksProjectsReducer && 
                                     <ChartTaskByProjects 
                                         dataCountTasks={dataCountTasksProjectsReducer.dataCountTasks}
                                         dataProjectName={dataCountTasksProjectsReducer.dataProjectName} />}
+                            </div>
+                        </div>
+                    </div>
+                    <div className="col-md-6 col-12">
+                        <div className="mixed-chart">
+                            <div className="card">
+                                {dataCountBugsProjectsReducer && 
+                                    <ChartBugByProjects 
+                                        dataCountBugs={dataCountBugsProjectsReducer.dataCountBugs}
+                                        dataProjectName={dataCountBugsProjectsReducer.dataProjectName} />}
                             </div>
                         </div>
                     </div>

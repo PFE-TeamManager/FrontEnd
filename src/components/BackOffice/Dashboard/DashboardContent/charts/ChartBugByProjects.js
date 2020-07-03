@@ -1,13 +1,13 @@
 import React from 'react';
 import ReactApexChart from "react-apexcharts";
 
-class ChartTaskByProjects extends React.Component {
+class ChartBugByProjects extends React.Component {
     constructor(props){
         super(props);
 
         this.state = {
             series: [{
-              data: props.dataCountTasks
+              data: props.dataCountBugs
             }],
             options: {
               chart: {
@@ -45,8 +45,8 @@ class ChartTaskByProjects extends React.Component {
 
     render(){
         return(
-            <div id="chart-task">
-                <h2 className="p-2"> Tasks number by project </h2>
+            <div id="chart-bug">
+                <h2 className="p-2"> Bugs number by project </h2>
                 <ReactApexChart 
                     options={this.state.options} 
                     series={this.state.series} 
@@ -56,4 +56,4 @@ class ChartTaskByProjects extends React.Component {
     }
 }
 
-export default ChartTaskByProjects;
+export default ChartBugByProjects;

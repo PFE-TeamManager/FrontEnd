@@ -23,7 +23,7 @@ import bugsToDoList from './reducers/bug/bugsToDoList.js';
 
 import searchTask from './reducers/search/searchReducer.js';
 import dataCountTasksProjectsReducer from './reducers/dashboard/dashboardCountTasksProjectReducer.js';
-
+import dataCountBugsProjectsReducer from './reducers/dashboard/dashboardCountBugsProjectReducer.js';
 
 //keep it That way, always router and form the last
 export default combineReducers({
@@ -33,7 +33,7 @@ export default combineReducers({
     task,teamList,memberList,
     labelList,allTasksListReducer,tasksToDoList,
     bugList,bug,allBugsListReducer,bugsToDoList,searchTask,
-    dataCountTasksProjectsReducer,
+    dataCountTasksProjectsReducer,dataCountBugsProjectsReducer,
     router: routerReducer,
     form: formReducer
 });
