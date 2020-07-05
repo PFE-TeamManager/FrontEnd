@@ -11,7 +11,7 @@ const menuItemsCHEF = [
     },
     {
         id: 2,
-        icon: "app-menu__icon fa fa-project-diagram",
+        icon: "app-menu__icon fa fa-product-hunt",
         text: "Projects",
         link: "/dashboard/projects"
     },
@@ -20,6 +20,12 @@ const menuItemsCHEF = [
         icon: "app-menu__icon fa fa-users",
         text: "Teams",
         link: "/dashboard/teams"
+    },
+    {
+        id: 4,
+        icon: "app-menu__icon fa fa-tasks",
+        text: "All Bugs",
+        link: "/dashboard/allbugs"
     }
 ];
 
@@ -32,15 +38,21 @@ const menuItemsDEV = [
     },
     {
         id: 2,
-        icon: "app-menu__icon fa fa-doc",
+        icon: "app-menu__icon fa fa-tasks",
+        text: "The Board",
+        link: "/dashboard/board"
+    },
+    {
+        id: 3,
+        icon: "app-menu__icon fa fa-tasks",
         text: "All Tasks",
         link: "/dashboard/alltasks"
     },
     {
-        id: 3,
-        icon: "app-menu__icon fa fa-doc",
-        text: "My Tasks",
-        link: "/dashboard/mytasks"
+        id: 4,
+        icon: "app-menu__icon fa fa-tasks",
+        text: "All Bugs",
+        link: "/dashboard/allbugs"
     }
 ];
 
@@ -52,14 +64,16 @@ class SideBar extends React.Component {
                 <div className="app-sidebar__overlay" data-toggle="sidebar"></div>
                 <aside className="app-sidebar">
                     <div className="app-sidebar__user">
-                        <Avatar name={this.props.userData.username} />
+                        <Avatar size="60" 
+                                className="app-sidebar__user-avatar" 
+                                name={this.props.userData.username} />
                         <div>
                             <p className="app-sidebar__user-name">
                                 {this.props.userData.username}
                             </p>
                             <p className="app-sidebar__user-designation">
-                                { this.props.userData.roles.includes("ROLE_DEV") ? <h4>Développeur</h4> : "" }
-                                { this.props.userData.roles.includes("ROLE_CHEF_PROJET") ? <h4>Chef Projet</h4> : "" }
+                                { this.props.userData.roles.includes("ROLE_DEV") ? "Développeur" : "" }
+                                { this.props.userData.roles.includes("ROLE_CHEF_PROJET") ? "Chef Projet" : "" }
                             </p>
                         </div>
                     </div>

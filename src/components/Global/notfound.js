@@ -1,4 +1,11 @@
 import React from 'react';
+import {connect} from "react-redux";
+import { Spinner } from '../Global/Spinner';
+import { SearchContainer } from '../BackOffice/Search/SearchContainer';
+
+const mapeStateToProps = state => ({
+    ...state.searchTask
+});
 
 class Notfound extends React.Component {
 
@@ -15,6 +22,25 @@ class Notfound extends React.Component {
     }
 
     render(){
+
+        const {searchTask,isFetching} = this.props;
+
+
+        if( searchTask ){
+
+            if (isFetching) {
+                return (<Spinner />);
+            }
+
+            return(
+                <div>
+                    {/* <main className="app-content"> */}
+                        <SearchContainer searchTask={searchTask} />
+                    {/* </main> */}
+                </div>
+            );
+        }
+
         return(
             <h1>Not found</h1>
         );
@@ -22,4 +48,4 @@ class Notfound extends React.Component {
 
 }
 
-export default Notfound;
+export default connect(mapeStateToProps, null)(Notfound);

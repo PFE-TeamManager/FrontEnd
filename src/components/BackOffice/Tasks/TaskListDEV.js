@@ -71,7 +71,7 @@ class TaskListDEV extends React.Component {
             {taskList.map( task => {
                 return (
                     <div key={task.id} className="col-12 col-md-6">
-                        <div className={"card text-white "+( task.enabled ? "bg-success" : "bg-danger" )+" mb-3"} >
+                        <div className={"card text-white "+( task.enabled ? "bg-success-app" : "bg-danger-app" )+" mb-3"} >
                         <div className="card-header"> Tache N° {task.id} - Project N° {task.IdProject.id} - {task.IdProject.projectName} </div>
                         <div className="card-body border-bottom">
                             <h5 className="card-title">

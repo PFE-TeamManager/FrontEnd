@@ -1,18 +1,21 @@
 import React from 'react';
-import {myTasksListFetch} from "../../../redux/actions/actions";
+import {myTasksListFetch,myBugsListFetch} from "../../../redux/actions/actions";
 import {connect} from "react-redux";
 import { Spinner } from '../../Global/Spinner';
 import KanbanBoard from './KanbanBoard';
 import { TaskCards } from './TaskCards';
+import { BugCards } from './BugCards';
+import { ComponentTitle } from '../../Global/ComponentTitle';
 import "./css/kanban.css";
 
 const mapeStateToProps = state => ({
   userData: state.auth.userData,
-  ...state.tasksToDoList
+  ...state.tasksToDoList,
+  ...state.bugsToDoList
 });
 
 const mapDispatchToProps = {
-    myTasksListFetch
+    myTasksListFetch,myBugsListFetch
 };
 
 class KanbanBoardContainer extends React.Component {
@@ -23,10 +26,11 @@ class KanbanBoardContainer extends React.Component {
 
     componentDidMount() {
         this.props.myTasksListFetch(this.props.userData.id);
+        this.props.myBugsListFetch(this.props.userData.id);
     }
 
     render() {
-        const {isFetching, tasksToDoList} = this.props;
+        const {isFetching, tasksToDoList, bugsToDoList} = this.props;
         //console.log(tasksToDoList);
         if (isFetching) {
             return (
@@ -39,6 +43,10 @@ class KanbanBoardContainer extends React.Component {
         }
 
         return (
+        <div>
+          <ComponentTitle   icon="fa fa-tasks" title="My Board" 
+                            introduction="Board of Tasks & Bugs" />
+          
         <div className="row">
             <div className="col-12">
                 <div className="mb-3 mt-3 shadow-sm">
@@ -50,14 +58,14 @@ class KanbanBoardContainer extends React.Component {
                 </div>
             </div>
             <div className="col-12">
-                <main className="flexbox">
+            <main className="flexbox">
                     {/** Get The Tasks To do */}
                     <KanbanBoard id="board-to-do" className="board" databackgroundColor="#98FB98">
                         {
                             tasksToDoList 
                             && tasksToDoList.map( 
                             (task,i) => {
-                                if( task.ToDo ){
+                                if( task.ToDo && task.enabled ){
                                     return (
                                         <TaskCards  key={i} id={"card-"+task.id} 
                                                     dataid={task.id} datasource="board-to-do"
@@ -69,6 +77,23 @@ class KanbanBoardContainer extends React.Component {
                                 }
                             })
                         }
+
+                        {
+                            bugsToDoList 
+                            && bugsToDoList.map( 
+                            (bug,i) => {
+                                if( bug.ToDo && bug.enabled ){
+                                    return (
+                                        <BugCards  key={i} id={"card-"+bug.id} 
+                                                    dataid={bug.id} datasource="board-to-do"
+                                                    backgroundColor="#98FB98"
+                                                    className="card" draggable="true">
+                                                    <p>{bug.BugTitle}</p>
+                                        </BugCards>
+                                    );
+                                }
+                            })
+                        }
                     </KanbanBoard>
 
                     <KanbanBoard id="board-doing" className="board" databackgroundColor="#3CB371">
@@ -76,7 +101,7 @@ class KanbanBoardContainer extends React.Component {
                             tasksToDoList 
                             && tasksToDoList.map( 
                             (task,i) => {
-                                if( task.doing ){
+                                if( task.doing && task.enabled ){
                                     return (
                                         <TaskCards  key={i} id={"card-"+task.id} 
                                                     dataid={task.id} datasource="board-doing"
@@ -88,6 +113,23 @@ class KanbanBoardContainer extends React.Component {
                                 }
                             })
                         }
+
+                        {
+                            bugsToDoList 
+                            && bugsToDoList.map( 
+                            (bug,i) => {
+                                if( bug.doing && bug.enabled ){
+                                    return (
+                                        <BugCards  key={i} id={"card-"+bug.id} 
+                                                    dataid={bug.id} datasource="board-to-do"
+                                                    backgroundColor="#98FB98"
+                                                    className="card" draggable="true">
+                                                    <p>{bug.BugTitle}</p>
+                                        </BugCards>
+                                    );
+                                }
+                            })
+                        }
                     </KanbanBoard>
 
                     <KanbanBoard id="board-done" className="board" databackgroundColor="#6B8E23">
@@ -95,7 +137,7 @@ class KanbanBoardContainer extends React.Component {
                             tasksToDoList 
                             && tasksToDoList.map( 
                             (task,i) => {
-                                if( task.done ){
+                                if( task.done && task.enabled ){
                                     return (
                                         <TaskCards  key={i} id={"card-"+task.id} 
                                                     dataid={task.id} datasource="board-done"
@@ -107,9 +149,27 @@ class KanbanBoardContainer extends React.Component {
                                 }
                             })
                         }
+
+                        {
+                            bugsToDoList 
+                            && bugsToDoList.map( 
+                            (bug,i) => {
+                                if( bug.done && bug.enabled ){
+                                    return (
+                                        <BugCards  key={i} id={"card-"+bug.id} 
+                                                    dataid={bug.id} datasource="board-to-do"
+                                                    backgroundColor="#98FB98"
+                                                    className="card" draggable="true">
+                                                    <p>{bug.BugTitle}</p>
+                                        </BugCards>
+                                    );
+                                }
+                            })
+                        }
                     </KanbanBoard>
                 </main>
             </div>
+        </div>
         </div>
         )
     }

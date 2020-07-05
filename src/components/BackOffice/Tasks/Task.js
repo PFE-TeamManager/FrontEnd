@@ -102,7 +102,7 @@ class Task extends React.Component {
             </button>
             <button className="btn btn-warning" 
                     onClick={ () => {this.setState({editing:''})} } >
-                    <i className="app-menu__icon fa-window-close"></i>
+                    <i className="app-menu__icon fa fa-window-close"></i>
             </button>
         </div>
       )

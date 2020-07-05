@@ -7,6 +7,7 @@ import { Spinner } from '../../Global/Spinner';
 import {canCreateAuthorization} from "../../../redux/apiUtils";
 import 'react-bootstrap-table/dist/react-bootstrap-table-all.min.css';
 import { Tab, Tabs } from 'react-bootstrap';
+import { ComponentTitle } from '../../Global/ComponentTitle';
 
 const mapStateToProps = state => ({
   userData: state.auth.userData,
@@ -50,17 +51,23 @@ class MemberListContainer extends React.Component {
       }
 
       return (
-        <div className="row">
-            <div className="col-12">
-              <Tabs defaultActiveKey="2" activeKey={this.state.key} onSelect={this.handleSelect} >
-                <Tab eventKey={1} title="Team">
-                    <TeamList teams={teams}/>
-                </Tab>
-                <Tab eventKey={2} title="Member">
-                    <MemberList members={members} teams={teams}/>
-                </Tab>
-              </Tabs>
-            </div>
+        <div>
+          <ComponentTitle 
+          icon="fa fa-users"
+          title="Teams & Members" 
+          introduction="Interafce Gestion des équipes et ses membres" />
+          <div className="row">
+              <div className="col-12">
+                <Tabs defaultActiveKey="2" activeKey={this.state.key} onSelect={this.handleSelect} >
+                  <Tab eventKey={1} title="Team">
+                      <TeamList teams={teams}/>
+                  </Tab>
+                  <Tab eventKey={2} title="Member">
+                      <MemberList members={members} teams={teams}/>
+                  </Tab>
+                </Tabs>
+              </div>
+          </div>
         </div>
       )
 

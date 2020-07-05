@@ -1,5 +1,5 @@
 import React from 'react';
-import {commentListFetch, commentListUnload} from "../../../redux/actions/actions";
+import {commentListFetchTask,commentListFetchBug, commentListUnload} from "../../../redux/actions/actions";
 import {connect} from "react-redux";
 import { Spinner } from '../../Global/Spinner';
 import {CommentList} from "./CommentList";
@@ -8,17 +8,23 @@ import {LoadMore} from "../../Global/LoadMore";
 
 const mapeStateToProps = state => ({
   ...state.commentList,
-  isAuthenticated: state.auth.isAuthenticated
+  isAuthenticated: state.auth.isAuthenticated,
+  userData: state.auth.userData
 });
 
 const mapDispatchToProps = {
-  commentListFetch,
+  commentListFetchTask,commentListFetchBug,
   commentListUnload
 };
 
 class CommentListContainer extends React.Component {
   componentDidMount() {
-    this.props.commentListFetch(this.props.taskId);
+    if( this.props.taskId ){
+      this.props.commentListFetchTask(this.props.taskId);
+    }
+    if( this.props.bugId ){
+      this.props.commentListFetchBug(this.props.bugId);
+    }
   }
 
   componentWillUnmount() {
@@ -26,12 +32,19 @@ class CommentListContainer extends React.Component {
   }
 
   onLoadMoreClick() {
-    const {taskId, currentPage, commentListFetch} = this.props;
-    commentListFetch(taskId, currentPage);
+    const {taskId, bugId, currentPage, commentListFetchTask, commentListFetchBug} = this.props;
+    if( taskId ){
+      commentListFetchTask(taskId, currentPage);
+    }
+
+    if( bugId ){
+      commentListFetchBug(bugId, currentPage);
+    }
+    
   }
 
   render() {
-    const {isFetching, commentList, isAuthenticated, taskId, currentPage, pageCount} = this.props;
+    const {isFetching, commentList, isAuthenticated, taskId, bugId, currentPage, pageCount} = this.props;
     const showLoadMore = pageCount > 1 && currentPage <= pageCount;
 
     if (isFetching && currentPage === 1) {
@@ -40,11 +53,12 @@ class CommentListContainer extends React.Component {
 
     return (
       <div>
-        <CommentList commentList={commentList}/>
+        <CommentList userData={this.props.userData} commentList={commentList}/>
         {showLoadMore && <LoadMore label="Load more comments..."
                                    onClick={this.onLoadMoreClick.bind(this)}
                                    disabled={isFetching}/>}
-        {isAuthenticated && <CommentForm taskId={taskId}/>}
+        {isAuthenticated && taskId && <CommentForm taskId={taskId}/>}
+        {isAuthenticated && bugId && <CommentForm bugId={bugId}/>}
       </div>
     )
   }

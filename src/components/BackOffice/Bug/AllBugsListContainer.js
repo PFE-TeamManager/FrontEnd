@@ -1,21 +1,21 @@
 import React from 'react';
-import {allTasksListFetch,allTasksListSetPage} from "../../../redux/actions/actions";
+import {allBugsListFetch,allBugsListSetPage} from "../../../redux/actions/actions";
 import {connect} from "react-redux";
 import { Spinner } from '../../Global/Spinner';
 import { Paginator } from "../../Global/Paginator";
-import TaskListDEV from './TaskListDEV';
+import BugListDEV from './BugListDEV';
 import { ComponentTitle } from '../../Global/ComponentTitle';
 
 const mapeStateToProps = state => ({
   userData: state.auth.userData,
-  ...state.allTasksListReducer
+  ...state.allBugsListReducer
 });
 
 const mapDispatchToProps = {
-    allTasksListFetch,allTasksListSetPage
+    allBugsListFetch,allBugsListSetPage
 };
 
-class AllTasksListContainer extends React.Component {
+class AllBugsListContainer extends React.Component {
     
     constructor(props){
         super(props);
@@ -25,18 +25,26 @@ class AllTasksListContainer extends React.Component {
     }
 
     componentDidMount() {
-        this.props.allTasksListFetch(this.props.userData.teams.project.id,this.getQueryParamPage());
+        if( this.props.userData.teams ){
+            this.props.allBugsListFetch(this.props.userData.teams.project.id,this.getQueryParamPage());
+        } else {
+            this.props.allBugsListFetch(null,this.getQueryParamPage());
+        }
     }
     
     componentDidUpdate(prevProps) {
-        const {currentPage, allTasksListFetch, allTasksListSetPage} = this.props;
+        const {currentPage, allBugsListFetch, allBugsListSetPage} = this.props;
 
         if (prevProps.match.params.page !== this.getQueryParamPage()) {
-            allTasksListSetPage(this.getQueryParamPage());
+            allBugsListSetPage(this.getQueryParamPage());
         }
 
         if (prevProps.currentPage !== currentPage) {
-            allTasksListFetch(this.props.userData.teams.project.id,currentPage);
+            if( this.props.userData.teams ){
+                this.props.allBugsListFetch(this.props.userData.teams.project.id,currentPage);
+            } else {
+                this.props.allBugsListFetch(null,currentPage);
+            }
         }
     }
     
@@ -45,9 +53,9 @@ class AllTasksListContainer extends React.Component {
     }
 
     changePage(page) {
-        const {history, allTasksListSetPage} = this.props;
-        allTasksListSetPage(page);
-        history.push(`/dashboard/alltasks/page/${page}`);
+        const {history, allBugsListSetPage} = this.props;
+        allBugsListSetPage(page);
+        history.push(`/dashboard/allbugs/page/${page}`);
     }
 
     onNextPageClick(e) {
@@ -63,7 +71,7 @@ class AllTasksListContainer extends React.Component {
     }
 
     render() {
-        const {isFetching, allTasksListReducer, currentPage, pageCount} = this.props;
+        const {isFetching, allBugsListReducer, currentPage, pageCount} = this.props;
 
         if (isFetching && currentPage === 1) {
             return (
@@ -77,11 +85,11 @@ class AllTasksListContainer extends React.Component {
 
         return (
         <div>
-          <ComponentTitle   icon="fa fa-tasks" title="Team's Tasks" 
-                            introduction="Tasks of My Team" />
+          <ComponentTitle   icon="fa fa-bug" title="Team's Bugs" 
+                            introduction="Bugs of My Team" />
             <div className="row">
                 <div className="col-12">
-                    <TaskListDEV taskList={allTasksListReducer} />
+                    <BugListDEV bugList={allBugsListReducer} />
                     <Paginator  currentPage={currentPage} pageCount={pageCount}
                                 setPage={this.changePage.bind(this)}
                                 nextPage={this.onNextPageClick.bind(this)}
@@ -93,4 +101,4 @@ class AllTasksListContainer extends React.Component {
     }
 }
 
-export default connect(mapeStateToProps, mapDispatchToProps)(AllTasksListContainer);
+export default connect(mapeStateToProps, mapDispatchToProps)(AllBugsListContainer);

@@ -7,6 +7,7 @@ import { Spinner } from '../../Global/Spinner';
 import ProjectForm from './ProjectForm';
 import { Paginator } from "../../Global/Paginator";
 import {canCreateAuthorization} from "../../../redux/apiUtils";
+import { ComponentTitle } from '../../Global/ComponentTitle';
 
 const mapStateToProps = state => ({
   userData: state.auth.userData,
@@ -66,59 +67,74 @@ class ProjectListContainer extends React.Component {
 
       if ( isFetching && currentPage === 1 ) {
         return (
+          <div>
+          <ComponentTitle icon="fa fa-product-hunt" title="Projects" introduction="Interafce Gestion de Projet" />
           <div className="row">
               <div className="col-12">
                 <Spinner />
               </div>
+          </div>
           </div>
         );
       }
 
       if ( isFetching && currentPage > 1 )  {
         return (
-          <div className="row">
-              <div className="col-12 col-md-6">
-                <Spinner />
-              </div>
-              <div className="col-12 col-md-6">
-                <ProjectForm teams={teams} />
-              </div>
+          <div>
+            <ComponentTitle icon="fa fa-product-hunt" title="Projects" introduction="Interafce Gestion de Projet" />
+            <div className="row">
+                <div className="col-12 col-md-6">
+                  <Spinner />
+                </div>
+                <div className="col-12 col-md-6">
+                  <ProjectForm teams={teams} />
+                </div>
+            </div>
           </div>
         );
       }
       return (
-        <div className="row">
-            <div className="col-12 col-md-6">
-              <ProjectList projects={projects}/>
-              <Paginator  currentPage={currentPage} pageCount={pageCount}
-                          setPage={this.changePage.bind(this)}
-                          nextPage={this.onNextPageClick.bind(this)}
-                          prevPage={this.onPrevPageClick.bind(this)}/>
-            </div>
-            <div className="col-12 col-md-6">
-              {/* here must be check of the role chef projet */}
-              <ProjectForm teams={teams} />
-            </div>
+        <div>
+          <ComponentTitle icon="fa fa-product-hunt" title="Projects" introduction="Interafce Gestion de Projet" />
+          <div className="row">
+              <div className="col-12 col-md-6">
+                <ProjectList projects={projects}/>
+                <Paginator  currentPage={currentPage} pageCount={pageCount}
+                            setPage={this.changePage.bind(this)}
+                            nextPage={this.onNextPageClick.bind(this)}
+                            prevPage={this.onPrevPageClick.bind(this)}/>
+              </div>
+              <div className="col-12 col-md-6">
+                {/* here must be check of the role chef projet */}
+                <ProjectForm teams={teams} />
+              </div>
+          </div>
         </div>
       )
     } else {
       if ( isFetching ) {
         return (
-          <div className="row">
-              <div className="col-12">
-                <Spinner />
-              </div>
+          <div>
+            <ComponentTitle icon="fa fa-product-hunt" title="Projects" introduction="Interafce Gestion de Projet" />
+            <div className="row">
+                <div className="col-12">
+                  <Spinner />
+                </div>
+            </div>
           </div>
         );
       }
       return (
-        <div className="row">
-          <div className="col-12">
-              <ProjectListDev projects={projects}/>
-              <Paginator  currentPage={currentPage} pageCount={pageCount}
-                          setPage={this.changePage.bind(this)}
-                          nextPage={this.onNextPageClick.bind(this)}
-                          prevPage={this.onPrevPageClick.bind(this)}/>
+        <div>
+          <ComponentTitle icon="fa fa-product-hunt" title="Projects" introduction="Interafce Gestion de Projet" />
+          <div className="row">
+            <div className="col-12">
+                <ProjectListDev projects={projects}/>
+                <Paginator  currentPage={currentPage} pageCount={pageCount}
+                            setPage={this.changePage.bind(this)}
+                            nextPage={this.onNextPageClick.bind(this)}
+                            prevPage={this.onPrevPageClick.bind(this)}/>
+            </div>
           </div>
         </div>
       )

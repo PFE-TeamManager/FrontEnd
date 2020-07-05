@@ -3300,7 +3300,7 @@ input[type="button"].btn-block {
   z-index: 1000;
   display: none;
   float: left;
-  min-width: 10rem;
+  min-width: 15rem;
   padding: 0 0;
   margin: 0 0 0;
   font-size: 0.875rem;
@@ -6985,43 +6985,43 @@ button.bg-secondary:focus {
   background-color: #545b62 !important;
 }
 
-.bg-success {
+.bg-success-app {
   background-color: #28a745 !important;
 }
 
-a.bg-success:hover, a.bg-success:focus,
-button.bg-success:hover,
-button.bg-success:focus {
+a.bg-success-app:hover, a.bg-success-app:focus,
+button.bg-success-app:hover,
+button.bg-success-app:focus {
   background-color: #1e7e34 !important;
 }
 
-.bg-info {
+.bg-info-app {
   background-color: #17a2b8 !important;
 }
 
-a.bg-info:hover, a.bg-info:focus,
-button.bg-info:hover,
-button.bg-info:focus {
+a.bg-info-app:hover, a.bg-info-app:focus,
+button.bg-info-app:hover,
+button.bg-info-app:focus {
   background-color: #117a8b !important;
 }
 
-.bg-warning {
+.bg-warning-app {
   background-color: #ffc107 !important;
 }
 
-a.bg-warning:hover, a.bg-warning:focus,
-button.bg-warning:hover,
-button.bg-warning:focus {
+a.bg-warning-app:hover, a.bg-warning-app:focus,
+button.bg-warning-app:hover,
+button.bg-warning-app:focus {
   background-color: #d39e00 !important;
 }
 
-.bg-danger {
+.bg-danger-app {
   background-color: #dc3545 !important;
 }
 
-a.bg-danger:hover, a.bg-danger:focus,
-button.bg-danger:hover,
-button.bg-danger:focus {
+a.bg-danger-app:hover, a.bg-danger-app:focus,
+button.bg-danger-app:hover,
+button.bg-danger-app:focus {
   background-color: #bd2130 !important;
 }
 
@@ -15420,7 +15420,9 @@ be a descendant of the grid when it is being dragged.
 
 .dropdown-menu.dropdown-menu-right {
   left: auto;
-  right: 0;
+  right: 0; 
+  min-width: 15rem !important; 
+  padding: 0rem 0 !important;
 }
 
 .dropdown-item .fa,
@@ -16381,7 +16383,7 @@ be a descendant of the grid when it is being dragged.
 
 .login-content .logo {
   margin-bottom: 40px;
-  font-family: "Niconne";
+  font-family: serif;
   color: #fff;
 }
 
@@ -16762,6 +16764,6 @@ be a descendant of the grid when it is being dragged.
   transition: opacity 1000ms ease-in;
 }
 
-.card-project .card-title a,.card-task .card-title a{
+.card-project .card-title a,.card-bug .card-title a,.card-task .card-title a{
   color: white;
 }
