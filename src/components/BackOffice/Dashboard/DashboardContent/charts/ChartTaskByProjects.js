@@ -7,6 +7,7 @@ class ChartTaskByProjects extends React.Component {
 
         this.state = {
             series: [{
+              name: 'Task\'s number',
               data: props.dataCountTasks
             }],
             options: {

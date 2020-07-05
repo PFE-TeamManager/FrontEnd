@@ -36,9 +36,14 @@ import {
 
   DASHBOARD_COUNT_TASKS_PROJECTS_REQUEST,DASHBOARD_COUNT_TASKS_PROJECTS_ERROR,
   DASHBOARD_COUNT_TASKS_PROJECTS_RECEIVED,
+
   DASHBOARD_COUNT_BUGS_PROJECTS_ERROR,
   DASHBOARD_COUNT_BUGS_PROJECTS_RECEIVED,
-  DASHBOARD_COUNT_BUGS_PROJECTS_REQUEST
+  DASHBOARD_COUNT_BUGS_PROJECTS_REQUEST,
+
+  DASHBOARD_STATE_TASK_ERROR,
+  DASHBOARD_STATE_TASK_RECEIVED,
+  DASHBOARD_STATE_TASK_REQUEST
 
 } from "./constants";
 import {SubmissionError} from "redux-form";
@@ -1008,6 +1013,30 @@ export const dashboardCountBugsByProject = () => {
     return requests.get(`/dashboard/projects/bugs`)
       .then(response => dispatch(dashboardCountBugsByProjectReceived(response)))
       .catch(error => dispatch(dashboardCountBugsByProjectError(error)));
+  }
+};
+
+
+export const dashboardStateTaskRequest = () => ({
+  type: DASHBOARD_STATE_TASK_REQUEST,
+});
+
+export const dashboardStateTaskError = (error) => ({
+  type: DASHBOARD_STATE_TASK_ERROR,
+  error
+});
+
+export const dashboardStateTaskReceived = (data) => ({
+  type: DASHBOARD_STATE_TASK_RECEIVED,
+  data
+});
+
+export const dashboardStateTask = () => {
+  return (dispatch) => {
+    dispatch(dashboardStateTaskRequest());
+    return requests.get(`/dashboard/projects/tasks/state`)
+      .then(response => dispatch(dashboardStateTaskReceived(response)))
+      .catch(error => dispatch(dashboardStateTaskError(error)));
   }
 };
 /**************END Dashboard Action**************/

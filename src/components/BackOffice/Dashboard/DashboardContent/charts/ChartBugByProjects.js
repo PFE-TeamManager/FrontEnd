@@ -7,6 +7,7 @@ class ChartBugByProjects extends React.Component {
 
         this.state = {
             series: [{
+              name: 'Bug\'s number',
               data: props.dataCountBugs
             }],
             options: {
