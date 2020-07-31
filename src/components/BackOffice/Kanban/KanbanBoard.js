@@ -48,6 +48,7 @@ class KanbanBoard extends React.Component {
           databackgroundColor={this.props.databackgroundColor}
           onDrop={this.drop}
           onDragOver={this.dragOver}>
+            <h3 class="text-center font-weight-bold mb-3">{ this.props.title }</h3>
             { this.props.children }
       </div>
     )

@@ -18,11 +18,10 @@
 .flexbox .board {
     display: flex;
     flex-direction: column;
-
+    border: 2px solid #ddd;
     width: 100%;
     max-width: 300px;
-
-    background-color: #331133;
+    background-color: #bfbfbf;
     padding: 15px;
 }
 

@@ -11,21 +11,27 @@ const menuItemsCHEF = [
     },
     {
         id: 2,
-        icon: "app-menu__icon fa fa-product-hunt",
-        text: "Projects",
-        link: "/dashboard/projects"
-    },
-    {
-        id: 3,
         icon: "app-menu__icon fa fa-users",
         text: "Teams",
         link: "/dashboard/teams"
+    },
+    {
+        id: 3,
+        icon: "app-menu__icon fa fa-product-hunt",
+        text: "Projects",
+        link: "/dashboard/projects"
     },
     {
         id: 4,
         icon: "app-menu__icon fa fa-tasks",
         text: "All Bugs",
         link: "/dashboard/allbugs"
+    },
+    {
+        id: 5,
+        icon: "app-menu__icon fa fa-tasks",
+        text: "The Board",
+        link: "/dashboard/board"
     }
 ];
 

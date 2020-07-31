@@ -58,9 +58,10 @@ class KanbanBoardContainer extends React.Component {
                 </div>
             </div>
             <div className="col-12">
-            <main className="flexbox">
+                <main className="flexbox">
                     {/** Get The Tasks To do */}
-                    <KanbanBoard id="board-to-do" className="board" databackgroundColor="#98FB98">
+
+                    <KanbanBoard id="board-to-do" title="To Do" className="board" databackgroundColor="#98FB98">
                         {
                             tasksToDoList 
                             && tasksToDoList.map( 
@@ -95,8 +96,8 @@ class KanbanBoardContainer extends React.Component {
                             })
                         }
                     </KanbanBoard>
-
-                    <KanbanBoard id="board-doing" className="board" databackgroundColor="#3CB371">
+                   
+                    <KanbanBoard id="board-doing" title="Doing" className="board" databackgroundColor="#3CB371">
                         {
                             tasksToDoList 
                             && tasksToDoList.map( 
@@ -131,8 +132,8 @@ class KanbanBoardContainer extends React.Component {
                             })
                         }
                     </KanbanBoard>
-
-                    <KanbanBoard id="board-done" className="board" databackgroundColor="#6B8E23">
+                    
+                    <KanbanBoard id="board-done" title="Done" className="board" databackgroundColor="#6B8E23">
                         {
                             tasksToDoList 
                             && tasksToDoList.map( 

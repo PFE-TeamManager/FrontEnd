@@ -32,6 +32,7 @@ class MainContent extends React.Component {
                         <Route path="/dashboard/board" component={KanbanBoardContainer} />
                         <Route path="/dashboard/profil" component={ProfileContainer} />
                         <Route path="/dashboard" component={DashboardContent} />
+                        <Route path="/" component={DashboardContent} />
                         <Route component={Notfound} />
                     </Switch>
                 </main>
