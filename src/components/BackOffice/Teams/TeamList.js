@@ -82,9 +82,9 @@ class TeamList extends React.Component {
       afterSaveCell: onAfterSaveCell  // a hook for after saving cell
     };
 
-    if (null === teams || 0 === teams.length) {
-      return (<Message message="No Teams available"/>);
-    }
+    // if (null === teams || 0 === teams.length) {
+    //   return (<Message message="No Teams available"/>);
+    // }
 
     return (
     <div className="card p-2">

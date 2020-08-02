@@ -5,6 +5,10 @@ import Select from 'react-select';
 import {renderField} from "../../../redux/form";
 import {taskAdd} from "../../../redux/actions/actions";
 
+// const mapeStateToProps = state => ({
+//   ...state.labelList
+// });
+
 const mapDispatchToProps = {
   taskAdd
 };
@@ -16,6 +20,7 @@ class TaskForm extends React.Component {
     this.state = {
       selectedLabel: null
     };
+    
   }
 
   onSubmit(values) {
@@ -35,21 +40,8 @@ class TaskForm extends React.Component {
   }
 
   render() {
-    const {labelList, handleSubmit, submitting} = this.props;
-    const options = [];
-
-    { labelList && labelList.map( 
-        (label,i) => {
-          if( (label.enabled === true) ){
-            options.push({
-              value: label.id,
-              label: label.labelName
-            });
-          }
-        }
-      ) 
-    } 
-
+    const {handleSubmit, submitting, listOptions} = this.props;
+    console.log(this.props.listOptions);
     return (
       <div className="card mb-3 mt-3 shadow-sm">
         <div className="card-body">
@@ -61,7 +53,7 @@ class TaskForm extends React.Component {
             <div className="form-group">
               <Select name="label" isMulti
                       onChange={this.handleChange}
-                      options={options}
+                      options={ this.props.listOptions }
                       className="basic-multi-select"
                       classNamePrefix="select" />
             </div>

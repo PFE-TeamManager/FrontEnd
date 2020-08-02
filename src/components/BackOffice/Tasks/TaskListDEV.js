@@ -68,7 +68,7 @@ class TaskListDEV extends React.Component {
     return (
       <div className="mb-3 mt-3 card-task">
           <div className="row">
-            {taskList.map( task => {
+            {taskList && taskList.map( task => {
                 return (
                     <div key={task.id} className="col-12 col-md-6">
                         <div className={"card text-white "+( task.enabled ? "bg-success-app" : "bg-danger-app" )+" mb-3"} >

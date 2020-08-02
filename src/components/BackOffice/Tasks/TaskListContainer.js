@@ -17,7 +17,8 @@ const mapeStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
-  taskListFetch,labelListFetch,
+  taskListFetch,
+  labelListFetch,
   taskListUnload
 };
 
@@ -37,14 +38,30 @@ class TaskListContainer extends React.Component {
   }
 
   render() {
-    const {labelList,isFetching, taskList, isAuthenticated, projectId, currentPage, pageCount} = this.props;
+    const {labelList, isFetching, taskList, isAuthenticated, projectId, currentPage, pageCount} = this.props;
     const showLoadMore = pageCount > 1 && currentPage <= pageCount;
+    const options = [];
 
     if (isFetching && currentPage === 1) {
+      
       return (<Spinner/>);
+
     }
 
     if (canCreateAuthorization(this.props.userData)) {
+
+      { labelList && labelList.map( 
+          (label,i) => {
+            if( (label.enabled === true) ){
+              options.push({
+                value: label.id,
+                label: label.labelName
+              });
+            }
+          }
+        ) 
+      }
+
         return (
           <div>
             <div className="row">
@@ -52,8 +69,7 @@ class TaskListContainer extends React.Component {
                     {isAuthenticated && <LabelForm />}
                 </div>
                 <div className="col-12 col-md-6">
-                  {isAuthenticated && <TaskForm labelList={labelList} projectId={projectId}/>}
-                  
+                    {isAuthenticated && <TaskForm projectId={projectId} listOptions={options} />}
                 </div>
             </div>
             <div className="row">

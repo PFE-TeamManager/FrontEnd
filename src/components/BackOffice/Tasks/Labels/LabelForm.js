@@ -19,7 +19,10 @@ class LabelForm extends React.Component {
 
   onSubmit(values) {
     const {labelAdd,reset} = this.props;
-    return labelAdd(values,this.state.color).then(() => reset());
+    // if( this.state.color ){
+    //   return labelAdd(values, this.state.color ).then(() => reset());
+    // }
+    return labelAdd(values, "b35858" ).then(() => reset());
   }
 
   render() {
@@ -31,12 +34,12 @@ class LabelForm extends React.Component {
           <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
             <Field name="LabelName" label="Type your new Label"
                    type="text" component={renderField}/>
-            <div className="form-group">
+            {/* <div className="form-group">
               <label htmlFor="background-color">Choose a color for the new task :</label>
               <input  id="background-color" type="color" 
                       name="ColorLabel" 
                       onChange={(e) => this.setState({ color: e.target.value.substring(1) })} />
-            </div>
+            </div> */}
             <button type="submit" className="btn btn-primary btn-big btn-block"
                     disabled={submitting}>
               Add Label
