@@ -38,7 +38,8 @@ class Bug extends React.Component {
       bugState: false
     });
     MyReactSwal.fire({
-      icon: 'success'
+      icon: 'success',
+      title:"Désactivation réussi"
     });
     bugPATCHActivity(bug.id,false);
   }
@@ -48,7 +49,8 @@ class Bug extends React.Component {
       bugState: true
     });
     MyReactSwal.fire({
-      icon: 'success'
+      icon: 'success',
+      title:"Activation réussi"
     });
     bugPATCHActivity(bug.id,true);
   }
@@ -84,7 +86,8 @@ class Bug extends React.Component {
       newName: this.refs.newName.value
     });
     MyReactSwal.fire({
-      icon: 'success'
+      icon: 'success',
+      title:"Modification réussi"
     });
   }
 

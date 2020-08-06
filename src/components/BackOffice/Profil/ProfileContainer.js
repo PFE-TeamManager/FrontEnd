@@ -53,7 +53,8 @@ class ProfileContainer extends React.Component {
           newDesc: this.refs.newDesc.value
         });
         MyReactSwal.fire({
-          icon: 'success'
+          icon: 'success',
+          title:"Modification réussi"
         });
     }
 

@@ -14,7 +14,8 @@ const mapDispatchToProps = {
 
 function onAfterSaveCell(row, cellName, cellValue) {
   MyReactSwal.fire({
-    icon: 'success'
+    icon: 'success',
+    title:"Modification membre réussi"
   })
 }
 

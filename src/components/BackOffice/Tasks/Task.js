@@ -39,7 +39,8 @@ class Task extends React.Component {
       taskState: false
     });
     MyReactSwal.fire({
-      icon: 'success'
+      icon: 'success',
+      title:"Désactivation tache réussi"
     });
     taskPATCHActivity(task.id,false);
   }
@@ -49,7 +50,8 @@ class Task extends React.Component {
       taskState: true
     });
     MyReactSwal.fire({
-      icon: 'success'
+      icon: 'success',
+      title:"Activation tache réussi"
     });
     taskPATCHActivity(task.id,true);
   }
@@ -85,7 +87,8 @@ class Task extends React.Component {
       newName: this.refs.newName.value
     });
     MyReactSwal.fire({
-      icon: 'success'
+      icon: 'success',
+      title:"Modification tache réussi"
     });
   }
 

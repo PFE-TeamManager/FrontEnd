@@ -33,7 +33,8 @@ class TaskListDEV extends React.Component {
       taskAffectedTo: "Task Affected To "+this.props.userData.username
     });
     MyReactSwal.fire({
-      icon: 'success'
+      icon: 'success',
+      title:"Affectation tache réussi"
     });
     affectDEVTotaskPATCH(taskId,this.props.userData.id);
   }

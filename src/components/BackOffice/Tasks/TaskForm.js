@@ -41,7 +41,7 @@ class TaskForm extends React.Component {
 
   render() {
     const {handleSubmit, submitting, listOptions} = this.props;
-    console.log(this.props.listOptions);
+
     return (
       <div className="card mb-3 mt-3 shadow-sm">
         <div className="card-body">
@@ -53,7 +53,7 @@ class TaskForm extends React.Component {
             <div className="form-group">
               <Select name="label" isMulti
                       onChange={this.handleChange}
-                      options={ this.props.listOptions }
+                      options={ listOptions }
                       className="basic-multi-select"
                       classNamePrefix="select" />
             </div>

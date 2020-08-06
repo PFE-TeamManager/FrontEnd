@@ -23,6 +23,13 @@ const mapDispatchToProps = {
 };
 
 class TaskListContainer extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      options: []
+    };
+  }
+
   componentDidMount() {
     this.props.taskListFetch(this.props.projectId);
     this.props.labelListFetch();
@@ -40,28 +47,29 @@ class TaskListContainer extends React.Component {
   render() {
     const {labelList, isFetching, taskList, isAuthenticated, projectId, currentPage, pageCount} = this.props;
     const showLoadMore = pageCount > 1 && currentPage <= pageCount;
-    const options = [];
 
     if (isFetching && currentPage === 1) {
-      
       return (<Spinner/>);
-
     }
 
     if (canCreateAuthorization(this.props.userData)) {
-
-      { labelList && labelList.map( 
-          (label,i) => {
-            if( (label.enabled === true) ){
-              options.push({
-                value: label.id,
-                label: label.labelName
-              });
+      
+        { 
+          this.state.options.length = 0;
+          if( this.state.options.length == 0 ){
+            { labelList && labelList.map( 
+                (label,i) => {
+                  if( (label.enabled === true) ){
+                    this.state.options.push({
+                      value: label.id,
+                      label: label.labelName
+                    });
+                  }
+                }
+              ) 
             }
           }
-        ) 
-      }
-
+        }
         return (
           <div>
             <div className="row">
@@ -69,7 +77,8 @@ class TaskListContainer extends React.Component {
                     {isAuthenticated && <LabelForm />}
                 </div>
                 <div className="col-12 col-md-6">
-                    {isAuthenticated && <TaskForm projectId={projectId} listOptions={options} />}
+                    
+                    {isAuthenticated && <TaskForm projectId={projectId} listOptions={this.state.options} />}
                 </div>
             </div>
             <div className="row">

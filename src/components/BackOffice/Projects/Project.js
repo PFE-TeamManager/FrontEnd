@@ -39,7 +39,8 @@ class Project extends React.Component {
       projectState: false
     });
     MyReactSwal.fire({
-      icon: 'success'
+      icon: 'success',
+      title:"Désactivation réussi"
     });
     projectPATCHActivity(project.id,false);
   }
@@ -49,7 +50,8 @@ class Project extends React.Component {
       projectState: true
     });
     MyReactSwal.fire({
-      icon: 'success'
+      icon: 'success',
+      title:"Activation réussi"
     });
     projectPATCHActivity(project.id,true);
   }
@@ -84,7 +86,8 @@ class Project extends React.Component {
       newName: this.refs.newName.value
     });
     MyReactSwal.fire({
-      icon: 'success'
+      icon: 'success',
+      title:"Modification réussi"
     });
   }
 

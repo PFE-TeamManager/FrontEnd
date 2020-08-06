@@ -14,7 +14,8 @@ const mapDispatchToProps = {
 
 function onAfterSaveCell(row, cellName, cellValue) {
   MyReactSwal.fire({
-    icon: 'success'
+    icon: 'success',
+    title:"Modification équipe réussi"
   })
 }
 
@@ -40,7 +41,8 @@ function onAfterInsertRow(row) {
   for (const prop in row) {
     if( prop == "teamName" ){
       MyReactSwal.fire({
-        icon: 'success'
+        icon: 'success',
+        title:"Ajout équipe réussi"
       })
       return teamAdd(row[prop]);
     }

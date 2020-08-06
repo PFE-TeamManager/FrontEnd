@@ -33,7 +33,8 @@ class BugListDEV extends React.Component {
       bugAffectedTo: "Bug Affected To "+this.props.userData.username
     });
     MyReactSwal.fire({
-      icon: 'success'
+      icon: 'success',
+      title:"Affectation réussi"
     });
     affectDEVTobugPATCH(bugId,this.props.userData.id);
   }

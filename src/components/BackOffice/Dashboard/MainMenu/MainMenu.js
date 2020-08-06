@@ -3,6 +3,10 @@ import timeago from 'timeago.js';
 import {Link} from "react-router-dom";
 import {allBugsListNotifFetch,searchTask} from "../../../../redux/actions/actions";
 import {connect} from "react-redux";
+import Swal from 'sweetalert2';
+import withReactContent from 'sweetalert2-react-content';
+
+const MyReactSwal = withReactContent(Swal);
 
 const mapeStateToProps = state => ({
     ...state.allBugsListReducer
@@ -47,6 +51,10 @@ class MainMenu extends React.Component {
         if( this.state.searhTerm ){
             this.props.searchTask(this.state.searhTerm);
         }
+        MyReactSwal.fire({
+            icon: 'error',
+            title: 'Something goes wrong! Data is here and the state is altered, but the component don\'t change, Return to this',
+        });
     }
 
     render(){
